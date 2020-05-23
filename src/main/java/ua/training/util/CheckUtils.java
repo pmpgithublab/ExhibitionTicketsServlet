@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import static ua.training.Constants.*;
 
 public class CheckUtils {
-    private static final String IS_NUMBER_REGEX = "[А-ЩЮЯІЇЄҐ][а-щьюяіїєґ']{2,20}";
+    private static final String IS_NUMBER_REGEX = "\\d+";
 
 
     private static boolean isPositiveNumber(String positiveNumber) {
