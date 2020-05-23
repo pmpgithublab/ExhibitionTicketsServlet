@@ -1,0 +1,126 @@
+package ua.training.model.service;
+
+import org.apache.log4j.Logger;
+import ua.training.util.FinancialUtil;
+import ua.training.model.dao.ExhibitDao;
+import ua.training.model.dao.TicketDao;
+import ua.training.model.dao.implementation.JDBCDaoFactory;
+import ua.training.model.dto.ExhibitDTO;
+import ua.training.model.dto.TicketDTO;
+import ua.training.model.entity.Ticket;
+import ua.training.util.MessageUtil;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static ua.training.Constants.ONE_ELEMENT;
+
+public class CartService {
+    private static final Logger log = Logger.getLogger(CartService.class);
+
+    private static final String TICKET_CREATION_OR_SAVING_ERROR = "Ticket creation or saving error. User id: ";
+    private static final String CREATING_TICKET_LIST_BY_ID_AND_DATE_ERROR = "Creating ticket list by id and date error";
+
+
+    public Optional<TicketDTO> createTicketByIdAndDate(Long exhibitId, LocalDate exhibitDate,
+                                                       int ticketQuantity, Long userId) {
+//        Optional<ExhibitDTO> exhibitDTOFromDB;
+        try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
+//            exhibitDTOFromDB =
+            return exhibitDao.findByIdWithHall(exhibitId)
+                    .map(result -> Optional.of(new TicketDTO.TicketDTOBuilder()
+                            .exhibitDate(exhibitDate)
+                            .exhibitId(result.getId())
+                            .exhibitName(result.getName())
+                            .hallId(result.getHallId())
+                            .hallName(result.getHallName())
+                            .ticketQuantity(ticketQuantity)
+                            .ticketSum(ticketQuantity * result.getTicketCost())
+                            .userId(userId)
+                            .build()))
+                    .orElseGet(log.error(CREATING_TICKET_LIST_BY_ID_AND_DATE_ERROR);
+            throw new RuntimeException(CREATING_TICKET_LIST_BY_ID_AND_DATE_ERROR););
+        }
+//
+//        if (exhibitDTOFromDB.isPresent()) {
+//            ExhibitDTO exhibitDTO = exhibitDTOFromDB.get();
+//
+//            return Optional.of(new TicketDTO.TicketDTOBuilder()
+//                    .exhibitDate(exhibitDate)
+//                    .exhibitId(exhibitDTO.getId())
+//                    .exhibitName(exhibitDTO.getName())
+//                    .hallId(exhibitDTO.getHallId())
+//                    .hallName(exhibitDTO.getHallName())
+//                    .ticketQuantity(ticketQuantity)
+//                    .ticketSum(ticketQuantity * exhibitDTO.getTicketCost())
+//                    .userId(userId)
+//                    .build());
+//        } else {
+        log.error(CREATING_TICKET_LIST_BY_ID_AND_DATE_ERROR);
+        throw new RuntimeException(CREATING_TICKET_LIST_BY_ID_AND_DATE_ERROR);
+//        }
+    }
+
+    public void addTicketToCart(Long exhibitId, LocalDate exhibitDate, int ticketQuantity, Long userId)
+            throws Exception {
+
+        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
+            Optional<Ticket> ticketFromDB =
+                    ticketDao.findTicketByExhibitIdAndExhibitDateAndUserIdAndNotPaid(exhibitId, exhibitDate, userId);
+            if (ticketFromDB.isPresent()) {
+                long cost = ticketFromDB.get().getTicketSum() / ticketFromDB.get().getTicketQuantity();
+                ticketFromDB.get().setTicketQuantity(ticketFromDB.get().getTicketQuantity() + ticketQuantity);
+                ticketFromDB.get().setTicketSum(ticketFromDB.get().getTicketQuantity() * cost);
+                saveTicket(new TicketDTO(ticketFromDB.get()));
+            } else {
+                Optional<TicketDTO> newTicket = createTicketByIdAndDate(exhibitId, exhibitDate, ticketQuantity, userId);
+                if (newTicket.isPresent()) {
+                    saveTicket(newTicket.get());
+                } else {
+                    log.error(MessageUtil.getRuntimeExceptionMessage(TICKET_CREATION_OR_SAVING_ERROR + userId));
+                    throw new RuntimeException(TICKET_CREATION_OR_SAVING_ERROR + userId);
+                }
+            }
+        }
+    }
+
+    public void deleteTicketFromCart(Long exhibitId, LocalDate exhibitDate, int ticketQuantity, Long userId)
+            throws Exception {
+
+        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
+            Optional<Ticket> ticketFromDB =
+                    ticketDao.findTicketByExhibitIdAndExhibitDateAndUserIdAndNotPaid(exhibitId, exhibitDate, userId);
+            if (ticketFromDB.isPresent()) {
+                if (ticketFromDB.get().getTicketQuantity() > ticketQuantity) {
+                    addTicketToCart(exhibitId, exhibitDate, -ticketQuantity, userId);
+                } else {
+                    ticketDao.deleteByIdNotPaid(ticketFromDB.get().getId());
+                }
+            }
+        }
+    }
+
+    public void saveTicket(TicketDTO ticketDTO) throws Exception {
+        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
+            ticketDao.save(new Ticket(ticketDTO));
+        }
+    }
+
+    public List<TicketDTO> findAllNotPaidUserTickets(Long userId) {
+        List<TicketDTO> result;
+        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
+            result = ticketDao.findAllNotPaidUserTickets(userId);
+        }
+
+        result.forEach(c -> c.setTicketSum(FinancialUtil.calcCost(c.getTicketSum())));
+        return result;
+    }
+
+    public void clearCart(Long userId) throws Exception {
+        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
+            ticketDao.deleteAllNotPaid(userId);
+        }
+    }
+}

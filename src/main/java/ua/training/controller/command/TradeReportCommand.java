@@ -1,0 +1,48 @@
+package ua.training.controller.command;
+
+import org.apache.log4j.Logger;
+import ua.training.controller.util.Util;
+import ua.training.model.dto.ReportDTO;
+import ua.training.model.dto.UserStatisticDTO;
+import ua.training.model.service.ReportService;
+import ua.training.util.CheckUtils;
+import ua.training.util.MessageUtil;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static ua.training.Constants.*;
+
+public class TradeReportCommand implements Command {
+    private static final Logger log = Logger.getLogger(TradeReportCommand.class);
+
+    private final ReportService reportService;
+
+
+    public TradeReportCommand(ReportService reportService) {
+        this.reportService = reportService;
+    }
+
+
+    @Override
+    public String execute(HttpServletRequest request) {
+        if (request.getMethod().equals(METHOD_GET)) {
+            String stringPageNumber = request.getParameter(FIELD_PAGE);
+            int pageNumber = 0;
+
+            if (CheckUtils.isPositiveInteger(stringPageNumber)) {
+                pageNumber = Integer.parseInt(stringPageNumber);
+            }
+
+            ReportDTO<UserStatisticDTO> userStatisticDTOS =
+                    reportService.getUserPurchases(Util.getUserId(request), pageNumber);
+            userStatisticDTOS.setCurrentPage(pageNumber);
+            userStatisticDTOS.setPageNavigationString(TRADE_PATH);
+            request.setAttribute(ReportDTOS, userStatisticDTOS);
+
+            return USER_STATISTIC_PAGE;
+        }
+
+        log.warn(MessageUtil.getUnacceptedMethodMessage(request));
+        return REDIRECT_STRING + ERROR_PATH;
+    }
+}
