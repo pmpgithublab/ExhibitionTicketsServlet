@@ -47,7 +47,7 @@ public class CheckUtils {
         return isPositiveInteger(id) && Integer.parseInt(id) < MAX_TICKET_QUANTITY;
     }
 
-    public static boolean isDateValid(String localDate) {
+    public static boolean isDate(String localDate) {
         try {
             LocalDate.parse(localDate);
 

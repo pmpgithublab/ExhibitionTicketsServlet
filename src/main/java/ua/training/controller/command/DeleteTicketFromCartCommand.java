@@ -28,7 +28,7 @@ public class DeleteTicketFromCartCommand implements Command {
             String stringTicketQuantity = request.getParameter(PARAM_TICKET_QUANTITY);
 
             if (CheckUtils.isPositiveLong(stringId)
-                    && CheckUtils.isDateValid(stringDate) && CheckUtils.isPositiveInteger(stringTicketQuantity)) {
+                    && CheckUtils.isDate(stringDate) && CheckUtils.isPositiveInteger(stringTicketQuantity)) {
 
                 Long id = Long.parseLong(stringId);
                 LocalDate date = LocalDate.parse(stringDate);

@@ -30,7 +30,7 @@ public class AddTicketToCartCommand implements Command {
             String stringTicketQuantity = request.getParameter(PARAM_TICKET_QUANTITY);
 
             if (CheckUtils.isPositiveLong(stringExhibitId)
-                    && CheckUtils.isDateValid(stringExhibitDate)
+                    && CheckUtils.isDate(stringExhibitDate)
                     && CheckUtils.isTicketQuantityValid(stringTicketQuantity)) {
 
                 Long exhibitId = Long.parseLong(stringExhibitId);

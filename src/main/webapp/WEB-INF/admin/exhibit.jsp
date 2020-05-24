@@ -10,7 +10,7 @@
 <h3 class="d-flex justify-content-center"><fmt:message key="page.title.exhibit"/></h3><br>
 
 <c:if test="${isError}">
-    <h5 class="d-flex justify-content-center" style="color: red"><fmt:message key="exhibit.error"/></h5>
+    <h5 class="text-center" style="color: red"><fmt:message key="exhibit.error"/></h5>
 </c:if>
 <form method="post" action="${pageContext.request.contextPath}/admin/exhibit_edit<c:if test="${exhibitDTO.getId() != null}">?id=${exhibitDTO.getId()}</c:if>">
     <table class="table d-flex justify-content-center">

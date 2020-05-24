@@ -98,12 +98,6 @@ public class ExhibitEditCommand implements Command {
         request.setAttribute(EXHIBIT_DTO, exhibitDTO);
         List<HallDTO> hallDTOS = hallService.findAllHall();
         request.setAttribute(FIELD_HALLS, hallDTOS);
-//        for (HallDTO hallDTO : hallDTOS) {
-//            if (hallDTO.getId().equals(exhibitDTO.getHallId())) {
-//                request.setAttribute(FIELD_SELECTED_HALL, hallDTO);
-//                break;
-//            }
-//        }
         request.setAttribute(FIELD_SELECTED_HALL,
                 hallDTOS.stream().filter(e->e.getId().equals(exhibitDTO.getHallId())).findFirst().get());
     }

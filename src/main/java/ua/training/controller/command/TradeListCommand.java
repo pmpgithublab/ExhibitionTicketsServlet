@@ -44,12 +44,6 @@ public class TradeListCommand implements Command {
     }
 
     private void setSelectedTheme(HttpServletRequest request, List<ExhibitDTO> exhibitDTOS, Long exhibitId) {
-//        for (ExhibitDTO exhibitDTO : exhibitDTOS) {
-//            if (exhibitDTO.getId().equals(exhibitId)) {
-//                request.setAttribute(EXHIBIT_SELECTED_THEME, exhibitDTO);
-//                break;
-//            }
-//        }
         request.setAttribute(EXHIBIT_SELECTED_THEME,
                 exhibitDTOS.stream().filter(e->e.getId().equals(exhibitId)).findFirst().get());
     }
