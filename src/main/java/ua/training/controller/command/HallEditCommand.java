@@ -15,7 +15,6 @@ import static ua.training.Constants.*;
 
 public class HallEditCommand implements Command {
     private static final Logger log = Logger.getLogger(HallEditCommand.class);
-
     private static final String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
 
     private final HallService hallService;

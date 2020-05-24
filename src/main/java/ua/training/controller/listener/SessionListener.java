@@ -14,7 +14,6 @@ import static ua.training.Constants.*;
 @WebListener
 public class SessionListener implements HttpSessionListener {
     private static final Logger log = Logger.getLogger(SessionListener.class);
-
     private static final String SESSION_CREATED = "Session created. Id: ";
     private static final String SESSION_DESTROYED = "Session destroyed. Id: ";
 

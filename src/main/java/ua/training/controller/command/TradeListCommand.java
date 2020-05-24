@@ -14,6 +14,7 @@ import static ua.training.Constants.*;
 
 public class TradeListCommand implements Command {
     private static final Logger log = Logger.getLogger(TradeListCommand.class);
+    private static final String EXHIBITS_LIST_TRADE_PAGE = "/WEB-INF/trade/exhibits_list.jsp";
 
     private final ExhibitService exhibitService;
 

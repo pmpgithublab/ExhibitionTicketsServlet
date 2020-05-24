@@ -45,7 +45,7 @@
                     <a href="${pageContext.request.contextPath}/admin/hall_edit"><fmt:message key="menu.add.hall"/></a> |
                     <a href="${pageContext.request.contextPath}/admin/exhibits_list">
                         <fmt:message key="menu.exhibits"/></a> |
-                    <a href="${pageContext.request.contextPath}/admin/exhibit_add">
+                    <a href="${pageContext.request.contextPath}/admin/exhibit_edit">
                         <fmt:message key="menu.add.exhibit"/></a> |
                     <a href="${pageContext.request.contextPath}/admin/report?page=0">
                         <fmt:message key="menu.admin.statistic"/></a>

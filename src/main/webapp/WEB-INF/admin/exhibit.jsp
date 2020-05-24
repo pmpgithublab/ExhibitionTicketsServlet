@@ -55,10 +55,8 @@
         <tr>
             <td><fmt:message key="exhibit.ticketCost"/></td>
             <td>
-                <input type="text" name="ticketCost" id="ticketCost" class="ticketCost"
-<%--                <input type="number" name="ticketCost" id="ticketCost" class="ticketCost" step="0.01" min="0"--%>
+                <input type="text" name="ticketCost" id="ticketCost" class="ticketCost" placeholder="0.00"
                        value="${exhibitDTO.getTicketCost()/100}"
-<%--                       value="${exhibitDTO.getTicketCost()/100}"--%>
                        size="10" pattern="^\d{1,7}\.\d{2}$" title="####.##" required/>
             </td>
         </tr>
@@ -66,10 +64,10 @@
             <td><fmt:message key="exhibit.hall"/></td>
             <td>
                 <select name="hallId">
-                    <option value="${selectedHall.id}" selected>${selectedHall.name}</option>
+                    <option value="${selectedHall.getId()}" selected>${selectedHall.getName()}</option>
                     <c:forEach items="${halls}" var="hall">
                         <c:if test="${hall != selectedHall}">
-                            <option value="${hall.id}">${hall.name}</option>
+                            <option value="${hall.getId()}">${hall.getName()}</option>
                         </c:if>
                     </c:forEach>
                 </select>
@@ -88,16 +86,6 @@
         }
     }
 </script>
-
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function () {--%>
-<%--        $(".ticketCost").change(function () {--%>
-<%--            $(this).val(parseFloat($(this).val()).toFixed(2));--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
-
 
 </body>
 </html>

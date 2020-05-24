@@ -15,7 +15,6 @@ import static ua.training.Constants.*;
 
 public class RegistrationCommand implements Command {
     private static final Logger log = Logger.getLogger(RegistrationCommand.class);
-
     private static final String REGISTRATION_PAGE = "/WEB-INF/registration.jsp";
 
     private final UserService userService;

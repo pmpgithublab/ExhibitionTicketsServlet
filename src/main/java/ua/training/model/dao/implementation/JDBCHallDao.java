@@ -18,7 +18,6 @@ import static ua.training.Constants.DB_CONNECTION_CLOSING_ERROR;
 
 public class JDBCHallDao implements HallDao {
     private static final Logger log = Logger.getLogger(JDBCHallDao.class);
-
     private static final String SQL_QUERY_INSERT_NEW_HALL = "insert.new.hall";
     private static final String SQL_QUERY_UPDATE_HALL = "update.hall";
     private static final String SQL_QUERY_SELECT_HALLS = "select.halls";

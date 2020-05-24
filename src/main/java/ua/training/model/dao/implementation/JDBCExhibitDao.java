@@ -19,7 +19,6 @@ import static ua.training.Constants.*;
 
 public class JDBCExhibitDao implements ExhibitDao {
     private static final Logger log = Logger.getLogger(JDBCExhibitDao.class);
-
     private static final String SQL_QUERY_INSERT_NEW_EXHIBIT = "insert.new.exhibit";
     private static final String SQL_QUERY_UPDATE_EXHIBIT = "update.exhibit";
     private static final String SQL_QUERY_SELECT_EXHIBITS = "select.exhibits";

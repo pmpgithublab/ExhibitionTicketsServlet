@@ -18,6 +18,7 @@ import static ua.training.Constants.*;
 
 public class ExhibitEditCommand implements Command {
     private static final Logger log = Logger.getLogger(ExhibitEditCommand.class);
+    private static final String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
 
     private final HallService hallService;
     private final ExhibitService exhibitService;
@@ -55,12 +56,9 @@ public class ExhibitEditCommand implements Command {
                 return REDIRECT_STRING + ERROR_PATH;
             }
         }
-        if (request.getParameter(PARAM_LANG) != null){
-            return EXHIBIT_PAGE;
-        }
 
-        log.warn(MessageUtil.getInvalidParameterMessage(request));
-        return REDIRECT_STRING + ERROR_PATH;
+        request.setAttribute(FIELD_HALLS, hallService.findAllHall());
+        return EXHIBIT_PAGE;
     }
 
     private String saveExhibit(HttpServletRequest request) {

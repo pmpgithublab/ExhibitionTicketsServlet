@@ -16,6 +16,7 @@ public interface Constants {
     String SQL_QUERY_PARAM = ",?";
     String QUERY_SYMBOL = "?";
     String SLASH_SYMBOL = "/";
+    String REDIRECT_STRING = "redirect:";
 
     String HALL_NAME = "Hall";
     String EXHIBIT_NAME = "Exhibit";
@@ -75,13 +76,9 @@ public interface Constants {
     String LOGOUT_PATH = "/logout";
     String ERROR_PATH = "/error";
     String ADMIN_PATH = "/admin";
-    String HALL_ADD_PATH = "/hall_add";
     String HALL_EDIT_PATH = "/hall_edit";
-//    String HALL_SAVE_PATH = "/hall_save";
     String HALLS_LIST_PATH = "/halls_list";
-    String EXHIBIT_ADD_PATH = "/exhibit_add";
     String EXHIBIT_EDIT_PATH = "/exhibit_edit";
-//    String EXHIBIT_SAVE_PATH = "/exhibit_save";
     String EXHIBITS_LIST_PATH = "/exhibits_list";
     String TRADE_PATH = "/trade";
     String TICKET_ADD_TO_CART_PATH = "/ticket_add";
@@ -90,22 +87,6 @@ public interface Constants {
     String CART_PATH = "/cart";
     String PAYMENT_PATH = "/payment";
     String REPORT_PATH = "/report";
-
-    //    pages
-//    String WELCOME_PAGE = "/WEB-INF/index.jsp";
-//    String REGISTRATION_PAGE = "/WEB-INF/registration.jsp";
-//    String LOGIN_PAGE = "/WEB-INF/login.jsp";
-//    String ERROR_PAGE = "/WEB-INF/error.jsp";
-    String REDIRECT_STRING = "redirect:";
-//    String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
-    String HALLS_LIST_PAGE = "/WEB-INF/admin/halls_list.jsp";
-    String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
-    String EXHIBITS_LIST_ADMIN_PAGE = "/WEB-INF/admin/exhibits_list.jsp";
-    String EXHIBITS_LIST_TRADE_PAGE = "/WEB-INF/trade/exhibits_list.jsp";
-    String CART_PAGE = "/WEB-INF/trade/cart.jsp";
-    String PAYMENT_PAGE = "/WEB-INF/trade/payment.jsp";
-    String USER_STATISTIC_PAGE = "/WEB-INF/trade/user_statistic.jsp";
-    String ADMIN_STATISTIC_PAGE = "/WEB-INF/admin/admin_statistic.jsp";
 
 
     //    DB, DTO, request, entity field names

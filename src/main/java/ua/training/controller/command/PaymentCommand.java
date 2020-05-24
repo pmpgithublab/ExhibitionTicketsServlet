@@ -18,7 +18,7 @@ import static ua.training.Constants.*;
 
 public class PaymentCommand implements Command {
     private static final Logger log = Logger.getLogger(PaymentCommand.class);
-
+    private static final String PAYMENT_PAGE = "/WEB-INF/trade/payment.jsp";
     private static final String EMPTY_PAYMENT_ERROR = "isEmptyPaymentError";
     private static final String USER_ASK_ZERO_PAYMENT_SUM_OR_TICKET_QUANTITY = "User ask zero payment sum or ticket quantity";
     private static final String PAYMENT_SUCCESSFUL = "Payment successful. Sum: ";

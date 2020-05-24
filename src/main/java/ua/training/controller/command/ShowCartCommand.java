@@ -14,6 +14,7 @@ import static ua.training.Constants.*;
 
 public class ShowCartCommand implements Command {
     private static final Logger log = Logger.getLogger(ShowCartCommand.class);
+    private static final String CART_PAGE = "/WEB-INF/trade/cart.jsp";
 
     private final CartService cartService;
 

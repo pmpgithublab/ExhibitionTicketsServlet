@@ -42,7 +42,6 @@ public class Servlet extends HttpServlet {
         commands.put(ADMIN_PATH + HALL_EDIT_PATH, new HallEditCommand(hallService));
 
         commands.put(ADMIN_PATH + EXHIBITS_LIST_PATH, new ExhibitListCommand(exhibitService));
-        commands.put(ADMIN_PATH + EXHIBIT_ADD_PATH, new ExhibitAddCommand(hallService));
         commands.put(ADMIN_PATH + EXHIBIT_EDIT_PATH, new ExhibitEditCommand(hallService, exhibitService));
         commands.put(ADMIN_PATH + REPORT_PATH, new AdminReportCommand(reportService));
 

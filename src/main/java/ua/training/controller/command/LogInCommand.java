@@ -16,7 +16,6 @@ import static ua.training.Constants.*;
 
 public class LogInCommand implements Command {
     private static final Logger log = Logger.getLogger(LogInCommand.class);
-
     private static final String LOGIN_PAGE = "/WEB-INF/login.jsp";
     private static final String USER_LOGGED_IN = "User is logged in. Email: ";
     private static final String USER_REDIRECT_BY_ROLE_ERROR = "User redirect by role error. Unknown role: ";

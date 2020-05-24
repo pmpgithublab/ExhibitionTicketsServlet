@@ -14,6 +14,7 @@ import static ua.training.Constants.*;
 
 public class TradeReportCommand implements Command {
     private static final Logger log = Logger.getLogger(TradeReportCommand.class);
+    private static final String USER_STATISTIC_PAGE = "/WEB-INF/trade/user_statistic.jsp";
 
     private final ReportService reportService;
 

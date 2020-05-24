@@ -15,7 +15,6 @@ import java.util.Optional;
 
 public class CartService {
     private static final Logger log = Logger.getLogger(CartService.class);
-
     private static final String TICKET_CREATION_OR_SAVING_ERROR = "Ticket creation or saving error. User id: ";
 
 
