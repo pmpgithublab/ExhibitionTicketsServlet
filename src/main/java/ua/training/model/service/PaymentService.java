@@ -43,6 +43,7 @@ public class PaymentService {
         log.info(ASK_EXTERNAL_PAYMENT_SYSTEM_TEMPORARY_BLOCK_USER_SUM + totalSum + SLASH_SYMBOL +  userId);
         if (FinancialUtil.askExternalPaymentSystemTemporaryBlockUserSum(userId, totalSum, TEN_SECONDS)) {
             log.info(EXTERNAL_PAYMENT_SYSTEM_CONFIRM_TEMPORARY_BLOCK_USER_SUM + totalSum + SLASH_SYMBOL + userId);
+
             Payment payment = createPayment(totalQuantity, totalSum, userId);
 
             try (PaymentDao paymentDao = JDBCDaoFactory.getInstance().createPaymentDao()) {

@@ -33,18 +33,6 @@ public class ConnectionPoolHolder {
                         basicDataSource.setDriverClassName(DBPropertiesManager.INSTANCE.getProperty(DRIVER_CLASS_NAME));
                         basicDataSource.setMaxWaitMillis(Long.parseLong(DBPropertiesManager.INSTANCE.getProperty(DB_TIMEOUT)));
 
-//                        HikariConfig config = new HikariConfig();
-//
-//                        config.setJdbcUrl(DBBundleManager.INSTANCE.getProperty(DB_URL));
-//                        config.setUsername(DBBundleManager.INSTANCE.getProperty(USER_NAME));
-//                        config.setPassword(DBBundleManager.INSTANCE.getProperty(USER_PASSWORD));
-//                        config.addDataSourceProperty("cachePrepStmts", "true");
-//                        config.addDataSourceProperty("prepStmtCacheSize", "250");
-//                        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-//                        config.setMaximumPoolSize(100);
-//
-//                        dataSource = new HikariDataSource(config);
-
                         dataSource = basicDataSource;
 
                     } catch (Exception e) {

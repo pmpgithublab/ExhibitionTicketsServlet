@@ -34,7 +34,7 @@ public interface Constants {
     int ONE_ELEMENT = 1;
     int EXCHANGE_RATE = 30;
     int TEN_SECONDS = 10;
-    int RECORD_PER_PAGE = 8;
+    int RECORD_PER_PAGE = 5;
 
     //    session variables
     String USER = "user";

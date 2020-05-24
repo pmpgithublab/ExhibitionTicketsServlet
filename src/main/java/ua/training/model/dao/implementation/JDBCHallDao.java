@@ -1,6 +1,7 @@
 package ua.training.model.dao.implementation;
 
 import org.apache.log4j.Logger;
+import ua.training.model.dao.mapper.ObjectMapper;
 import ua.training.util.MessageUtil;
 import ua.training.model.dao.HallDao;
 import ua.training.model.dao.mapper.HallAdminMapper;
@@ -80,9 +81,9 @@ public class JDBCHallDao implements HallDao {
             ResultSet resultSet =
                     statement.executeQuery(DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_HALLS));
 
-            HallMapper hallMapper = new HallMapper();
+            ObjectMapper<Hall> mapper = new HallMapper();
             while (resultSet.next()) {
-                result.add(hallMapper.extractFromResultSet(resultSet));
+                result.add(mapper.extractFromResultSet(resultSet));
             }
         } catch (Exception e) {
             log.error(MessageUtil.getRuntimeExceptionMessage(e));

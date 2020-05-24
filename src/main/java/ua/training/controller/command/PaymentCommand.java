@@ -63,18 +63,15 @@ public class PaymentCommand implements Command {
         if (CheckUtils.isPositiveInteger(stringTotalQuantity) && CheckUtils.isPositiveLong(stringTotalSum)
                 && (currencySign.equals(DOLLAR_SIGN) || currencySign.equals(HRYVNA_SIGN))) {
 
-            return paymentProcess(request, stringTotalQuantity, stringTotalSum, currencySign);
+            return paymentProcess(request, Integer.parseInt(stringTotalQuantity),
+                    FinancialUtil.getAccountingSum(Long.parseLong(stringTotalSum), currencySign));
         }
 
         log.warn(MessageUtil.getInvalidParameterMessage(request));
         return REDIRECT_STRING + ERROR_PATH;
     }
 
-    private String paymentProcess(HttpServletRequest request, String stringTotalQuantity,
-                                  String stringTotalSum, String currencySign) {
-
-        int totalQuantity = Integer.parseInt(stringTotalQuantity);
-        long totalSum = FinancialUtil.getAccountingSum(Long.parseLong(stringTotalSum), currencySign);
+    private String paymentProcess(HttpServletRequest request, int totalQuantity, long totalSum) {
         long userId = ControllerUtil.getUserId(request);
 
         if (totalQuantity == 0 || totalSum == 0) {
@@ -84,7 +81,8 @@ public class PaymentCommand implements Command {
         }
 
         try {
-            paymentService.paymentProcess(totalQuantity, totalSum, ControllerUtil.getUserId(request));
+            paymentService.paymentProcess(totalQuantity, totalSum, userId);
+
             log.info(PAYMENT_SUCCESSFUL + totalSum + TICKET_QUANTITY + totalQuantity + SESSION_ID + userId);
             request.setAttribute(IS_SUCCESSFUL, true);
         } catch (ExternalPaymentSystemRejectPaymentException e) {
