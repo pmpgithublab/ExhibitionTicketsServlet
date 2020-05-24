@@ -42,7 +42,7 @@
 
                 <c:if test="${sessionScope.userRole == 'ROLE_ADMIN'}">
                     <a href="${pageContext.request.contextPath}/admin/halls_list"><fmt:message key="menu.halls"/></a> |
-                    <a href="${pageContext.request.contextPath}/admin/hall_add"><fmt:message key="menu.add.hall"/></a> |
+                    <a href="${pageContext.request.contextPath}/admin/hall_edit"><fmt:message key="menu.add.hall"/></a> |
                     <a href="${pageContext.request.contextPath}/admin/exhibits_list">
                         <fmt:message key="menu.exhibits"/></a> |
                     <a href="${pageContext.request.contextPath}/admin/exhibit_add">

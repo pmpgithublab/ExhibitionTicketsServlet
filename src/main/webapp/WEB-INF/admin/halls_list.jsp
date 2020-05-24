@@ -26,7 +26,7 @@
     </tbody>
 </table>
 <div class=" d-flex justify-content-center">
-    <a href="${pageContext.request.contextPath}/admin/hall_add" class="btn btn-primary"><fmt:message
+    <a href="${pageContext.request.contextPath}/admin/hall_edit" class="btn btn-primary"><fmt:message
             key="hall.add"/></a>
 </div>
 

@@ -56,7 +56,7 @@ public class ExhibitEditCommand implements Command {
             }
         }
         if (request.getParameter(PARAM_LANG) != null){
-            return HALL_PAGE;
+            return EXHIBIT_PAGE;
         }
 
         log.warn(MessageUtil.getInvalidParameterMessage(request));

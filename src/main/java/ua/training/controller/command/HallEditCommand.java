@@ -16,6 +16,8 @@ import static ua.training.Constants.*;
 public class HallEditCommand implements Command {
     private static final Logger log = Logger.getLogger(HallEditCommand.class);
 
+    private static final String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
+
     private final HallService hallService;
 
 
@@ -52,12 +54,7 @@ public class HallEditCommand implements Command {
                 return REDIRECT_STRING + ERROR_PATH;
             }
         }
-        if (request.getParameter(PARAM_LANG) != null){
-            return HALL_PAGE;
-        }
-
-        log.warn(MessageUtil.getInvalidParameterMessage(request));
-        return REDIRECT_STRING + ERROR_PATH;
+        return HALL_PAGE;
     }
 
     private String saveHall(HttpServletRequest request) {

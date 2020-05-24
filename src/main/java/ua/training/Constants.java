@@ -92,12 +92,12 @@ public interface Constants {
     String REPORT_PATH = "/report";
 
     //    pages
-    String WELCOME_PAGE = "/WEB-INF/index.jsp";
-    String REGISTRATION_PAGE = "/WEB-INF/registration.jsp";
-    String LOGIN_PAGE = "/WEB-INF/login.jsp";
-    String ERROR_PAGE = "/WEB-INF/error.jsp";
+//    String WELCOME_PAGE = "/WEB-INF/index.jsp";
+//    String REGISTRATION_PAGE = "/WEB-INF/registration.jsp";
+//    String LOGIN_PAGE = "/WEB-INF/login.jsp";
+//    String ERROR_PAGE = "/WEB-INF/error.jsp";
     String REDIRECT_STRING = "redirect:";
-    String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
+//    String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
     String HALLS_LIST_PAGE = "/WEB-INF/admin/halls_list.jsp";
     String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
     String EXHIBITS_LIST_ADMIN_PAGE = "/WEB-INF/admin/exhibits_list.jsp";
