@@ -12,16 +12,15 @@ public class ExhibitAdminMapper implements ObjectMapper<Exhibit> {
 
     @Override
     public Exhibit extractFromResultSet(ResultSet rs) throws SQLException {
-        Exhibit exhibit = new Exhibit();
-        exhibit.setId(rs.getLong(FIELD_DB_ID));
-        exhibit.setName(rs.getString(FIELD_DB_NAME_EN));
-        exhibit.setNameUK(rs.getString(FIELD_DB_NAME_UK));
-        exhibit.setStartDateTime(rs.getObject(FIELD_DB_START_DATE_TIME, LocalDateTime.class));
-        exhibit.setEndDateTime(rs.getObject(FIELD_DB_END_DATE_TIME, LocalDateTime.class));
-        exhibit.setMaxVisitorsPerDay(rs.getInt(FIELD_DB_MAX_VISITORS_PER_DAY));
-        exhibit.setTicketCost(rs.getLong(FIELD_DB_TICKET_COST));
-        exhibit.setHallId(rs.getLong(FIELD_DB_HALL_ID));
-
-        return exhibit;
+        return new Exhibit.ExhibitBuilder()
+                .id(rs.getLong(FIELD_DB_ID))
+                .name(rs.getString(FIELD_DB_NAME_EN))
+                .nameUK(rs.getString(FIELD_DB_NAME_UK))
+                .startDateTime(rs.getObject(FIELD_DB_START_DATE_TIME, LocalDateTime.class))
+                .endDateTime(rs.getObject(FIELD_DB_END_DATE_TIME, LocalDateTime.class))
+                .maxVisitorsPerDay(rs.getInt(FIELD_DB_MAX_VISITORS_PER_DAY))
+                .ticketCost(rs.getLong(FIELD_DB_TICKET_COST))
+                .hallId(rs.getLong(FIELD_DB_HALL_ID))
+                .build();
     }
 }

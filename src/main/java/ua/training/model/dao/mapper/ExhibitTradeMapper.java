@@ -12,16 +12,15 @@ public class ExhibitTradeMapper implements ObjectMapper<ExhibitDTO> {
 
     @Override
     public ExhibitDTO extractFromResultSet(ResultSet rs) throws SQLException {
-        ExhibitDTO exhibitDTO = new ExhibitDTO();
-        exhibitDTO.setId(rs.getLong(FIELD_ID));
-        exhibitDTO.setName(rs.getString(FIELD_DB_NAME));
-        exhibitDTO.setHallName(rs.getString(FIELD_DB_HALL_NAME));
-        exhibitDTO.setStartDateTime(rs.getObject(FIELD_DB_START_DATE_TIME, LocalDateTime.class));
-        exhibitDTO.setEndDateTime(rs.getObject(FIELD_DB_END_DATE_TIME, LocalDateTime.class));
-        exhibitDTO.setMaxVisitorsPerDay(rs.getInt(FIELD_DB_MAX_VISITORS_PER_DAY));
-        exhibitDTO.setTicketCost(rs.getLong(FIELD_DB_TICKET_COST));
-        exhibitDTO.setHallId(rs.getLong(FIELD_DB_HALL_ID));
-
-        return exhibitDTO;
+        return new ExhibitDTO.ExhibitDTOBuilder()
+                .id(rs.getLong(FIELD_ID))
+                .name(rs.getString(FIELD_DB_NAME))
+                .hallName(rs.getString(FIELD_DB_HALL_NAME))
+                .startDateTime(rs.getObject(FIELD_DB_START_DATE_TIME, LocalDateTime.class))
+                .endDateTime(rs.getObject(FIELD_DB_END_DATE_TIME, LocalDateTime.class))
+                .maxVisitorsPerDay(rs.getInt(FIELD_DB_MAX_VISITORS_PER_DAY))
+                .ticketCost(rs.getLong(FIELD_DB_TICKET_COST))
+                .hallId(rs.getLong(FIELD_DB_HALL_ID))
+                .build();
     }
 }

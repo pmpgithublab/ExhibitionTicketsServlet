@@ -44,7 +44,6 @@
                                       currencySymbol="${currencySign}"
                                       maxFractionDigits="2"
                                       minFractionDigits="2"/>
-<%--            <td><a href="${exhibitItem.restLink}" class="btn btn-primary pt-0 pb-0"><fmt:message key="exhibit.edit"/></a></td>--%>
             <td><a href="${pageContext.request.contextPath}/admin/exhibit_edit?id=${exhibitItem.id}" class="btn btn-primary pt-0 pb-0"><fmt:message key="exhibit.edit"/></a></td>
         </tr>
     </c:forEach>

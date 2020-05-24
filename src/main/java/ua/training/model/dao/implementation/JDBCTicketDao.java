@@ -124,9 +124,8 @@ public class JDBCTicketDao implements TicketDao {
             preparedStatement.setObject(2, exhibitDate);
             preparedStatement.setLong(3, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            TicketMapper ticketMapper = new TicketMapper();
             if (resultSet.next()) {
-                return Optional.of(ticketMapper.extractFromResultSet(resultSet));
+                return Optional.of(new TicketMapper().extractFromResultSet(resultSet));
             }
         } catch (Exception e) {
             log.error(MessageUtil.getRuntimeExceptionMessage(e));

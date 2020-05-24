@@ -29,6 +29,58 @@ public class Ticket {
 
     }
 
+    public static class TicketBuilder{
+        private final Ticket ticket;
+
+        public TicketBuilder() {
+            this.ticket = new Ticket();
+        }
+
+        public TicketBuilder id(Long id){
+            ticket.setId(id);
+            return this;
+        }
+
+        public TicketBuilder exhibitDate(LocalDate exhibitDate){
+            ticket.setExhibitDate(exhibitDate);
+            return this;
+        }
+
+        public TicketBuilder ticketQuantity(int ticketQuantity){
+            ticket.setTicketQuantity(ticketQuantity);
+            return this;
+        }
+
+        public TicketBuilder ticketSum(long ticketSum){
+            ticket.setTicketSum(ticketSum);
+            return this;
+        }
+
+        public TicketBuilder hallId(Long hallId){
+            ticket.setHallId(hallId);
+            return this;
+        }
+
+        public TicketBuilder exhibitId(Long exhibitId){
+            ticket.setExhibitId(exhibitId);
+            return this;
+        }
+
+        public TicketBuilder paymentId(Long paymentId){
+            ticket.setPaymentId(paymentId);
+            return this;
+        }
+
+        public TicketBuilder userId(Long userId){
+            ticket.setUserId(userId);
+            return this;
+        }
+
+        public Ticket builder(){
+            return ticket;
+        }
+    }
+
     public Long getId() {
         return id;
     }

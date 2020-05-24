@@ -12,20 +12,6 @@ public class TicketDTOMapper implements ObjectMapper<TicketDTO> {
 
     @Override
     public TicketDTO extractFromResultSet(ResultSet rs) throws SQLException {
-//        TicketDTO ticketDTO = new TicketDTO();
-//        ticketDTO.setId(rs.getLong(FIELD_ID));
-//        ticketDTO.setExhibitDate(rs.getObject(FIELD_DB_EXHIBIT_DATE, LocalDate.class));
-//        ticketDTO.setTicketQuantity(rs.getInt(FIELD_DB_TICKET_QUANTITY));
-//        ticketDTO.setTicketSum(rs.getLong(FIELD_DB_TICKET_SUM));
-//        ticketDTO.setPaymentId(rs.getLong(FIELD_DB_PAYMENT_ID));
-//        ticketDTO.setExhibitId(rs.getLong(FIELD_DB_EXHIBIT_ID));
-//        ticketDTO.setExhibitName(rs.getString(FIELD_DB_EXHIBIT_NAME));
-//        ticketDTO.setHallId(rs.getLong(FIELD_DB_HALL_ID));
-//        ticketDTO.setHallName(rs.getString(FIELD_DB_HALL_NAME));
-//        ticketDTO.setUserId(rs.getLong(FIELD_DB_USER_ID));
-
-//        return ticketDTO;
-
         return new TicketDTO.TicketDTOBuilder()
                 .id(rs.getLong(FIELD_ID))
                 .exhibitDate(rs.getObject(FIELD_DB_EXHIBIT_DATE, LocalDate.class))

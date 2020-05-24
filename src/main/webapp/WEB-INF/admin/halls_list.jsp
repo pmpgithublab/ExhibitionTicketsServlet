@@ -22,7 +22,6 @@
         <tr>
             <td></td>
             <td>${hall.name}</td>
-<%--            <td><a href="${hall.restLink}" class="btn btn-primary pt-0 pb-0"><fmt:message key="hall.edit"/></a></td>--%>
             <td><a href="${pageContext.request.contextPath}/admin/hall_edit?id=${hall.id}" class="btn btn-primary pt-0 pb-0"><fmt:message key="hall.edit"/></a></td>
         </tr>
     </c:forEach>

@@ -31,6 +31,58 @@ public class Exhibit {
     public Exhibit() {
     }
 
+    public static class ExhibitBuilder{
+        private final Exhibit exhibit;
+
+        public ExhibitBuilder() {
+            this.exhibit = new Exhibit();
+        }
+
+        public ExhibitBuilder id(Long id){
+            exhibit.setId(id);
+            return this;
+        }
+
+        public ExhibitBuilder name(String name){
+            exhibit.setName(name);
+            return this;
+        }
+
+        public ExhibitBuilder nameUK(String nameUK){
+            exhibit.setNameUK(nameUK);
+            return this;
+        }
+
+        public ExhibitBuilder startDateTime(LocalDateTime startDateTime){
+            exhibit.setStartDateTime(startDateTime);
+            return this;
+        }
+
+        public ExhibitBuilder endDateTime(LocalDateTime endDateTime){
+            exhibit.setEndDateTime(endDateTime);
+            return this;
+        }
+
+        public ExhibitBuilder maxVisitorsPerDay(int maxVisitorsPerDay){
+            exhibit.setMaxVisitorsPerDay(maxVisitorsPerDay);
+            return this;
+        }
+
+        public ExhibitBuilder ticketCost(long ticketCost){
+            exhibit.setTicketCost(ticketCost);
+            return this;
+        }
+
+        public ExhibitBuilder hallId(Long hallId){
+            exhibit.setHallId(hallId);
+            return this;
+        }
+
+        public Exhibit build(){
+            return exhibit;
+        }
+    }
+
     public Long getId() {
         return id;
     }
