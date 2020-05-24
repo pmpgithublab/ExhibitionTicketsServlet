@@ -22,7 +22,7 @@ public class Servlet extends HttpServlet {
     private final Map<String, Command> commands = new HashMap<>();
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         log.info(SERVLET_INIT_METHOD_START);
 
         UserService userService = new UserService();
@@ -72,7 +72,7 @@ public class Servlet extends HttpServlet {
             throws ServletException, IOException {
 
         String path = request.getServletPath();
-        Command command = commands.getOrDefault(path, (r) -> REDIRECT_STRING + ERROR_PATH);
+        Command command = commands.getOrDefault(path, (r) -> REDIRECT_STRING + WELCOME_PATH);
         String page = command.execute(request);
         if (page.startsWith(REDIRECT_STRING)) {
             response.sendRedirect(page.replace(REDIRECT_STRING, request.getContextPath()));
