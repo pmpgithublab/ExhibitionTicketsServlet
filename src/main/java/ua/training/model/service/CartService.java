@@ -5,6 +5,7 @@ import ua.training.model.dao.ExhibitDao;
 import ua.training.model.dao.TicketDao;
 import ua.training.model.dao.implementation.JDBCDaoFactory;
 import ua.training.model.dto.TicketDTO;
+import ua.training.model.dto.UserCartDTO;
 import ua.training.model.entity.Ticket;
 import ua.training.util.FinancialUtil;
 import ua.training.util.MessageUtil;
@@ -80,19 +81,19 @@ public class CartService {
         }
     }
 
-    public List<TicketDTO> findAllNotPaidUserTickets(Long userId) {
-        List<TicketDTO> result;
-        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
-            result = ticketDao.findAllNotPaidUserTickets(userId);
-        }
-
-        result.forEach(c -> c.setTicketSum(FinancialUtil.calcCost(c.getTicketSum())));
-        return result;
-    }
-
     public void clearCart(Long userId) throws Exception {
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
             ticketDao.deleteAllNotPaid(userId);
         }
+    }
+
+    public List<UserCartDTO> getUserCart(Long userId) {
+        List<UserCartDTO> result;
+        try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
+            result = ticketDao.getUserCart(userId);
+        }
+
+        result.forEach(c -> c.setTicketSum(FinancialUtil.calcCost(c.getTicketSum())));
+        return result;
     }
 }

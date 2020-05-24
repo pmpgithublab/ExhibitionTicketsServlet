@@ -65,11 +65,11 @@
                             <td><fmt:formatDate pattern="MMM dd yyyy h:mm a" value="${endDateTime}"/></td>
                         </c:otherwise>
                     </c:choose>
-                    <td id="cost"><fmt:formatNumber value="${exhibitItem.ticketCost/100}" type="currency"
+                    <td><fmt:formatNumber value="${exhibitItem.ticketCost/100}" type="currency"
                                                     currencySymbol="${currencySign}"
                                                     maxFractionDigits="2"
                                                     minFractionDigits="2"/></td>
-                    <td><input name="quantity" id="quantity" type="number" onchange="calc()"
+                    <td><input name="quantity" id="quantity" type="number"
                                min="1" max="100000" step="1" value="1" size="6" required/></td>
                     <td>
 
@@ -98,18 +98,6 @@
             }
             window.location.href = location + "?id=" + selectedIndex;
         }
-    }
-
-    function calc() {
-        // const quantity = parseInt(document.getElementById("quantity").value);
-        // const cost = parseInt(document.getElementById("cost").value);
-        // if (!isNaN(quantity) && !isNaN(cost)) {
-        //     document.getElementById("cost").value
-        //
-        // }
-        //
-
-
     }
 </script>
 </body>

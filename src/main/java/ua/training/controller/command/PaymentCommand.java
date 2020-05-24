@@ -1,7 +1,7 @@
 package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.training.controller.util.Util;
+import ua.training.controller.util.ControllerUtil;
 import ua.training.model.dto.TicketDTO;
 import ua.training.model.exception.ExpiredPaymentDataException;
 import ua.training.model.exception.ExternalPaymentSystemRejectPaymentException;
@@ -48,7 +48,7 @@ public class PaymentCommand implements Command {
     }
 
     private String showPaymentData(HttpServletRequest request) {
-        Optional<TicketDTO> payment = paymentService.findSumAndQuantityNotPaidUserTickets(Util.getUserId(request));
+        Optional<TicketDTO> payment = paymentService.findSumAndQuantityNotPaidUserTickets(ControllerUtil.getUserId(request));
         payment.ifPresent(p -> request.setAttribute(TOTAL_SUM, p.getTicketSum()));
         payment.ifPresent(p -> request.setAttribute(TOTAL_QUANTITY, p.getTicketQuantity()));
 
@@ -75,7 +75,7 @@ public class PaymentCommand implements Command {
 
         int totalQuantity = Integer.parseInt(stringTotalQuantity);
         long totalSum = FinancialUtil.getAccountingSum(Long.parseLong(stringTotalSum), currencySign);
-        long userId = Util.getUserId(request);
+        long userId = ControllerUtil.getUserId(request);
 
         if (totalQuantity == 0 || totalSum == 0) {
             log.warn(USER_ASK_ZERO_PAYMENT_SUM_OR_TICKET_QUANTITY);
@@ -84,7 +84,7 @@ public class PaymentCommand implements Command {
         }
 
         try {
-            paymentService.paymentProcess(totalQuantity, totalSum, Util.getUserId(request));
+            paymentService.paymentProcess(totalQuantity, totalSum, ControllerUtil.getUserId(request));
             log.info(PAYMENT_SUCCESSFUL + totalSum + TICKET_QUANTITY + totalQuantity + SESSION_ID + userId);
             request.setAttribute(IS_SUCCESSFUL, true);
         } catch (ExternalPaymentSystemRejectPaymentException e) {

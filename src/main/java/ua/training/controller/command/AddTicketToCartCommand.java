@@ -1,7 +1,7 @@
 package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.training.controller.util.Util;
+import ua.training.controller.util.ControllerUtil;
 import ua.training.model.service.CartService;
 import ua.training.util.CheckUtils;
 import ua.training.util.MessageUtil;
@@ -38,7 +38,7 @@ public class AddTicketToCartCommand implements Command {
                 int ticketQuantity = Integer.parseInt(stringTicketQuantity);
 
                 try {
-                    cartService.addTicketToCart(exhibitId, exhibitDate, ticketQuantity, Util.getUserId(request));
+                    cartService.addTicketToCart(exhibitId, exhibitDate, ticketQuantity, ControllerUtil.getUserId(request));
                     log.info(TICKET_ADDED_TO_CART + stringExhibitDate
                             + EXHIBIT_ID + stringExhibitId + TICKET_QUANTITY + stringTicketQuantity);
                 } catch (Exception e) {

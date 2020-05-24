@@ -1,7 +1,7 @@
 package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.training.controller.util.Util;
+import ua.training.controller.util.ControllerUtil;
 import ua.training.model.dto.ReportDTO;
 import ua.training.model.dto.UserStatisticDTO;
 import ua.training.model.service.ReportService;
@@ -35,7 +35,7 @@ public class TradeReportCommand implements Command {
             }
 
             ReportDTO<UserStatisticDTO> userStatisticDTOS =
-                    reportService.getUserPurchases(Util.getUserId(request), pageNumber);
+                    reportService.getUserPurchases(ControllerUtil.getUserId(request), pageNumber);
             userStatisticDTOS.setCurrentPage(pageNumber);
             userStatisticDTOS.setPageNavigationString(TRADE_PATH);
             request.setAttribute(ReportDTOS, userStatisticDTOS);

@@ -1,14 +1,11 @@
 package ua.training.model.dao.implementation;
 
 import org.apache.log4j.Logger;
+import ua.training.model.dto.*;
 import ua.training.model.exception.TicketDeleteException;
 import ua.training.model.util.DBQueryBundleManager;
 import ua.training.model.dao.TicketDao;
 import ua.training.model.dao.mapper.*;
-import ua.training.model.dto.AdminStatisticDTO;
-import ua.training.model.dto.ReportDTO;
-import ua.training.model.dto.TicketDTO;
-import ua.training.model.dto.UserStatisticDTO;
 import ua.training.model.entity.Ticket;
 import ua.training.util.MessageUtil;
 
@@ -34,6 +31,7 @@ public class JDBCTicketDao implements TicketDao {
     private static final String SQL_QUERY_FIND_TICKETS_SUM_AND_QUANTITY_BY_USER_ID_AND_NOT_PAID = "find.tickets.sum.and.quantity.by.user.id.and.not.paid";
     private static final String SQL_QUERY_DELETE_ALL_NOT_PAID_TICKETS_FROM_CART = "delete.all.not.paid.tickets.from.cart";
     private static final String SQL_QUERY_DELETE_BY_ID_NOT_PAID_TICKET_FROM_CART = "delete.by.id.not.paid.tickets.from.cart";
+    private static final String FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_REST_OF_NOT_SOLD_TICKETS = "find.user.cart.tickets.with.exhibit.dates.and.rest.of.not.sold.tickets";
 
     private static final String DB_TICKET_SAVED_ID = "DB ticket saved. Id: ";
     private static final String DB_TICKET_SAVING_ERROR = "DB ticked saving error. Name: ";
@@ -92,25 +90,6 @@ public class JDBCTicketDao implements TicketDao {
             log.error(MessageUtil.getRuntimeExceptionMessage(e));
             throw new Exception(e);
         }
-    }
-
-    @Override
-    public List<TicketDTO> findAllNotPaidUserTickets(Long userId) {
-        String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_FIND_TICKETS_BY_USER_ID_AND_NOT_PAID);
-        List<TicketDTO> result = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setLong(1, userId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            TicketDTOMapper ticketDTOMapper = new TicketDTOMapper();
-            while (resultSet.next()) {
-                result.add(ticketDTOMapper.extractFromResultSet(resultSet));
-            }
-        } catch (Exception e) {
-            log.error(MessageUtil.getRuntimeExceptionMessage(e));
-            throw new RuntimeException(e);
-        }
-
-        return result;
     }
 
     @Override
@@ -191,6 +170,7 @@ public class JDBCTicketDao implements TicketDao {
                 preparedStatement.setLong(2, RECORD_PER_PAGE);
                 preparedStatement.setLong(3, pageNumber * RECORD_PER_PAGE);
                 ResultSet resultSet = preparedStatement.executeQuery();
+
                 ObjectMapper<UserStatisticDTO> mapper = new UserStatisticDTOMapper();
                 while (resultSet.next()) {
                     result.getItems().add(mapper.extractFromResultSet(resultSet));
@@ -253,6 +233,27 @@ public class JDBCTicketDao implements TicketDao {
 
             if (resultSet.next()) {
                 result = Optional.of(new TicketPaymentMapper().extractFromResultSet(resultSet));
+            }
+        } catch (Exception e) {
+            log.error(MessageUtil.getRuntimeExceptionMessage(e));
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<UserCartDTO> getUserCart(Long userId) {
+        String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(
+                FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_REST_OF_NOT_SOLD_TICKETS);
+        List<UserCartDTO> result = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ObjectMapper<UserCartDTO> mapper = new UserCartDTOMapper();
+            while (resultSet.next()) {
+                result.add(mapper.extractFromResultSet(resultSet));
             }
         } catch (Exception e) {
             log.error(MessageUtil.getRuntimeExceptionMessage(e));

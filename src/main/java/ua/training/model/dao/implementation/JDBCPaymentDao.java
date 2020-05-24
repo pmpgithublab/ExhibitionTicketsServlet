@@ -23,7 +23,7 @@ public class JDBCPaymentDao implements PaymentDao {
 
     private static final String SQL_QUERY_SAVE_PAYMENT = "sql.query.save.payment";
     private static final String SQL_QUERY_SAVE_PAYMENT_UPDATE_TICKETS = "sql.query.save.payment.update.tickets";
-    private static final String SQL_QUERY_FIND_TICKET_BY_USER_ID_AND_EXHIBIT_DATES_AND_NOT_PAID_WITH_EXHIBIT_DATES = "find.tickets.by.user.id.and.exhibit.dates.and.not.paid";
+    private static final String SQL_QUERY_FIND_TICKET_BY_USER_ID_WITH_EXHIBIT_DATES_AND_NOT_PAID = "find.tickets.by.user.id.with.exhibit.dates.and.not.paid";
     private static final String SQL_QUERY_FIND_SOLD_TICKETS_QUANTITY_AND_MAX_VISITORS_QUANTITY_BY_EXHIBIT_ID = "find.sold.tickets.quantity.and.max.visitors.quantity.by.exhibit.id";
 
     private static final String PAYMENT_SAVE_FAILED_NO_ROWS_AFFECTED = "Saving payment failed, no rows affected. User id: ";
@@ -86,7 +86,7 @@ public class JDBCPaymentDao implements PaymentDao {
     @Override
     public void makePayment(Payment payment) throws Exception {
         String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(
-                SQL_QUERY_FIND_TICKET_BY_USER_ID_AND_EXHIBIT_DATES_AND_NOT_PAID_WITH_EXHIBIT_DATES);
+                SQL_QUERY_FIND_TICKET_BY_USER_ID_WITH_EXHIBIT_DATES_AND_NOT_PAID);
         String sqlQuery2 = DBQueryBundleManager.INSTANCE.getProperty(
                 SQL_QUERY_FIND_SOLD_TICKETS_QUANTITY_AND_MAX_VISITORS_QUANTITY_BY_EXHIBIT_ID);
         ResultSet resultSet;
