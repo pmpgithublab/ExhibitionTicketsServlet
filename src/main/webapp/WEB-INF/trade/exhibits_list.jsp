@@ -41,8 +41,8 @@
         </thead>
         <tbody>
         <c:forEach items="${exhibitDatesList}" var="exhibitItem">
-            <form action="${pageContext.request.contextPath}/trade/ticket_add" method="post">
-                <tr>
+            <tr>
+                <form action="${pageContext.request.contextPath}/trade/ticket_add" method="post">
                     <fmt:parseDate value="${exhibitItem.exhibitDate}" pattern="yyyy-MM-dd" var="exhibitDate"
                                    type="date"/>
                     <fmt:parseDate value="${exhibitItem.startDateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="startDateTime"
@@ -66,9 +66,9 @@
                         </c:otherwise>
                     </c:choose>
                     <td><fmt:formatNumber value="${exhibitItem.ticketCost/100}" type="currency"
-                                                    currencySymbol="${currencySign}"
-                                                    maxFractionDigits="2"
-                                                    minFractionDigits="2"/></td>
+                                          currencySymbol="${currencySign}"
+                                          maxFractionDigits="2"
+                                          minFractionDigits="2"/></td>
                     <td><input name="quantity" id="quantity" type="number"
                                min="1" max="100000" step="1" value="1" size="6" required/></td>
                     <td>
@@ -79,8 +79,8 @@
                                 key="exhibit.title.add.to.cart"/></button>
 
                     </td>
-                </tr>
-            </form>
+                </form>
+            </tr>
         </c:forEach>
         </tbody>
     </table>

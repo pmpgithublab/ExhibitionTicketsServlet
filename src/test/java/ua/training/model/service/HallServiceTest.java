@@ -1,6 +1,5 @@
 package ua.training.model.service;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import ua.training.model.dto.HallDTO;
 import ua.training.model.entity.Hall;

@@ -5,8 +5,6 @@ import ua.training.util.CheckUtils;
 
 import java.time.LocalDateTime;
 
-import static ua.training.Constants.*;
-
 public class ExhibitDTOValidator implements Validator<ExhibitDTO> {
     private static final int EXHIBIT_NAME_LENGTH = 200;
 

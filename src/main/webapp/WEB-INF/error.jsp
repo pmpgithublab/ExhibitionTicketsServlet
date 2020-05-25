@@ -7,7 +7,6 @@
 
 <h5 align="center"><fmt:message key="page.error.fatal1"/></h5>
 <h5 align="center"><fmt:message key="page.error.fatal2"/></h5>
-<h5 align="center"><fmt:message key="page.error.fatal4"/></h5>
 
 
 </body>
