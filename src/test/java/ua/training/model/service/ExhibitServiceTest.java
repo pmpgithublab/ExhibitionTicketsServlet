@@ -175,7 +175,7 @@ public class ExhibitServiceTest {
         int tenDays = 10;
         ExhibitDTO exhibitDTO = buildDefaultTestExhibitDTO();
         exhibitDTO.setStartDateTime(LocalDateTime.now().minusDays(tenDays).minusSeconds(5));
-        exhibitDTO.setEndDateTime(LocalDateTime.now().plusDays(tenDays).plusSeconds(10));
+        exhibitDTO.setEndDateTime(LocalDateTime.now().plusDays(tenDays).plusMinutes(10));
         try {
             exhibitService.saveExhibit(exhibitDTO);
         } catch (Exception e) {
