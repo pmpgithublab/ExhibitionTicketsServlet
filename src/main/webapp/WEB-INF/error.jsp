@@ -5,8 +5,10 @@
 <body>
 <%@ include file="page_parts/header_and_menu.jsp" %>
 
-<h5 align="center"><fmt:message key="page.error.fatal1"/></h5>
-<h5 align="center"><fmt:message key="page.error.fatal2"/></h5>
+<br><br>
+<h3 class="d-flex justify-content-center"><fmt:message key="page.error.title"/></h3>
+<br>
+<h5 class="d-flex justify-content-center"><fmt:message key="page.error.return.previous.page.or.use.menu"/></h5>
 
 
 </body>

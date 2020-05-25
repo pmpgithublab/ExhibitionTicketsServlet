@@ -6,9 +6,11 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/page_parts/header_and_menu.jsp" %>
-<h2 align="center">Error 500</h2>
 
-Error on our side. We are fixing it. Try again later.
+<br><br>
+<h5 class="d-flex justify-content-center"><fmt:message key="page.error.page.not.found.404"/></h5>
+<br>
+<h5 class="d-flex justify-content-center"><fmt:message key="page.error.return.previous.page.or.use.menu"/></h5>
 
 </body>
 </html>
