@@ -27,9 +27,7 @@ public class DeleteTicketFromCartCommand implements Command {
             String stringDate = request.getParameter(FIELD_DATE);
             String stringTicketQuantity = request.getParameter(PARAM_TICKET_QUANTITY);
 
-            if (CheckUtils.isPositiveLong(stringId)
-                    && CheckUtils.isDate(stringDate) && CheckUtils.isPositiveInteger(stringTicketQuantity)) {
-
+            if (isParametersValid(stringId, stringDate, stringTicketQuantity)) {
                 Long id = Long.parseLong(stringId);
                 LocalDate date = LocalDate.parse(stringDate);
                 int ticketQuantity = Integer.parseInt(stringTicketQuantity);
@@ -50,6 +48,11 @@ public class DeleteTicketFromCartCommand implements Command {
 
         log.warn(MessageUtil.getUnacceptedMethodMessage(request));
         return REDIRECT_STRING + ERROR_PATH;
+    }
+
+    private boolean isParametersValid(String stringId, String stringDate, String stringTicketQuantity) {
+        return CheckUtils.isPositiveLong(stringId)
+                && CheckUtils.isDate(stringDate) && CheckUtils.isPositiveInteger(stringTicketQuantity);
     }
 
     private Long getUserId(HttpServletRequest request) {

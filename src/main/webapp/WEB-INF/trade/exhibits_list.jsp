@@ -29,13 +29,13 @@
     <table class="table table-hover">
         <thead class="thead-light">
         <tr>
-            <th style="width: 10%"><fmt:message key="exhibit.title.exhibitDate"/></th>
-            <th style="width: 20%"><fmt:message key="exhibit.title.theme"/></th>
-            <th style="width: 15%"><fmt:message key="exhibit.title.hall"/></th>
-            <th style="width: 13%"><fmt:message key="exhibit.title.startDateTime"/></th>
-            <th style="width: 13%"><fmt:message key="exhibit.title.endDateTime"/></th>
-            <th style="width: 7%"><fmt:message key="exhibit.title.ticketCost"/></th>
-            <th style="width: 5%"><fmt:message key="exhibit.title.ticketQuantity"/></th>
+            <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
+            <th style="width: 20%"><fmt:message key="theme"/></th>
+            <th style="width: 15%"><fmt:message key="hall"/></th>
+            <th style="width: 13%"><fmt:message key="startDateTime"/></th>
+            <th style="width: 13%"><fmt:message key="endDateTime"/></th>
+            <th style="width: 7%"><fmt:message key="cost"/></th>
+            <th style="width: 5%"><fmt:message key="quantity"/></th>
             <th style="width: 7%"><fmt:message key="exhibit.title.add.to.cart"/></th>
         </tr>
         </thead>

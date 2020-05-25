@@ -2,14 +2,12 @@ package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
 import ua.training.controller.util.ControllerUtil;
-import ua.training.model.dto.TicketDTO;
 import ua.training.model.dto.UserCartDTO;
 import ua.training.model.service.CartService;
 import ua.training.util.CheckUtils;
 import ua.training.util.MessageUtil;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

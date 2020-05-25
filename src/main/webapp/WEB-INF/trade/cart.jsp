@@ -14,11 +14,11 @@
         <thead>
         <tr>
             <th style="width: 10%"></th>
-            <th style="width: 10%"><fmt:message key="cart.exhibitDate"/></th>
-            <th style="width: 30%"><fmt:message key="cart.title.theme"/></th>
-            <th style="width: 25%"><fmt:message key="cart.title.hall"/></th>
-            <th style="width: 8%"><fmt:message key="cart.title.sum"/></th>
-            <th style="width: 7%"><fmt:message key="cart.title.quantity"/></th>
+            <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
+            <th style="width: 30%"><fmt:message key="theme"/></th>
+            <th style="width: 23%"><fmt:message key="hall"/></th>
+            <th style="width: 10%"><fmt:message key="cart.title.sum"/></th>
+            <th style="width: 7%"><fmt:message key="quantity"/></th>
             <th style="width: 10%"></th>
         </tr>
         </thead>
@@ -55,11 +55,11 @@
         <thead>
         <tr>
             <th style="width: 10%"></th>
-            <th style="width: 10%"><fmt:message key="cart.exhibitDate"/></th>
-            <th style="width: 30%"><fmt:message key="cart.title.theme"/></th>
-            <th style="width: 25%"><fmt:message key="cart.title.hall"/></th>
-            <th style="width: 8%"><fmt:message key="cart.title.sum"/></th>
-            <th style="width: 7%"><fmt:message key="cart.title.quantity"/></th>
+            <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
+            <th style="width: 30%"><fmt:message key="theme"/></th>
+            <th style="width: 23%"><fmt:message key="hall"/></th>
+            <th style="width: 10%"><fmt:message key="cart.title.sum"/></th>
+            <th style="width: 7%"><fmt:message key="quantity"/></th>
             <th style="width: 10%"></th>
         </tr>
         </thead>
@@ -94,11 +94,11 @@
     <thead>
     <tr>
         <th style="width: 10%"></th>
-        <th style="width: 10%"><fmt:message key="cart.exhibitDate"/></th>
-        <th style="width: 25%"><fmt:message key="cart.title.theme"/></th>
-        <th style="width: 25%"><fmt:message key="cart.title.hall"/></th>
-        <th style="width: 6%"><fmt:message key="cart.title.sum"/></th>
-        <th style="width: 6%"><fmt:message key="cart.title.quantity"/></th>
+        <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
+        <th style="width: 25%"><fmt:message key="theme"/></th>
+        <th style="width: 22%"><fmt:message key="hall"/></th>
+        <th style="width: 8%"><fmt:message key="cart.title.sum"/></th>
+        <th style="width: 6%"><fmt:message key="quantity"/></th>
         <th style="width: 8%"><fmt:message key="cart.delete"/></th>
         <th style="width: 10%"></th>
     </tr>
@@ -154,7 +154,7 @@
 <c:if test="${!cart.isEmpty() && notEnoughTickets.isEmpty() && expiredTickets.isEmpty()}">
     <div class="d-flex justify-content-center">
         <a href="${pageContext.request.contextPath}/trade/payment" class="btn btn-primary"><fmt:message
-                key="cart.pay"/></a>
+                key="pay"/></a>
     </div>
 </c:if>
 </body>

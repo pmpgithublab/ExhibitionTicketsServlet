@@ -13,6 +13,7 @@ public class MessageUtil {
     private static final String OBJECT_SAVED = " saved. Path: ";
     private static final String OBJECT_NOT_VALID = " not valid. Path: ";
     private static final String RUNTIME_EXCEPTION = "Runtime exception: ";
+    private static final String PARAMETERS = ". Parameters: ";
 
 
     public static String getUnacceptedMethodMessage(HttpServletRequest request) {

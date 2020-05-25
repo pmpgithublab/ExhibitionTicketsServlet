@@ -53,7 +53,7 @@
             <input hidden name="totalQuantity" value="${totalQuantity}">
             <input hidden name="totalSum" value="${totalSum}">
             <input hidden name="currencySign" value="${currencySign}">
-            <button type="submit" class="btn btn-primary"><fmt:message key="payment.pay"/></button>
+            <button type="submit" class="btn btn-primary"><fmt:message key="pay"/></button>
         </form>
     </div>
 </c:if>

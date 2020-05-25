@@ -24,7 +24,7 @@
         <tr>
             <td>
                 <c:if test="${sessionScope.userRole != 'ROLE_ANONYMOUS'}">
-                    <a href="${pageContext.request.contextPath}/logout"><fmt:message key="header.logout"/></a>
+                    <a href="${pageContext.request.contextPath}/logout"><fmt:message key="logout"/></a>
                 </c:if>
             </td>
         </tr>

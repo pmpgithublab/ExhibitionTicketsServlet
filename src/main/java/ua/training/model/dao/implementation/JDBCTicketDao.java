@@ -38,6 +38,8 @@ public class JDBCTicketDao implements TicketDao {
     private static final String DB_TICKET_DELETED_FROM_CART_BY_ID = "Ticket deleted from cart by id";
     private static final String DB_ALL_TICKETS_DELETING_FROM_CART_ERROR = "All tickets deleting from cart error";
     private static final String DB_TICKET_DELETING_BY_ID_FROM_CART_ERROR = "Deleting ticket by id from cart error";
+    private static final int ONE_ELEMENT = 1;
+    private static final int RECORD_PER_PAGE = 5;
 
     private final Connection connection;
 

@@ -9,14 +9,14 @@ import static ua.training.Constants.*;
 
 public class CheckUtils {
     private static final String IS_NUMBER_REGEX = "\\d+";
-
+    private static final int MAX_TICKET_QUANTITY = 99999;
 
     private static boolean isPositiveNumber(String positiveNumber) {
         return positiveNumber != null && !positiveNumber.equals(EMPTY_STRING) && positiveNumber.matches(IS_NUMBER_REGEX);
     }
 
     public static boolean isPositiveInteger(String positiveNumber) {
-        if (isPositiveNumber(positiveNumber)){
+        if (isPositiveNumber(positiveNumber)) {
             try {
                 Integer.parseInt(positiveNumber);
                 return true;
@@ -29,7 +29,7 @@ public class CheckUtils {
     }
 
     public static boolean isPositiveLong(String positiveNumber) {
-        if (isPositiveNumber(positiveNumber)){
+        if (isPositiveNumber(positiveNumber)) {
             try {
                 Long.parseLong(positiveNumber);
 
@@ -58,6 +58,10 @@ public class CheckUtils {
         }
     }
 
+    public static boolean isNullOrEmptyString(String string) {
+        return string == null || string.equals(EMPTY_STRING);
+    }
+
     public static LocalDate getMaxDate(LocalDate date1, LocalDate date2) {
         return date1.isAfter(date2) ? date1 : date2;
     }
@@ -71,7 +75,7 @@ public class CheckUtils {
     }
 
     public static boolean isExhibitDateTimeActual(LocalDate ticketExhibitDate, LocalDate startDate,
-                                                            LocalDate endDate, LocalTime timeExhibitEnd) {
+                                                  LocalDate endDate, LocalTime timeExhibitEnd) {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
 

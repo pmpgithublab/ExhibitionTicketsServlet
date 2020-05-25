@@ -15,6 +15,7 @@ public class AddTicketToCartCommand implements Command {
     private static final Logger log = Logger.getLogger(AddTicketToCartCommand.class);
     private static final String TICKET_ADDED_TO_CART = "Ticket added to cart. Date: ";
     private static final String EXHIBIT_ID = ". Exhibit id: ";
+    private static final String PARAM_ID = "?id=";
 
     private final CartService cartService;
 
@@ -29,10 +30,7 @@ public class AddTicketToCartCommand implements Command {
             String stringExhibitDate = request.getParameter(FIELD_DATE);
             String stringTicketQuantity = request.getParameter(PARAM_TICKET_QUANTITY);
 
-            if (CheckUtils.isPositiveLong(stringExhibitId)
-                    && CheckUtils.isDate(stringExhibitDate)
-                    && CheckUtils.isTicketQuantityValid(stringTicketQuantity)) {
-
+            if (isParametersValid(stringExhibitId, stringExhibitDate, stringTicketQuantity)) {
                 Long exhibitId = Long.parseLong(stringExhibitId);
                 LocalDate exhibitDate = LocalDate.parse(stringExhibitDate);
                 int ticketQuantity = Integer.parseInt(stringTicketQuantity);
@@ -55,5 +53,11 @@ public class AddTicketToCartCommand implements Command {
 
         log.warn(MessageUtil.getUnacceptedMethodMessage(request));
         return REDIRECT_STRING + ERROR_PATH;
+    }
+
+    private boolean isParametersValid(String stringExhibitId, String stringExhibitDate, String stringTicketQuantity) {
+        return CheckUtils.isPositiveLong(stringExhibitId)
+                && CheckUtils.isDate(stringExhibitDate)
+                && CheckUtils.isTicketQuantityValid(stringTicketQuantity);
     }
 }

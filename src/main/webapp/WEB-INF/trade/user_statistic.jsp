@@ -13,10 +13,10 @@
     <thead>
     <tr>
         <th style="width: 20%"></th>
-        <th style="width: 10%"><fmt:message key="user.statistic.purchase.date"/></th>
+        <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
         <th style="width: 30%"><fmt:message key="user.statistic.exhibit.theme"/></th>
         <th class="text-center" style="width: 10%"><fmt:message key="user.statistic.ticket.sum"/></th>
-        <th class="text-center" style="width: 10%"><fmt:message key="user.statistic.ticket.quantity"/></th>
+        <th class="text-center" style="width: 10%"><fmt:message key="ticket.quantity"/></th>
         <th style="width: 20%"></th>
     </tr>
     </thead>

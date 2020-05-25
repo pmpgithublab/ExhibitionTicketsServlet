@@ -17,11 +17,11 @@
     <table class="table d-flex justify-content-center">
         <tbody>
         <tr>
-            <td><label for="email"><fmt:message key="login.email"/></label></td>
+            <td><label for="email"><fmt:message key="email"/></label></td>
             <td><input type="email" name="email" id="email" size="30" required/></td>
         </tr>
         <tr>
-            <td><label for="password"><fmt:message key="login.password"/></label></td>
+            <td><label for="password"><fmt:message key="password"/></label></td>
             <td><input type="password" name="password" id="password" size="30" required/></td>
         </tr>
         </tbody>

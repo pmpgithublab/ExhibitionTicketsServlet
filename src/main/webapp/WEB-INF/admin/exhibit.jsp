@@ -15,7 +15,7 @@
 <form method="post" action="${pageContext.request.contextPath}/admin/exhibit_edit<c:if test="${exhibitDTO.getId() != null}">?id=${exhibitDTO.getId()}</c:if>">
     <table class="table d-flex justify-content-center">
         <tr hidden>
-            <td><fmt:message key="exhibit.id"/></td>
+            <td></td>
             <td><input type="text" name="id" value="${exhibitDTO.getId()}"/></td>
         </tr>
         <tr>
@@ -36,24 +36,24 @@
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.startDateTime"/></td>
+            <td><fmt:message key="startDateTime"/></td>
             <td><input type="datetime-local" name="startDateTime" value="${exhibitDTO.getStartDateTime()}" size="30"
                        required/>
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.endDateTime"/></td>
+            <td><fmt:message key="endDateTime"/></td>
             <td><input type="datetime-local" name="endDateTime" dataformatas="" value="${exhibitDTO.getEndDateTime()}"
                        size="30" required/></td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.maxVisitorsPerDay"/></td>
+            <td><fmt:message key="maxVisitorsPerDay"/></td>
             <td><input type="number" name="maxVisitorsPerDay" value="${exhibitDTO.getMaxVisitorsPerDay()}"
                        size="20" min="1" step="1" max="99999" required/>
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.ticketCost"/></td>
+            <td><fmt:message key="cost"/></td>
             <td>
                 <input type="text" name="ticketCost" id="ticketCost" class="ticketCost" placeholder="0.00"
                        value="${exhibitDTO.getTicketCost()/100}"
@@ -61,7 +61,7 @@
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.hall"/></td>
+            <td><fmt:message key="hall"/></td>
             <td>
                 <select name="hallId">
                     <option value="${selectedHall.getId()}" selected>${selectedHall.getName()}</option>
@@ -75,7 +75,7 @@
         </tr>
     </table>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary" onclick="copyData()"><fmt:message key="exhibit.save"/></button>
+        <button type="submit" class="btn btn-primary" onclick="copyData()"><fmt:message key="save"/></button>
     </div>
 </form>
 

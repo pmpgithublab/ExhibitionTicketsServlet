@@ -73,7 +73,6 @@ public class ExhibitService {
                 newExhibitDTO = exhibitDTO.clone();
             } catch (CloneNotSupportedException e) {
                 log.error(CREATING_EXHIBIT_LIST_BY_DATES_ERROR + SLASH_SYMBOL + e.getMessage());
-//                    log.error(MessageUtil.getRuntimeExceptionMessage(e));
                 throw new RuntimeException(e);
             }
             exhibitDate = startDate.plusDays(i);

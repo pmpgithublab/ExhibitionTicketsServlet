@@ -31,12 +31,12 @@
             </td>
         </tr>
         <tr>
-            <td><label for="email"><fmt:message key="registration.user.email"/></label></td>
+            <td><label for="email"><fmt:message key="email"/></label></td>
             <td><input type="email" name="email" id="email" pattern="${email_pattern_regex}" value="${userEmail}" required/>
             </td>
         </tr>
         <tr>
-            <td><label for="password"><fmt:message key="registration.user.password"/></label></td>
+            <td><label for="password"><fmt:message key="password"/></label></td>
             <td><input type="password" name="password" id="password" pattern="${password_pattern_regex}" required/></td>
         </tr>
         </tbody>
