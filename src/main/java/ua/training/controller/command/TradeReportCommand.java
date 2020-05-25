@@ -27,7 +27,7 @@ public class TradeReportCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_GET)) {
-            String stringPageNumber = request.getParameter(FIELD_PAGE);
+            String stringPageNumber = request.getParameter(PARAM_PAGE_NUMBER);
             int pageNumber = 0;
 
             if (CheckUtils.isPositiveInteger(stringPageNumber)) {
@@ -35,8 +35,7 @@ public class TradeReportCommand implements Command {
             }
 
             ReportDTO<UserStatisticDTO> userStatisticDTOS =
-                    reportService.getUserPurchases(ControllerUtil.getUserId(request), pageNumber);
-            userStatisticDTOS.setCurrentPage(pageNumber);
+                    reportService.getUserReport(ControllerUtil.getUserId(request), pageNumber);
             userStatisticDTOS.setPageNavigationString(TRADE_PATH);
             request.setAttribute(ReportDTOS, userStatisticDTOS);
 

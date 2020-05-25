@@ -63,7 +63,7 @@ public class LogInCommand implements Command {
         Optional<UserDTO> userFromDB = userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
 
         if (userFromDB.isPresent()) {
-            setSessionVariables(request, userFromDB.get());
+            setupSessionVariables(request, userFromDB.get());
             log.info(USER_LOGGED_IN + userFromDB.get().getEmail() + SESSION_ID + request.getSession().getId());
 
             return redirectToUserPage(request, userFromDB.get());
@@ -73,7 +73,7 @@ public class LogInCommand implements Command {
         }
     }
 
-    private void setSessionVariables(HttpServletRequest request, UserDTO userDTO) {
+    private void setupSessionVariables(HttpServletRequest request, UserDTO userDTO) {
         HttpSession session = request.getSession();
         session.setAttribute(USER, userDTO);
         session.setAttribute(USER_NAME, userDTO.getName());

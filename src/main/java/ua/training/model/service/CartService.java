@@ -19,8 +19,8 @@ public class CartService {
     private static final String TICKET_CREATION_OR_SAVING_ERROR = "Ticket creation or saving error. User id: ";
 
 
-    public Optional<TicketDTO> createTicketByIdAndDate(Long exhibitId, LocalDate exhibitDate,
-                                                       int ticketQuantity, Long userId) {
+    public Optional<TicketDTO> createTicketByExhibitIdAndExhibitDate(Long exhibitId, LocalDate exhibitDate,
+                                                                     int ticketQuantity, Long userId) {
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
             return exhibitDao.findByIdWithHall(exhibitId)
                     .map(result -> new TicketDTO.TicketDTOBuilder()
@@ -48,7 +48,7 @@ public class CartService {
                 ticketFromDB.get().setTicketSum(ticketFromDB.get().getTicketQuantity() * cost);
                 saveTicket(new TicketDTO(ticketFromDB.get()));
             } else {
-                Optional<TicketDTO> newTicket = createTicketByIdAndDate(exhibitId, exhibitDate, ticketQuantity, userId);
+                Optional<TicketDTO> newTicket = createTicketByExhibitIdAndExhibitDate(exhibitId, exhibitDate, ticketQuantity, userId);
                 if (newTicket.isPresent()) {
                     saveTicket(newTicket.get());
                 } else {
@@ -69,7 +69,7 @@ public class CartService {
                 if (ticketFromDB.get().getTicketQuantity() > ticketQuantity) {
                     addTicketToCart(exhibitId, exhibitDate, -ticketQuantity, userId);
                 } else {
-                    ticketDao.deleteByIdNotPaid(ticketFromDB.get().getId());
+                    ticketDao.deleteByIdAndNotPaid(ticketFromDB.get().getId());
                 }
             }
         }
@@ -83,7 +83,7 @@ public class CartService {
 
     public void clearCart(Long userId) throws Exception {
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
-            ticketDao.deleteAllNotPaid(userId);
+            ticketDao.deleteAllByUserIdAndNotPaid(userId);
         }
     }
 

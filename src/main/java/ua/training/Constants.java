@@ -8,7 +8,6 @@ public interface Constants {
     String METHOD_POST = "POST";
 
     String EMPTY_STRING = "";
-    String CURRENCY_SIGN = "currencySign";
     String DOLLAR_SIGN = "$";
     String HRYVNA_SIGN = "₴";
     String SLASH_SYMBOL = "/";
@@ -20,6 +19,8 @@ public interface Constants {
 
     //    parameter's names
     String PARAM_TICKET_QUANTITY = "quantity";
+    String PARAM_PAGE_NUMBER = "page";
+    String PARAM_DATE = "date";
 
     //    session variables
     String USER = "user";
@@ -28,6 +29,7 @@ public interface Constants {
     String USER_EMAIL = "userEmail";
     String USER_ROLE = "userRole";
     String USER_CART = "userCart";
+    String CURRENCY_SIGN = "currencySign";
 
     //page variables
     String IS_ERROR = "isError";
@@ -49,8 +51,6 @@ public interface Constants {
     String NOT_ENOUGH_TICKETS = "notEnoughTickets";
     String TOTAL_SUM = "totalSum";
     String TOTAL_QUANTITY = "totalQuantity";
-    String EXHIBIT_DTO = "exhibitDTO";
-    String HALL_DTO = "hallDTO";
 
     //    end points
     String WELCOME_PATH = "/";
@@ -77,17 +77,6 @@ public interface Constants {
     String FIELD_ID = "id";
     String FIELD_NAME = "name";
     String FIELD_NAME_UK = "nameUK";
-    String FIELD_EMAIL = "email";
-    String FIELD_PASSWORD = "password";
-    String FIELD_HALLS = "halls";
-    String FIELD_SELECTED_HALL = "selectedHall";
-    String FIELD_START_DATE_TIME = "startDateTime";
-    String FIELD_END_DATE_TIME = "endDateTime";
-    String FIELD_MAX_VISITORS_PER_DAY = "maxVisitorsPerDay";
-    String FIELD_TICKET_COST = "ticketCost";
-    String FIELD_HALL_ID = "hallId";
-    String FIELD_DATE = "date";
-    String FIELD_PAGE = "page";
     String FIELD_DB_ID = "id";
     String FIELD_DB_NAME = "name";
     String FIELD_DB_NAME_EN = "name_en";
@@ -95,10 +84,10 @@ public interface Constants {
     String FIELD_DB_HALL_ID = "hall_id";
     String FIELD_DB_HALL_NAME = "hall_name";
     String FIELD_DB_EXHIBIT_ID = "exhibit_id";
+    String FIELD_DB_EXHIBIT_DATE = "exhibit_date";
     String FIELD_DB_START_DATE_TIME = "start_date_time";
     String FIELD_DB_END_DATE_TIME = "end_date_time";
     String FIELD_DB_MAX_VISITORS_PER_DAY = "max_visitors_per_day";
-    String FIELD_DB_EXHIBIT_DATE = "exhibit_date";
     String FIELD_DB_TICKET_QUANTITY = "tickets_quantity";
     String FIELD_DB_TICKET_COST = "ticket_cost";
     String FIELD_DB_TICKET_SUM = "tickets_sum";

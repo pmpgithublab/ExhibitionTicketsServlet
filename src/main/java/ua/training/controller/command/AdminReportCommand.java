@@ -26,15 +26,14 @@ public class AdminReportCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_GET)) {
-            String stringPageNumber = request.getParameter(FIELD_PAGE);
+            String stringPageNumber = request.getParameter(PARAM_PAGE_NUMBER);
             int pageNumber = 0;
 
             if (CheckUtils.isPositiveInteger(stringPageNumber)) {
                 pageNumber = Integer.parseInt(stringPageNumber);
             }
 
-            ReportDTO<AdminStatisticDTO> adminStatisticDTOS = reportService.getAdminPurchases(pageNumber);
-            adminStatisticDTOS.setCurrentPage(pageNumber);
+            ReportDTO<AdminStatisticDTO> adminStatisticDTOS = reportService.getAdminReport(pageNumber);
             adminStatisticDTOS.setPageNavigationString(ADMIN_PATH);
             request.setAttribute(ReportDTOS, adminStatisticDTOS);
 

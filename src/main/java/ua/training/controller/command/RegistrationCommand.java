@@ -75,7 +75,7 @@ public class RegistrationCommand implements Command {
         request.setAttribute(IS_FIELDS_FILLED, isFieldsCorrect);
         request.setAttribute(IS_USER_EMAIL_ERROR, isEmailRegistered);
         request.setAttribute(NAME_PATTERN_REGEX, LocaleUtil.getProperty(REGEX_NAME_PATTERN));
-        request.setAttribute(NAME_UK_PATTERN_REGEX, LocaleUtil.getLocalNameRegexName());
+        request.setAttribute(NAME_UK_PATTERN_REGEX, LocaleUtil.getLocalNameRegex());
         request.setAttribute(EMAIL_PATTERN_REGEX, LocaleUtil.getProperty(REGEX_EMAIL_PATTERN));
         request.setAttribute(PASSWORD_PATTERN_REGEX, LocaleUtil.getProperty(REGEX_PASSWORD_PATTERN));
     }

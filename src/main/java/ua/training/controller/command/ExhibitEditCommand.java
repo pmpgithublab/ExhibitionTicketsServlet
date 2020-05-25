@@ -19,6 +19,9 @@ import static ua.training.Constants.*;
 public class ExhibitEditCommand implements Command {
     private static final Logger log = Logger.getLogger(ExhibitEditCommand.class);
     private static final String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
+    private static final String EXHIBIT_DTO = "exhibitDTO";
+    private static final String FIELD_SELECTED_HALL = "selectedHall";
+    private static final String FIELD_HALLS = "halls";
 
     private final HallService hallService;
     private final ExhibitService exhibitService;
@@ -97,6 +100,6 @@ public class ExhibitEditCommand implements Command {
         List<HallDTO> hallDTOS = hallService.findAllHall();
         request.setAttribute(FIELD_HALLS, hallDTOS);
         request.setAttribute(FIELD_SELECTED_HALL,
-                hallDTOS.stream().filter(e->e.getId().equals(exhibitDTO.getHallId())).findFirst().get());
+                hallDTOS.stream().filter(e -> e.getId().equals(exhibitDTO.getHallId())).findFirst().get());
     }
 }

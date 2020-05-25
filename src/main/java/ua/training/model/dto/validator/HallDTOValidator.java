@@ -8,9 +8,9 @@ public class HallDTOValidator implements Validator<HallDTO> {
 
     @Override
     public boolean isValid(HallDTO hallDTO) {
-        return !CheckUtils.isNullOrEmptyString(hallDTO.getName())
+        return CheckUtils.isStringNotEmpty(hallDTO.getName())
                 && hallDTO.getName().length() <= HALL_NAME_LENGTH
-                && !CheckUtils.isNullOrEmptyString(hallDTO.getNameUK())
+                && CheckUtils.isStringNotEmpty(hallDTO.getNameUK())
                 && hallDTO.getNameUK().length() <= HALL_NAME_LENGTH;
     }
 }

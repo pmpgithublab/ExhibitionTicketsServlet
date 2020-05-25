@@ -58,8 +58,8 @@ public class CheckUtils {
         }
     }
 
-    public static boolean isNullOrEmptyString(String string) {
-        return string == null || string.equals(EMPTY_STRING);
+    public static boolean isStringNotEmpty(String string) {
+        return string != null && !string.equals(EMPTY_STRING);
     }
 
     public static LocalDate getMaxDate(LocalDate date1, LocalDate date2) {

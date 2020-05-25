@@ -27,10 +27,10 @@ public class PaymentService {
     private static final int TEN_SECONDS = 10;
 
 
-    public Optional<TicketDTO> findSumAndQuantityNotPaidUserTickets(Long userId) {
+    public Optional<TicketDTO> findByUserIdSumAndQuantityNotPaidTickets(Long userId) {
         Optional<Ticket> result;
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
-            result = ticketDao.findSumAndQuantityNotPaidUserTickets(userId);
+            result = ticketDao.findByUserIdSumAndQuantityNotPaidTickets(userId);
         }
         if (result.isPresent()) {
             result.get().setTicketSum(FinancialUtil.calcCost(result.get().getTicketSum()));

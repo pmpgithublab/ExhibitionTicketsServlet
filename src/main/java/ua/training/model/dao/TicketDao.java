@@ -12,15 +12,15 @@ public interface TicketDao extends GenericDao<Ticket> {
 
     Optional<Ticket> findTicketByExhibitIdAndExhibitDateAndUserIdAndNotPaid(Long exhibitId, LocalDate exhibitDate, Long userId);
 
-    void deleteAllNotPaid(Long userId) throws Exception;
+    void deleteAllByUserIdAndNotPaid(Long userId) throws Exception;
 
-    void deleteByIdNotPaid(Long userId) throws Exception;
+    void deleteByIdAndNotPaid(Long userId) throws Exception;
 
     ReportDTO<UserStatisticDTO> getUserStatistic(Long userId, int pageNumber);
 
     ReportDTO<AdminStatisticDTO> getAdminStatistic(int pageNumber);
 
-    Optional<Ticket> findSumAndQuantityNotPaidUserTickets(Long userId);
+    Optional<Ticket> findByUserIdSumAndQuantityNotPaidTickets(Long userId);
 
     List<UserCartDTO> getUserCart(Long userId);
 }

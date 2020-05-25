@@ -26,14 +26,14 @@ public class TradeListCommand implements Command {
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_GET)) {
             String stringExhibitId = request.getParameter(FIELD_ID);
-            List<ExhibitDTO> exhibitDTOS = exhibitService.getCurrentExhibits();
+            List<ExhibitDTO> exhibitDTOS = exhibitService.findCurrentExhibits();
 
             request.setAttribute(EXHIBIT_THEMES_LIST, exhibitDTOS);
 
             if (CheckUtils.isPositiveLong(stringExhibitId)) {
                 Long id = Long.parseLong(stringExhibitId);
 
-                setSelectedTheme(request, exhibitDTOS, id);
+                setupSelectedTheme(request, exhibitDTOS, id);
                 createExhibitList(request, id);
             }
 
@@ -44,7 +44,7 @@ public class TradeListCommand implements Command {
         return REDIRECT_STRING + ERROR_PATH;
     }
 
-    private void setSelectedTheme(HttpServletRequest request, List<ExhibitDTO> exhibitDTOS, Long exhibitId) {
+    private void setupSelectedTheme(HttpServletRequest request, List<ExhibitDTO> exhibitDTOS, Long exhibitId) {
         request.setAttribute(EXHIBIT_SELECTED_THEME,
                 exhibitDTOS.stream().filter(e->e.getId().equals(exhibitId)).findFirst().get());
     }

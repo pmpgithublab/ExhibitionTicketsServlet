@@ -48,7 +48,7 @@ public class PaymentCommand implements Command {
     }
 
     private String showPaymentData(HttpServletRequest request) {
-        Optional<TicketDTO> payment = paymentService.findSumAndQuantityNotPaidUserTickets(ControllerUtil.getUserId(request));
+        Optional<TicketDTO> payment = paymentService.findByUserIdSumAndQuantityNotPaidTickets(ControllerUtil.getUserId(request));
         payment.ifPresent(p -> request.setAttribute(TOTAL_SUM, p.getTicketSum()));
         payment.ifPresent(p -> request.setAttribute(TOTAL_QUANTITY, p.getTicketQuantity()));
 

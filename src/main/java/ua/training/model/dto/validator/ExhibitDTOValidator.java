@@ -11,9 +11,9 @@ public class ExhibitDTOValidator implements Validator<ExhibitDTO> {
 
     @Override
     public boolean isValid(ExhibitDTO exhibitDTO) {
-        return !CheckUtils.isNullOrEmptyString(exhibitDTO.getName())
+        return CheckUtils.isStringNotEmpty(exhibitDTO.getName())
                 && exhibitDTO.getName().length() <= EXHIBIT_NAME_LENGTH
-                && !CheckUtils.isNullOrEmptyString(exhibitDTO.getNameUK())
+                && CheckUtils.isStringNotEmpty(exhibitDTO.getNameUK())
                 && exhibitDTO.getNameUK().length() <= EXHIBIT_NAME_LENGTH
                 && exhibitDTO.getStartDateTime() != null
                 && exhibitDTO.getStartDateTime().isAfter(LocalDateTime.now())

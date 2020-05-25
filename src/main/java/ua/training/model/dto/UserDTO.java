@@ -14,6 +14,8 @@ import static ua.training.Constants.*;
 
 public class UserDTO implements HttpSessionBindingListener {
     private static final Map<UserDTO, HttpSession> loggedUsers = new ConcurrentHashMap<>();
+    private static final String FIELD_EMAIL = "email";
+    private static final String FIELD_PASSWORD = "password";
 
     private Long id;
     private String name;

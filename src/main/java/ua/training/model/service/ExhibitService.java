@@ -43,7 +43,7 @@ public class ExhibitService {
         }
     }
 
-    public List<ExhibitDTO> getCurrentExhibits() {
+    public List<ExhibitDTO> findCurrentExhibits() {
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
             return exhibitDao.findCurrentExhibits().stream().map(ExhibitDTO::new).collect(Collectors.toList());
         }

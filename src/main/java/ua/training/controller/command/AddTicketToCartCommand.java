@@ -27,7 +27,7 @@ public class AddTicketToCartCommand implements Command {
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_POST)) {
             String stringExhibitId = request.getParameter(FIELD_ID);
-            String stringExhibitDate = request.getParameter(FIELD_DATE);
+            String stringExhibitDate = request.getParameter(PARAM_DATE);
             String stringTicketQuantity = request.getParameter(PARAM_TICKET_QUANTITY);
 
             if (isParametersValid(stringExhibitId, stringExhibitDate, stringTicketQuantity)) {

@@ -117,7 +117,7 @@ public class JDBCTicketDao implements TicketDao {
     }
 
     @Override
-    public void deleteAllNotPaid(Long userId) throws TicketDeleteException {
+    public void deleteAllByUserIdAndNotPaid(Long userId) throws TicketDeleteException {
         String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_DELETE_ALL_NOT_PAID_TICKETS_FROM_CART);
         String message = DB_ALL_TICKETS_DELETING_FROM_CART_ERROR + userId;
         ticketDelete(userId, sqlQuery, message);
@@ -125,7 +125,7 @@ public class JDBCTicketDao implements TicketDao {
     }
 
     @Override
-    public void deleteByIdNotPaid(Long ticketId) throws TicketDeleteException {
+    public void deleteByIdAndNotPaid(Long ticketId) throws TicketDeleteException {
         String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_DELETE_BY_ID_NOT_PAID_TICKET_FROM_CART);
         String message = DB_TICKET_DELETING_BY_ID_FROM_CART_ERROR + ticketId;
         ticketDelete(ticketId, sqlQuery, message);
@@ -178,6 +178,7 @@ public class JDBCTicketDao implements TicketDao {
                     result.getItems().add(mapper.extractFromResultSet(resultSet));
                 }
                 result.setPageQuantity((recordQuantity - ONE_ELEMENT) / RECORD_PER_PAGE);
+                result.setCurrentPage(pageNumber);
             } catch (Exception e) {
                 log.error(MessageUtil.getRuntimeExceptionMessage(e));
                 throw new RuntimeException(e);
@@ -215,6 +216,7 @@ public class JDBCTicketDao implements TicketDao {
                     result.getItems().add(mapper.extractFromResultSet(resultSet));
                 }
                 result.setPageQuantity(recordQuantity / RECORD_PER_PAGE);
+                result.setCurrentPage(pageNumber);
             } catch (Exception e) {
                 log.error(MessageUtil.getRuntimeExceptionMessage(e));
                 throw new RuntimeException(e);
@@ -225,7 +227,7 @@ public class JDBCTicketDao implements TicketDao {
     }
 
     @Override
-    public Optional<Ticket> findSumAndQuantityNotPaidUserTickets(Long userId) {
+    public Optional<Ticket> findByUserIdSumAndQuantityNotPaidTickets(Long userId) {
         String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(
                 SQL_QUERY_FIND_TICKETS_SUM_AND_QUANTITY_BY_USER_ID_AND_NOT_PAID);
         Optional<Ticket> result = Optional.empty();
