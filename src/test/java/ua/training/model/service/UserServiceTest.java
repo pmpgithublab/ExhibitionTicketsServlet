@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class UserServiceTest {
     private static final String TEST_STRING = "Test";
@@ -19,7 +18,7 @@ public class UserServiceTest {
     private final Random random = new Random(System.currentTimeMillis());
 
     @Test
-    public void saveCorrectUser() {
+    public void successfulSaveCorrectUserAndFindUser() {
         UserDTO userDTO = buildDefaultTestUserDTO();
 
         try {
@@ -27,7 +26,8 @@ public class UserServiceTest {
         } catch (Exception e) {
             fail();
         }
-        Optional<UserDTO> userDTOFromDB = userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
+        Optional<UserDTO> userDTOFromDB =
+                userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (userDTOFromDB.isPresent()) {
             assertEquals(userDTO, userDTOFromDB.get());
         } else {
@@ -39,14 +39,14 @@ public class UserServiceTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setName(TEST_STRING);
         userDTO.setNameUK(TEST_STRING);
-        userDTO.setEmail(TEST_STRING + LocalDateTime.now() + random.nextInt(10000));
+        userDTO.setEmail(TEST_STRING + LocalDateTime.now() + random.nextInt(10_000));
         userDTO.setPassword(SecurityUtil.encryptString(TEST_STRING));
         userDTO.setRole(UserRole.ROLE_USER);
         return userDTO;
     }
 
     @Test(expected = SuchEmailExistsException.class)
-    public void saveDoubleUser() throws Exception {
+    public void failSaveUserDuplicate() throws Exception {
         UserDTO userDTO = buildDefaultTestUserDTO();
         try {
             userService.saveUser(userDTO);
@@ -58,7 +58,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void saveUserWithEmptyFields() {
+    public void failSaveUserWithEmptyFields() {
         UserDTO userDTO = buildDefaultTestUserDTO();
 
         userDTO.setName(null);
@@ -94,7 +94,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void saveEmptyUser() {
+    public void failSaveEmptyUser() {
         UserDTO userDTO = new UserDTO();
         try {
             userService.saveUser(userDTO);
