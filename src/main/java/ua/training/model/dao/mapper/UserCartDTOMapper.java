@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import static ua.training.Constants.*;
 
 public class UserCartDTOMapper implements ObjectMapper<UserCartDTO> {
+    private static final String FIELD_DB_EXHIBIT_NAME = "exhibit_name";
 
     @Override
     public UserCartDTO extractFromResultSet(ResultSet rs) throws SQLException {

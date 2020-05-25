@@ -9,6 +9,11 @@ import java.sql.SQLException;
 import static ua.training.Constants.*;
 
 public class UserMapper implements ObjectMapper<User> {
+    private static final String FIELD_DB_PASSWORD = "password";
+    private static final String FIELD_DB_ROLE = "role";
+    private static final String FIELD_DB_EMAIL = "email";
+
+
     @Override
     public User extractFromResultSet(ResultSet rs) throws SQLException {
         return new User.UserBuilder()

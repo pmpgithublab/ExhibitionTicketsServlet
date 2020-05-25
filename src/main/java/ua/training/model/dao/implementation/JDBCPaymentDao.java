@@ -50,20 +50,20 @@ public class JDBCPaymentDao implements PaymentDao {
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
                 connection.rollback();
-                log.error(MessageUtil.getRuntimeExceptionMessage(PAYMENT_SAVE_FAILED_NO_ROWS_AFFECTED + payment.getUserId()
-                        + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity()));
-                throw new RuntimeException(PAYMENT_SAVE_FAILED_NO_ROWS_AFFECTED + payment.getUserId()
-                        + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity());
+                String message = PAYMENT_SAVE_FAILED_NO_ROWS_AFFECTED + payment.getUserId()
+                        + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity();
+                log.error(MessageUtil.getRuntimeExceptionMessage(message));
+                throw new RuntimeException(message);
             }
             try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
                 if (generatedKey.next()) {
                     payment.setId(generatedKey.getLong(1));
                 } else {
                     connection.rollback();
-                    log.error(MessageUtil.getRuntimeExceptionMessage(PAYMENT_SAVE_FAILED_NO_ID_OBTAINED + payment.getUserId()
-                            + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity()));
-                    throw new RuntimeException(PAYMENT_SAVE_FAILED_NO_ID_OBTAINED + payment.getUserId()
-                            + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity());
+                    String message = PAYMENT_SAVE_FAILED_NO_ID_OBTAINED + payment.getUserId()
+                            + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity();
+                    log.error(MessageUtil.getRuntimeExceptionMessage(message));
+                    throw new RuntimeException(message);
                 }
             }
 
@@ -87,7 +87,6 @@ public class JDBCPaymentDao implements PaymentDao {
         long ticketSum = 0;
         int ticketQuantity = 0;
         int resultRecordsQuantity = 0;
-        int tickedRecordAffected = 0;
 
         connection.setAutoCommit(false);
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -112,7 +111,7 @@ public class JDBCPaymentDao implements PaymentDao {
                     + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity());
         }
 
-        tickedRecordAffected = save(payment);
+        int tickedRecordAffected = save(payment);
 
         if (tickedRecordAffected != resultRecordsQuantity) {
             throw new ExpiredPaymentDataException(PAYMENT_SAVE_FAILED_NOT_ALL_TICKETS_UPDATED + payment.getUserId()

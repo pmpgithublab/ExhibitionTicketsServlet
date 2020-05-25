@@ -78,7 +78,6 @@ public interface Constants {
     String FIELD_NAME = "name";
     String FIELD_NAME_UK = "nameUK";
     String FIELD_EMAIL = "email";
-    String FIELD_DB_EMAIL = "email";
     String FIELD_PASSWORD = "password";
     String FIELD_HALLS = "halls";
     String FIELD_SELECTED_HALL = "selectedHall";
@@ -90,27 +89,20 @@ public interface Constants {
     String FIELD_DATE = "date";
     String FIELD_PAGE = "page";
     String FIELD_DB_ID = "id";
-    String FIELD_DB_PASSWORD = "password";
-    String FIELD_DB_ROLE = "role";
     String FIELD_DB_NAME = "name";
     String FIELD_DB_NAME_EN = "name_en";
     String FIELD_DB_NAME_UK = "name_uk";
     String FIELD_DB_HALL_ID = "hall_id";
     String FIELD_DB_HALL_NAME = "hall_name";
+    String FIELD_DB_EXHIBIT_ID = "exhibit_id";
     String FIELD_DB_START_DATE_TIME = "start_date_time";
     String FIELD_DB_END_DATE_TIME = "end_date_time";
     String FIELD_DB_MAX_VISITORS_PER_DAY = "max_visitors_per_day";
-    String FIELD_DB_TICKET_COST = "ticket_cost";
     String FIELD_DB_EXHIBIT_DATE = "exhibit_date";
     String FIELD_DB_TICKET_QUANTITY = "tickets_quantity";
+    String FIELD_DB_TICKET_COST = "ticket_cost";
     String FIELD_DB_TICKET_SUM = "tickets_sum";
-    String FIELD_DB_PAYMENT_ID = "payment_id";
-    String FIELD_DB_EXHIBIT_ID = "exhibit_id";
-    String FIELD_DB_USER_ID = "user_id";
-    String FIELD_DB_EXHIBIT_NAME = "exhibit_name";
     String FIELD_DB_REMAIN_TICKETS = "remain_tickets";
-    String FIELD_DB_RECORD_QUANTITY = "record_quantity";
-
 
     //    regex patterns
     String REGEX_NAME_PATTERN = "name.pattern.regexp";
@@ -128,6 +120,5 @@ public interface Constants {
     String PAYMENT_NOT_ENOUGH_TICKETS = "Payment. Not enough tickets. User id: ";
 
     //    db messages
-    String DB_CONNECTION_CREATION_ERROR = "DB connection creation error";
     String DB_CONNECTION_CLOSING_ERROR = "DB connection closing error";
 }
