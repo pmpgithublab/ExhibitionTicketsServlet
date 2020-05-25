@@ -129,9 +129,9 @@ public class JDBCTicketDao implements TicketDao {
         log.info(DB_TICKET_DELETED_FROM_CART_BY_ID + ticketId);
     }
 
-    private void ticketDelete(Long ticketId, String sqlQuery, String message) throws TicketDeleteException {
+    private void ticketDelete(Long id, String sqlQuery, String message) throws TicketDeleteException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setLong(1, ticketId);
+            preparedStatement.setLong(1, id);
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {

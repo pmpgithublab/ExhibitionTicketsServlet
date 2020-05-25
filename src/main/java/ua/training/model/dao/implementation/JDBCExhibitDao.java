@@ -25,6 +25,7 @@ public class JDBCExhibitDao implements ExhibitDao {
     private static final String SQL_QUERY_FIND_EXHIBIT_BY_ID = "find.exhibit.by.id";
     private static final String SQL_QUERY_SELECT_CURRENT_EXHIBIT_NAMES = "select.current.exhibit.names";
     private static final String SQL_QUERY_SELECT_CURRENT_EXHIBITS_WITH_HALL = "find.actual.exhibits.by.id.with.hall";
+    private static final String DB_EXHIBIT_SAVING_ERROR = "Exhibit saving error";
 
     private final Connection connection;
 
@@ -53,7 +54,11 @@ public class JDBCExhibitDao implements ExhibitDao {
             if (exhibit.getId() != null) {
                 preparedStatement.setLong(8, exhibit.getId());
             }
-            preparedStatement.execute();
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException(DB_EXHIBIT_SAVING_ERROR + exhibit.getName()
+                        + SLASH_SYMBOL + exhibit.getNameUK());
+            }
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new NoDuplicationAllowedException(e);
         } catch (Exception e) {
