@@ -1,6 +1,7 @@
 package ua.training.model.dao.implementation;
 
 import org.apache.log4j.Logger;
+import ua.training.model.dao.mapper.ObjectMapper;
 import ua.training.util.MessageUtil;
 import ua.training.model.dao.HallDao;
 import ua.training.model.dao.mapper.HallAdminMapper;
@@ -15,14 +16,16 @@ import java.util.List;
 import java.util.Optional;
 
 import static ua.training.Constants.DB_CONNECTION_CLOSING_ERROR;
+import static ua.training.Constants.SLASH_SYMBOL;
 
 public class JDBCHallDao implements HallDao {
     private static final Logger log = Logger.getLogger(JDBCHallDao.class);
-
     private static final String SQL_QUERY_INSERT_NEW_HALL = "insert.new.hall";
     private static final String SQL_QUERY_UPDATE_HALL = "update.hall";
     private static final String SQL_QUERY_SELECT_HALLS = "select.halls";
     private static final String SQL_QUERY_FIND_HALL_BY_ID = "find.hall.by.id";
+
+    private static final String DB_HALL_SAVING_ERROR = "Hall saving error";
 
     private final Connection connection;
 
@@ -46,7 +49,11 @@ public class JDBCHallDao implements HallDao {
             if (hall.getId() != null) {
                 preparedStatement.setLong(3, hall.getId());
             }
-            preparedStatement.execute();
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException(DB_HALL_SAVING_ERROR + hall.getName()
+                        + SLASH_SYMBOL + hall.getNameUK());
+            }
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new NoDuplicationAllowedException(e);
         } catch (Exception e) {
@@ -81,9 +88,9 @@ public class JDBCHallDao implements HallDao {
             ResultSet resultSet =
                     statement.executeQuery(DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_HALLS));
 
-            HallMapper hallMapper = new HallMapper();
+            ObjectMapper<Hall> mapper = new HallMapper();
             while (resultSet.next()) {
-                result.add(hallMapper.extractFromResultSet(resultSet));
+                result.add(mapper.extractFromResultSet(resultSet));
             }
         } catch (Exception e) {
             log.error(MessageUtil.getRuntimeExceptionMessage(e));

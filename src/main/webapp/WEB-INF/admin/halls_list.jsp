@@ -12,21 +12,23 @@
 <table class="table">
     <thead>
     <tr>
+        <th width="10%"></th>
         <th><fmt:message key="halls.title.name"/></th>
-        <th width="10%"><fmt:message key="hall.edit"/></th>
+        <th width="10%"><fmt:message key="edit"/></th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${hallsList}" var="hall">
         <tr>
+            <td></td>
             <td>${hall.name}</td>
-            <td><a href="${hall.restLink}" class="btn btn-primary pt-0 pb-0"><fmt:message key="hall.edit"/></a></td>
+            <td><a href="${pageContext.request.contextPath}/admin/hall_edit?id=${hall.id}" class="btn btn-primary pt-0 pb-0"><fmt:message key="edit"/></a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 <div class=" d-flex justify-content-center">
-    <a href="${pageContext.request.contextPath}/admin/hall_add" class="btn btn-primary"><fmt:message
+    <a href="${pageContext.request.contextPath}/admin/hall_edit" class="btn btn-primary"><fmt:message
             key="hall.add"/></a>
 </div>
 

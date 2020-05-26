@@ -13,6 +13,8 @@ import static ua.training.Constants.*;
 @WebFilter(urlPatterns = EVERY_PATH)
 public class LoggingFilter implements Filter {
     private static final Logger log = Logger.getLogger(LoggingFilter.class);
+    private static final String QUERY_SYMBOL = "?";
+    private static final String NEW_PATH = "Path: ";
 
 
     @Override

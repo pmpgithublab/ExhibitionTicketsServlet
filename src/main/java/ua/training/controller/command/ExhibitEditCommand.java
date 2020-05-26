@@ -18,6 +18,10 @@ import static ua.training.Constants.*;
 
 public class ExhibitEditCommand implements Command {
     private static final Logger log = Logger.getLogger(ExhibitEditCommand.class);
+    private static final String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
+    private static final String EXHIBIT_DTO = "exhibitDTO";
+    private static final String FIELD_SELECTED_HALL = "selectedHall";
+    private static final String FIELD_HALLS = "halls";
 
     private final HallService hallService;
     private final ExhibitService exhibitService;
@@ -55,12 +59,9 @@ public class ExhibitEditCommand implements Command {
                 return REDIRECT_STRING + ERROR_PATH;
             }
         }
-        if (request.getParameter(PARAM_LANG) != null){
-            return HALL_PAGE;
-        }
 
-        log.warn(MessageUtil.getInvalidParameterMessage(request));
-        return REDIRECT_STRING + ERROR_PATH;
+        request.setAttribute(FIELD_HALLS, hallService.findAllHall());
+        return EXHIBIT_PAGE;
     }
 
     private String saveExhibit(HttpServletRequest request) {
@@ -98,13 +99,7 @@ public class ExhibitEditCommand implements Command {
         request.setAttribute(EXHIBIT_DTO, exhibitDTO);
         List<HallDTO> hallDTOS = hallService.findAllHall();
         request.setAttribute(FIELD_HALLS, hallDTOS);
-//        for (HallDTO hallDTO : hallDTOS) {
-//            if (hallDTO.getId().equals(exhibitDTO.getHallId())) {
-//                request.setAttribute(FIELD_SELECTED_HALL, hallDTO);
-//                break;
-//            }
-//        }
         request.setAttribute(FIELD_SELECTED_HALL,
-                hallDTOS.stream().filter(e->e.getId().equals(exhibitDTO.getHallId())).findFirst().get());
+                hallDTOS.stream().filter(e -> e.getId().equals(exhibitDTO.getHallId())).findFirst().get());
     }
 }

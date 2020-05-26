@@ -8,32 +8,19 @@ public interface Constants {
     String METHOD_POST = "POST";
 
     String EMPTY_STRING = "";
-    String CURRENCY_SIGN = "currencySign";
     String DOLLAR_SIGN = "$";
     String HRYVNA_SIGN = "₴";
-    String AMPERSAND_SIGN = "&";
-    String CLOSING_BRACE = ")";
-    String SQL_QUERY_PARAM = ",?";
-    String QUERY_SYMBOL = "?";
     String SLASH_SYMBOL = "/";
+    String REDIRECT_STRING = "redirect:";
 
     String HALL_NAME = "Hall";
     String EXHIBIT_NAME = "Exhibit";
     String ReportDTOS = "ReportDTOS";
 
     //    parameter's names
-    String PARAM_ID = "?id=";
     String PARAM_TICKET_QUANTITY = "quantity";
-    String PARAM_LANG = "lang";
-
-
-    int ONE_ID = 1;
-    int ONE_SYMBOL = 1;
-    int MAX_TICKET_QUANTITY = 99999;
-    int ONE_ELEMENT = 1;
-    int EXCHANGE_RATE = 30;
-    int TEN_SECONDS = 10;
-    int RECORD_PER_PAGE = 3;
+    String PARAM_PAGE_NUMBER = "page";
+    String PARAM_DATE = "date";
 
     //    session variables
     String USER = "user";
@@ -42,6 +29,7 @@ public interface Constants {
     String USER_EMAIL = "userEmail";
     String USER_ROLE = "userRole";
     String USER_CART = "userCart";
+    String CURRENCY_SIGN = "currencySign";
 
     //page variables
     String IS_ERROR = "isError";
@@ -59,13 +47,10 @@ public interface Constants {
     String EXHIBIT_SELECTED_THEME = "selectedExhibitTheme";
     String LANGUAGE = "language";
     String CART = "cart";
-    String TICKETS = "tickets";
     String EXPIRED_TICKETS = "expiredTickets";
     String NOT_ENOUGH_TICKETS = "notEnoughTickets";
     String TOTAL_SUM = "totalSum";
     String TOTAL_QUANTITY = "totalQuantity";
-    String EXHIBIT_DTO = "exhibitDTO";
-    String HALL_DTO = "hallDTO";
 
     //    end points
     String WELCOME_PATH = "/";
@@ -75,13 +60,9 @@ public interface Constants {
     String LOGOUT_PATH = "/logout";
     String ERROR_PATH = "/error";
     String ADMIN_PATH = "/admin";
-    String HALL_ADD_PATH = "/hall_add";
     String HALL_EDIT_PATH = "/hall_edit";
-//    String HALL_SAVE_PATH = "/hall_save";
     String HALLS_LIST_PATH = "/halls_list";
-    String EXHIBIT_ADD_PATH = "/exhibit_add";
     String EXHIBIT_EDIT_PATH = "/exhibit_edit";
-//    String EXHIBIT_SAVE_PATH = "/exhibit_save";
     String EXHIBITS_LIST_PATH = "/exhibits_list";
     String TRADE_PATH = "/trade";
     String TICKET_ADD_TO_CART_PATH = "/ticket_add";
@@ -91,62 +72,26 @@ public interface Constants {
     String PAYMENT_PATH = "/payment";
     String REPORT_PATH = "/report";
 
-    //    pages
-    String WELCOME_PAGE = "/WEB-INF/index.jsp";
-    String REGISTRATION_PAGE = "/WEB-INF/registration.jsp";
-    String LOGIN_PAGE = "/WEB-INF/login.jsp";
-    String ERROR_PAGE = "/WEB-INF/error.jsp";
-    String REDIRECT_STRING = "redirect:";
-    String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
-    String HALLS_LIST_PAGE = "/WEB-INF/admin/halls_list.jsp";
-    String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
-    String EXHIBITS_LIST_ADMIN_PAGE = "/WEB-INF/admin/exhibits_list.jsp";
-    String EXHIBITS_LIST_TRADE_PAGE = "/WEB-INF/trade/exhibits_list.jsp";
-    String CART_PAGE = "/WEB-INF/trade/cart.jsp";
-    String PAYMENT_PAGE = "/WEB-INF/trade/payment.jsp";
-    String USER_STATISTIC_PAGE = "/WEB-INF/trade/user_statistic.jsp";
-    String ADMIN_STATISTIC_PAGE = "/WEB-INF/admin/admin_statistic.jsp";
-
 
     //    DB, DTO, request, entity field names
     String FIELD_ID = "id";
-    String FIELD_DB_ID = "id";
     String FIELD_NAME = "name";
     String FIELD_NAME_UK = "nameUK";
-    String FIELD_EMAIL = "email";
-    String FIELD_DB_EMAIL = "email";
-    String FIELD_PASSWORD = "password";
-    String FIELD_DB_PASSWORD = "password";
-    String FIELD_ROLE = "role";
-    String FIELD_DB_ROLE = "role";
+    String FIELD_DB_ID = "id";
     String FIELD_DB_NAME = "name";
     String FIELD_DB_NAME_EN = "name_en";
     String FIELD_DB_NAME_UK = "name_uk";
     String FIELD_DB_HALL_ID = "hall_id";
     String FIELD_DB_HALL_NAME = "hall_name";
+    String FIELD_DB_EXHIBIT_ID = "exhibit_id";
+    String FIELD_DB_EXHIBIT_DATE = "exhibit_date";
     String FIELD_DB_START_DATE_TIME = "start_date_time";
     String FIELD_DB_END_DATE_TIME = "end_date_time";
     String FIELD_DB_MAX_VISITORS_PER_DAY = "max_visitors_per_day";
-    String FIELD_DB_TICKET_COST = "ticket_cost";
-    String FIELD_HALLS = "halls";
-    String FIELD_SELECTED_HALL = "selectedHall";
-    String FIELD_START_DATE_TIME = "startDateTime";
-    String FIELD_END_DATE_TIME = "endDateTime";
-    String FIELD_MAX_VISITORS_PER_DAY = "maxVisitorsPerDay";
-    String FIELD_TICKET_COST = "ticketCost";
-    String FIELD_HALL_ID = "hallId";
-    String FIELD_DATE = "date";
-    String FIELD_PAGE = "page";
-    String FIELD_DB_EXHIBIT_DATE = "exhibit_date";
     String FIELD_DB_TICKET_QUANTITY = "tickets_quantity";
+    String FIELD_DB_TICKET_COST = "ticket_cost";
     String FIELD_DB_TICKET_SUM = "tickets_sum";
-    String FIELD_DB_PAYMENT_ID = "payment_id";
-    String FIELD_DB_EXHIBIT_ID = "exhibit_id";
-    String FIELD_DB_USER_ID = "user_id";
-    String FIELD_DB_EXHIBIT_NAME = "exhibit_name";
     String FIELD_DB_REMAIN_TICKETS = "remain_tickets";
-    String FIELD_DB_RECORD_QUANTITY = "record_quantity";
-
 
     //    regex patterns
     String REGEX_NAME_PATTERN = "name.pattern.regexp";
@@ -156,22 +101,13 @@ public interface Constants {
 
     //    logger messages
     String SESSION_ID = ". Session id: ";
-    String PATH = ". Path: ";
-    String NEW_PATH = "Path: ";
     String ROLE = ". Role: ";
     String METHOD = ". Method: ";
-    String PARAMETERS = ". Parameters: ";
     String EMAIL = ". Email: ";
-    String EMAIL_EXIST = "Unsuccessful attempt to save new user. Email: ";
-    String SERVLET_DESTROY_METHOD_EXECUTING = "Servlet destroy method executing";
-    String SERVLET_INIT_METHOD_START = "Servlet init method start";
-    String SERVLET_INIT_METHOD_FINISH = "Servlet init method finish";
     String TICKET_QUANTITY = ". Ticket quantity: ";
     String EXTERNAL_PAYMENT_SYSTEM_NOT_CONFIRM_TEMPORARY_BLOCK_USER_SUM = "External payment system not confirm temporary block user sum: ";
     String PAYMENT_NOT_ENOUGH_TICKETS = "Payment. Not enough tickets. User id: ";
 
-
     //    db messages
-    String DB_CONNECTION_CREATION_ERROR = "DB connection creation error";
     String DB_CONNECTION_CLOSING_ERROR = "DB connection closing error";
 }

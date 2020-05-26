@@ -1,20 +1,8 @@
-/*
- * @(#)ResourceManager.java     1.00 2020/03/11
- *
- * This software is free for use.
- */
-
 package ua.training.model.util;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * DB properties manager class
- *
- * @author Firstname Lastname
- * @version 1.00 11 Mar 2020
- */
 public enum DBPropertiesManager {
     INSTANCE;
 

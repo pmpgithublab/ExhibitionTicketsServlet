@@ -85,45 +85,45 @@ public class User {
     }
 
 
-//    public static class UserBuilder{
-//        private User user;
-//
-//        public UserBuilder() {
-//            this.user = new User();
-//        }
-//
-//        public UserBuilder name(Long id){
-//            user.setId(id);
-//            return this;
-//        }
-//
-//        public UserBuilder name(String name){
-//            user.setName(name);
-//            return this;
-//        }
-//
-//        public UserBuilder nameUK(String name){
-//            user.setNameUK(name);
-//            return this;
-//        }
-//
-//        public UserBuilder email(String email){
-//            user.setEmail(email);
-//            return this;
-//        }
-//
-//        public UserBuilder password(String password){
-//            user.setPassword(password);
-//            return this;
-//        }
-//
-//        public UserBuilder role(UserRole role){
-//            user.setRole(role);
-//            return this;
-//        }
-//
-//        public User build(){
-//            return user;
-//        }
-//    }
+    public static class UserBuilder{
+        private final User user;
+
+        public UserBuilder() {
+            this.user = new User();
+        }
+
+        public UserBuilder id(Long id){
+            user.setId(id);
+            return this;
+        }
+
+        public UserBuilder name(String name){
+            user.setName(name);
+            return this;
+        }
+
+        public UserBuilder nameUK(String name){
+            user.setNameUK(name);
+            return this;
+        }
+
+        public UserBuilder email(String email){
+            user.setEmail(email);
+            return this;
+        }
+
+        public UserBuilder password(String password){
+            user.setPassword(password);
+            return this;
+        }
+
+        public UserBuilder role(UserRole role){
+            user.setRole(role);
+            return this;
+        }
+
+        public User build(){
+            return user;
+        }
+    }
 }

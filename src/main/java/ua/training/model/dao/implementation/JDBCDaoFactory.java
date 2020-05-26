@@ -8,10 +8,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static ua.training.Constants.*;
-
 public class JDBCDaoFactory extends DaoFactory {
     private static final Logger log = Logger.getLogger(JDBCDaoFactory.class);
+    private static final String DB_CONNECTION_CREATION_ERROR = "DB connection creation error";
 
     private final DataSource dataSource = ConnectionPoolHolder.getDataSource();
 

@@ -1,7 +1,7 @@
 package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.training.controller.util.Util;
+import ua.training.controller.util.ControllerUtil;
 import ua.training.model.service.CartService;
 import ua.training.util.MessageUtil;
 
@@ -22,7 +22,7 @@ public class ClearCartCommand implements Command {
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_POST)) {
             try {
-                cartService.clearCart(Util.getUserId(request));
+                cartService.clearCart(ControllerUtil.getUserId(request));
             } catch (Exception e) {
                 log.error(MessageUtil.getRuntimeExceptionMessage(e));
                 return REDIRECT_STRING + ERROR_PATH;

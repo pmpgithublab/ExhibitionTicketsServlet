@@ -13,7 +13,6 @@ public class HallDTO {
     private Long id;
     private String name;
     private String nameUK;
-    private String restLink;
 
     public HallDTO(HttpServletRequest request) {
         String s = request.getParameter(FIELD_ID);
@@ -67,13 +66,5 @@ public class HallDTO {
 
     public void setNameUK(String nameUK) {
         this.nameUK = nameUK;
-    }
-
-    public String getRestLink() {
-        return restLink;
-    }
-
-    public void setRestLink(String restLink) {
-        this.restLink = restLink;
     }
 }

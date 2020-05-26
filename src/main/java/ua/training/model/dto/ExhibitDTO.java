@@ -11,6 +11,11 @@ import static ua.training.Constants.*;
 public class ExhibitDTO implements Cloneable {
     private static final String TICKET_COST_REGEX = "^\\d{1,7}\\.\\d{2}$";
     private static final String POINT_SIGN_REGEX = "\\.";
+    private static final String FIELD_HALL_ID = "hallId";
+    private static final String FIELD_TICKET_COST = "ticketCost";
+    private static final String FIELD_MAX_VISITORS_PER_DAY = "maxVisitorsPerDay";
+    private static final String FIELD_START_DATE_TIME = "startDateTime";
+    private static final String FIELD_END_DATE_TIME = "endDateTime";
 
     private Long id;
     private String name;
@@ -22,7 +27,6 @@ public class ExhibitDTO implements Cloneable {
     private Long hallId;
     private String hallName;
     private LocalDate exhibitDate;
-    private String restLink;
 
     public ExhibitDTO(Exhibit exhibit) {
         this.id = exhibit.getId();
@@ -86,6 +90,68 @@ public class ExhibitDTO implements Cloneable {
     @Override
     public ExhibitDTO clone() throws CloneNotSupportedException {
         return (ExhibitDTO) super.clone();
+    }
+
+    public static class ExhibitDTOBuilder {
+        private final ExhibitDTO exhibitDTO;
+
+        public ExhibitDTOBuilder() {
+            this.exhibitDTO = new ExhibitDTO();
+        }
+
+        public ExhibitDTOBuilder id(Long id) {
+            exhibitDTO.setId(id);
+            return this;
+        }
+
+        public ExhibitDTOBuilder name(String name) {
+            exhibitDTO.setName(name);
+            return this;
+        }
+
+        public ExhibitDTOBuilder nameUK(String nameUK) {
+            exhibitDTO.setNameUK(nameUK);
+            return this;
+        }
+
+        public ExhibitDTOBuilder startDateTime(LocalDateTime startDateTime) {
+            exhibitDTO.setStartDateTime(startDateTime);
+            return this;
+        }
+
+        public ExhibitDTOBuilder endDateTime(LocalDateTime endDateTime) {
+            exhibitDTO.setEndDateTime(endDateTime);
+            return this;
+        }
+
+        public ExhibitDTOBuilder maxVisitorsPerDay(int maxVisitorsPerDay) {
+            exhibitDTO.setMaxVisitorsPerDay(maxVisitorsPerDay);
+            return this;
+        }
+
+        public ExhibitDTOBuilder ticketCost(long ticketCost) {
+            exhibitDTO.setTicketCost(ticketCost);
+            return this;
+        }
+
+        public ExhibitDTOBuilder hallId(Long hallId) {
+            exhibitDTO.setHallId(hallId);
+            return this;
+        }
+
+        public ExhibitDTOBuilder hallName(String hallName) {
+            exhibitDTO.setHallName(hallName);
+            return this;
+        }
+
+        public ExhibitDTOBuilder exhibitDate(LocalDate exhibitDate) {
+            exhibitDTO.setExhibitDate(exhibitDate);
+            return this;
+        }
+
+        public ExhibitDTO build() {
+            return exhibitDTO;
+        }
     }
 
     public Long getId() {
@@ -166,13 +232,5 @@ public class ExhibitDTO implements Cloneable {
 
     public void setExhibitDate(LocalDate exhibitDate) {
         this.exhibitDate = exhibitDate;
-    }
-
-    public String getRestLink() {
-        return restLink;
-    }
-
-    public void setRestLink(String restLink) {
-        this.restLink = restLink;
     }
 }

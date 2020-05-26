@@ -28,7 +28,7 @@
         </tr>
     </table>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary" onclick="copyData()"><fmt:message key="hall.save"/></button>
+        <button type="submit" class="btn btn-primary" onclick="copyData()"><fmt:message key="save"/></button>
     </div>
 </form>
 

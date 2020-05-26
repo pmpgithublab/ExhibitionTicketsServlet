@@ -13,6 +13,7 @@ import static ua.training.Constants.*;
 
 public class AdminReportCommand implements Command {
     private static final Logger log = Logger.getLogger(AdminReportCommand.class);
+    private static final String ADMIN_STATISTIC_PAGE = "/WEB-INF/admin/admin_statistic.jsp";
 
     private final ReportService reportService;
 
@@ -25,15 +26,14 @@ public class AdminReportCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_GET)) {
-            String stringPageNumber = request.getParameter(FIELD_PAGE);
+            String stringPageNumber = request.getParameter(PARAM_PAGE_NUMBER);
             int pageNumber = 0;
 
             if (CheckUtils.isPositiveInteger(stringPageNumber)) {
                 pageNumber = Integer.parseInt(stringPageNumber);
             }
 
-            ReportDTO<AdminStatisticDTO> adminStatisticDTOS = reportService.getAdminPurchases(pageNumber);
-            adminStatisticDTOS.setCurrentPage(pageNumber);
+            ReportDTO<AdminStatisticDTO> adminStatisticDTOS = reportService.getAdminReport(pageNumber);
             adminStatisticDTOS.setPageNavigationString(ADMIN_PATH);
             request.setAttribute(ReportDTOS, adminStatisticDTOS);
 

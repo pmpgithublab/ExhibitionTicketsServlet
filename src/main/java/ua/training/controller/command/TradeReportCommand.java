@@ -1,7 +1,7 @@
 package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.training.controller.util.Util;
+import ua.training.controller.util.ControllerUtil;
 import ua.training.model.dto.ReportDTO;
 import ua.training.model.dto.UserStatisticDTO;
 import ua.training.model.service.ReportService;
@@ -14,6 +14,7 @@ import static ua.training.Constants.*;
 
 public class TradeReportCommand implements Command {
     private static final Logger log = Logger.getLogger(TradeReportCommand.class);
+    private static final String USER_STATISTIC_PAGE = "/WEB-INF/trade/user_statistic.jsp";
 
     private final ReportService reportService;
 
@@ -26,7 +27,7 @@ public class TradeReportCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals(METHOD_GET)) {
-            String stringPageNumber = request.getParameter(FIELD_PAGE);
+            String stringPageNumber = request.getParameter(PARAM_PAGE_NUMBER);
             int pageNumber = 0;
 
             if (CheckUtils.isPositiveInteger(stringPageNumber)) {
@@ -34,8 +35,7 @@ public class TradeReportCommand implements Command {
             }
 
             ReportDTO<UserStatisticDTO> userStatisticDTOS =
-                    reportService.getUserPurchases(Util.getUserId(request), pageNumber);
-            userStatisticDTOS.setCurrentPage(pageNumber);
+                    reportService.getUserReport(ControllerUtil.getUserId(request), pageNumber);
             userStatisticDTOS.setPageNavigationString(TRADE_PATH);
             request.setAttribute(ReportDTOS, userStatisticDTOS);
 

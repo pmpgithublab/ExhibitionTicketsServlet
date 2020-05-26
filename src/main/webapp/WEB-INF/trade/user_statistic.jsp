@@ -12,16 +12,19 @@
 <table class="table">
     <thead>
     <tr>
-        <th style="width: 10%"><fmt:message key="user.statistic.purchase.date"/></th>
-        <th style="width: 70%"><fmt:message key="user.statistic.exhibit.theme"/></th>
-        <th style="width: 10%"><fmt:message key="user.statistic.ticket.sum"/></th>
-        <th style="width: 10%"><fmt:message key="user.statistic.ticket.quantity"/></th>
+        <th style="width: 20%"></th>
+        <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
+        <th style="width: 30%"><fmt:message key="user.statistic.exhibit.theme"/></th>
+        <th class="text-center" style="width: 10%"><fmt:message key="user.statistic.ticket.sum"/></th>
+        <th class="text-center" style="width: 10%"><fmt:message key="ticket.quantity"/></th>
+        <th style="width: 20%"></th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${ReportDTOS.getItems()}" var="purchase">
         <fmt:parseDate value="${purchase.exhibitDate}" pattern="yyyy-MM-dd" var="exhibitDate" type="date"/>
         <tr>
+            <td></td>
             <c:choose>
                 <c:when test="${language != 'en'}">
                     <td><fmt:formatDate pattern="dd MMM yyyy" value="${exhibitDate}"/></td>
@@ -36,6 +39,7 @@
                                                           maxFractionDigits="2"
                                                           minFractionDigits="2"/></td>
             <td class="text-right pr-4">${purchase.ticketQuantity}</td>
+            <td></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -12,12 +12,12 @@
 <table class="table">
     <thead>
     <tr>
-        <th width="50%"><fmt:message key="exhibit.title.theme"/></th>
-        <th width="15%"><fmt:message key="exhibit.title.startDateTime"/></th>
-        <th width="15%"><fmt:message key="exhibit.title.endDateTime"/></th>
-        <th width="8%"><fmt:message key="exhibit.title.maxVisitorsPerDay"/></th>
-        <th width="6%"><fmt:message key="exhibit.title.ticketCost"/></th>
-        <th width="6%"><fmt:message key="exhibit.edit"/></th>
+        <th width="50%"><fmt:message key="theme"/></th>
+        <th width="15%"><fmt:message key="startDateTime"/></th>
+        <th width="15%"><fmt:message key="endDateTime"/></th>
+        <th width="8%"><fmt:message key="maxVisitorsPerDay"/></th>
+        <th width="6%"><fmt:message key="cost"/></th>
+        <th width="6%"><fmt:message key="edit"/></th>
     </tr>
     </thead>
     <tbody>
@@ -44,12 +44,12 @@
                                       currencySymbol="${currencySign}"
                                       maxFractionDigits="2"
                                       minFractionDigits="2"/>
-            <td><a href="${exhibitItem.restLink}" class="btn btn-primary pt-0 pb-0"><fmt:message key="exhibit.edit"/></a></td>
+            <td><a href="${pageContext.request.contextPath}/admin/exhibit_edit?id=${exhibitItem.id}" class="btn btn-primary pt-0 pb-0"><fmt:message key="edit"/></a></td>
         </tr>
     </c:forEach>
     <tr>
         <td colspan="6" align="center">
-            <a href="${pageContext.request.contextPath}/admin/exhibit_add" class="btn btn-primary"> <fmt:message
+            <a href="${pageContext.request.contextPath}/admin/exhibit_edit" class="btn btn-primary"> <fmt:message
                     key="exhibit.add"/></a>
         </td>
     </tr>

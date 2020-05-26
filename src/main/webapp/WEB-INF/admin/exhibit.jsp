@@ -10,12 +10,12 @@
 <h3 class="d-flex justify-content-center"><fmt:message key="page.title.exhibit"/></h3><br>
 
 <c:if test="${isError}">
-    <h5 class="d-flex justify-content-center" style="color: red"><fmt:message key="exhibit.error"/></h5>
+    <h5 class="text-center" style="color: red"><fmt:message key="exhibit.error"/></h5>
 </c:if>
 <form method="post" action="${pageContext.request.contextPath}/admin/exhibit_edit<c:if test="${exhibitDTO.getId() != null}">?id=${exhibitDTO.getId()}</c:if>">
     <table class="table d-flex justify-content-center">
         <tr hidden>
-            <td><fmt:message key="exhibit.id"/></td>
+            <td></td>
             <td><input type="text" name="id" value="${exhibitDTO.getId()}"/></td>
         </tr>
         <tr>
@@ -36,40 +36,38 @@
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.startDateTime"/></td>
+            <td><fmt:message key="startDateTime"/></td>
             <td><input type="datetime-local" name="startDateTime" value="${exhibitDTO.getStartDateTime()}" size="30"
                        required/>
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.endDateTime"/></td>
+            <td><fmt:message key="endDateTime"/></td>
             <td><input type="datetime-local" name="endDateTime" dataformatas="" value="${exhibitDTO.getEndDateTime()}"
                        size="30" required/></td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.maxVisitorsPerDay"/></td>
+            <td><fmt:message key="maxVisitorsPerDay"/></td>
             <td><input type="number" name="maxVisitorsPerDay" value="${exhibitDTO.getMaxVisitorsPerDay()}"
                        size="20" min="1" step="1" max="99999" required/>
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.ticketCost"/></td>
+            <td><fmt:message key="cost"/></td>
             <td>
-                <input type="text" name="ticketCost" id="ticketCost" class="ticketCost"
-<%--                <input type="number" name="ticketCost" id="ticketCost" class="ticketCost" step="0.01" min="0"--%>
+                <input type="text" name="ticketCost" id="ticketCost" class="ticketCost" placeholder="0.00"
                        value="${exhibitDTO.getTicketCost()/100}"
-<%--                       value="${exhibitDTO.getTicketCost()/100}"--%>
                        size="10" pattern="^\d{1,7}\.\d{2}$" title="####.##" required/>
             </td>
         </tr>
         <tr>
-            <td><fmt:message key="exhibit.hall"/></td>
+            <td><fmt:message key="hall"/></td>
             <td>
                 <select name="hallId">
-                    <option value="${selectedHall.id}" selected>${selectedHall.name}</option>
+                    <option value="${selectedHall.getId()}" selected>${selectedHall.getName()}</option>
                     <c:forEach items="${halls}" var="hall">
                         <c:if test="${hall != selectedHall}">
-                            <option value="${hall.id}">${hall.name}</option>
+                            <option value="${hall.getId()}">${hall.getName()}</option>
                         </c:if>
                     </c:forEach>
                 </select>
@@ -77,7 +75,7 @@
         </tr>
     </table>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary" onclick="copyData()"><fmt:message key="exhibit.save"/></button>
+        <button type="submit" class="btn btn-primary" onclick="copyData()"><fmt:message key="save"/></button>
     </div>
 </form>
 
@@ -88,16 +86,6 @@
         }
     }
 </script>
-
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function () {--%>
-<%--        $(".ticketCost").change(function () {--%>
-<%--            $(this).val(parseFloat($(this).val()).toFixed(2));--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
-
 
 </body>
 </html>

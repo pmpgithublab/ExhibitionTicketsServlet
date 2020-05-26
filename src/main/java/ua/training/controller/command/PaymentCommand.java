@@ -1,7 +1,7 @@
 package ua.training.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.training.controller.util.Util;
+import ua.training.controller.util.ControllerUtil;
 import ua.training.model.dto.TicketDTO;
 import ua.training.model.exception.ExpiredPaymentDataException;
 import ua.training.model.exception.ExternalPaymentSystemRejectPaymentException;
@@ -18,7 +18,7 @@ import static ua.training.Constants.*;
 
 public class PaymentCommand implements Command {
     private static final Logger log = Logger.getLogger(PaymentCommand.class);
-
+    private static final String PAYMENT_PAGE = "/WEB-INF/trade/payment.jsp";
     private static final String EMPTY_PAYMENT_ERROR = "isEmptyPaymentError";
     private static final String USER_ASK_ZERO_PAYMENT_SUM_OR_TICKET_QUANTITY = "User ask zero payment sum or ticket quantity";
     private static final String PAYMENT_SUCCESSFUL = "Payment successful. Sum: ";
@@ -48,7 +48,7 @@ public class PaymentCommand implements Command {
     }
 
     private String showPaymentData(HttpServletRequest request) {
-        Optional<TicketDTO> payment = paymentService.findSumAndQuantityNotPaidUserTickets(Util.getUserId(request));
+        Optional<TicketDTO> payment = paymentService.findByUserIdSumAndQuantityNotPaidTickets(ControllerUtil.getUserId(request));
         payment.ifPresent(p -> request.setAttribute(TOTAL_SUM, p.getTicketSum()));
         payment.ifPresent(p -> request.setAttribute(TOTAL_QUANTITY, p.getTicketQuantity()));
 
@@ -63,19 +63,16 @@ public class PaymentCommand implements Command {
         if (CheckUtils.isPositiveInteger(stringTotalQuantity) && CheckUtils.isPositiveLong(stringTotalSum)
                 && (currencySign.equals(DOLLAR_SIGN) || currencySign.equals(HRYVNA_SIGN))) {
 
-            return paymentProcess(request, stringTotalQuantity, stringTotalSum, currencySign);
+            return paymentProcess(request, Integer.parseInt(stringTotalQuantity),
+                    FinancialUtil.getAccountingSum(Long.parseLong(stringTotalSum), currencySign));
         }
 
         log.warn(MessageUtil.getInvalidParameterMessage(request));
         return REDIRECT_STRING + ERROR_PATH;
     }
 
-    private String paymentProcess(HttpServletRequest request, String stringTotalQuantity,
-                                  String stringTotalSum, String currencySign) {
-
-        int totalQuantity = Integer.parseInt(stringTotalQuantity);
-        long totalSum = FinancialUtil.getAccountingSum(Long.parseLong(stringTotalSum), currencySign);
-        long userId = Util.getUserId(request);
+    private String paymentProcess(HttpServletRequest request, int totalQuantity, long totalSum) {
+        long userId = ControllerUtil.getUserId(request);
 
         if (totalQuantity == 0 || totalSum == 0) {
             log.warn(USER_ASK_ZERO_PAYMENT_SUM_OR_TICKET_QUANTITY);
@@ -84,7 +81,8 @@ public class PaymentCommand implements Command {
         }
 
         try {
-            paymentService.paymentProcess(totalQuantity, totalSum, Util.getUserId(request));
+            paymentService.paymentProcess(totalQuantity, totalSum, userId);
+
             log.info(PAYMENT_SUCCESSFUL + totalSum + TICKET_QUANTITY + totalQuantity + SESSION_ID + userId);
             request.setAttribute(IS_SUCCESSFUL, true);
         } catch (ExternalPaymentSystemRejectPaymentException e) {

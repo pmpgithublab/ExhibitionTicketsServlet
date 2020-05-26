@@ -15,15 +15,15 @@ public class PageCacheFilter implements Filter {
     private static final String PAGE_CACHE_CONTROL_HEADER_NAME = "Cache-Control";
     private static final String PAGE_CACHE_CONTROL_HEADER_VALUE = "no-cache, no-store, must-revalidate";
 
-    private static final Set<String> notCachedPaths = new HashSet<>();
+    private static final Set<String> notCachePath = new HashSet<>();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        notCachedPaths.add(WELCOME_PATH);
-        notCachedPaths.add(LOGIN_PATH);
-        notCachedPaths.add(REGISTRATION_PATH);
-        notCachedPaths.add(ERROR_PATH);
-        notCachedPaths.add(LOGOUT_PATH);
+    public void init(FilterConfig filterConfig) {
+        notCachePath.add(WELCOME_PATH);
+        notCachePath.add(LOGIN_PATH);
+        notCachePath.add(REGISTRATION_PATH);
+        notCachePath.add(ERROR_PATH);
+        notCachePath.add(LOGOUT_PATH);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PageCacheFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        if (!notCachedPaths.contains(request.getServletPath())) {
+        if (!notCachePath.contains(request.getServletPath())) {
             ((HttpServletResponse) servletResponse).setHeader(PAGE_CACHE_CONTROL_HEADER_NAME, PAGE_CACHE_CONTROL_HEADER_VALUE);
         }
 

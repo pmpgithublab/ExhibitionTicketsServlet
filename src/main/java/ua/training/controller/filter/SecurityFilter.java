@@ -20,7 +20,7 @@ public class SecurityFilter implements Filter {
     private static final String USER_FORCED_LOGGED_OUT = "User is forced logged out. Email: ";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -33,28 +33,11 @@ public class SecurityFilter implements Filter {
         final HttpSession session = request.getSession();
         final UserRole currentUserRole = (UserRole) session.getAttribute(USER_ROLE);
 
-
-        // todo refactor to map
-        if (path.startsWith(TRADE_PATH) && UserRole.ROLE_USER.equals(currentUserRole)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
-
-        if (path.startsWith(ADMIN_PATH) && UserRole.ROLE_ADMIN.equals(currentUserRole)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
-
-        if (path.equals(WELCOME_PATH) || path.equals(LOGIN_PATH) || path.equals(REGISTRATION_PATH)) {
-            if (UserRole.ROLE_ANONYMOUS.equals(currentUserRole)) {
-                filterChain.doFilter(servletRequest, servletResponse);
-            } else {
-                ((HttpServletResponse) servletResponse).sendRedirect(new LogOutCommand().execute(request));
-            }
-            return;
-        }
-
-        if (path.equals(ERROR_PATH) || path.equals(LOGOUT_PATH)) {
+        if ((path.startsWith(TRADE_PATH) && UserRole.ROLE_USER.equals(currentUserRole))
+                || (path.startsWith(ADMIN_PATH) && UserRole.ROLE_ADMIN.equals(currentUserRole))
+                || (path.equals(ERROR_PATH) || path.equals(LOGOUT_PATH))
+                || ((path.equals(WELCOME_PATH) || path.equals(LOGIN_PATH) || path.equals(REGISTRATION_PATH))
+                    && (UserRole.ROLE_ANONYMOUS.equals(currentUserRole)))) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -64,7 +47,7 @@ public class SecurityFilter implements Filter {
             log.info(USER_FORCED_LOGGED_OUT + session.getAttribute(USER_EMAIL));
             new LogOutCommand().execute(request);
         }
-        ((HttpServletResponse) servletResponse).sendRedirect(request.getContextPath() + ERROR_PATH);
+        ((HttpServletResponse) servletResponse).sendRedirect(request.getContextPath() + WELCOME_PATH);
     }
 
     @Override

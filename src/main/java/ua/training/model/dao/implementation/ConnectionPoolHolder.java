@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 
 public class ConnectionPoolHolder {
     private static final Logger log = Logger.getLogger(ConnectionPoolHolder.class);
-    private static volatile DataSource dataSource;
     private static final String DB_URL = "url";
     private static final String USER_NAME = "userName";
     private static final String USER_PASSWORD = "userPassword";
@@ -17,6 +16,7 @@ public class ConnectionPoolHolder {
     private static final String DB_TIMEOUT = "timeout";
     private static final String DB_INIT_ERROR = "DB init error";
 
+    private static volatile DataSource dataSource;
 
     public static DataSource getDataSource() {
 
@@ -32,18 +32,6 @@ public class ConnectionPoolHolder {
                         basicDataSource.setPassword(DBPropertiesManager.INSTANCE.getProperty(USER_PASSWORD));
                         basicDataSource.setDriverClassName(DBPropertiesManager.INSTANCE.getProperty(DRIVER_CLASS_NAME));
                         basicDataSource.setMaxWaitMillis(Long.parseLong(DBPropertiesManager.INSTANCE.getProperty(DB_TIMEOUT)));
-
-//                        HikariConfig config = new HikariConfig();
-//
-//                        config.setJdbcUrl(DBBundleManager.INSTANCE.getProperty(DB_URL));
-//                        config.setUsername(DBBundleManager.INSTANCE.getProperty(USER_NAME));
-//                        config.setPassword(DBBundleManager.INSTANCE.getProperty(USER_PASSWORD));
-//                        config.addDataSourceProperty("cachePrepStmts", "true");
-//                        config.addDataSourceProperty("prepStmtCacheSize", "250");
-//                        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-//                        config.setMaximumPoolSize(100);
-//
-//                        dataSource = new HikariDataSource(config);
 
                         dataSource = basicDataSource;
 

@@ -11,7 +11,7 @@ public class RegistrationDTOValidator implements Validator<UserDTO> {
         return userDTO.getName() != null
                 && userDTO.getName().matches(LocaleUtil.getProperty(REGEX_NAME_PATTERN))
                 && userDTO.getNameUK() != null
-                && userDTO.getNameUK().matches(LocaleUtil.getLocalNameRegexName())
+                && userDTO.getNameUK().matches(LocaleUtil.getLocalNameRegex())
                 && userDTO.getEmail() != null
                 && userDTO.getEmail().matches(LocaleUtil.getProperty(REGEX_EMAIL_PATTERN))
                 && userDTO.getPassword() != null

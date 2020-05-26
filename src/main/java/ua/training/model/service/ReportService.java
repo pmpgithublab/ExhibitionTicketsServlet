@@ -8,7 +8,7 @@ import ua.training.model.dto.UserStatisticDTO;
 import ua.training.util.FinancialUtil;
 
 public class ReportService {
-    public ReportDTO<UserStatisticDTO> getUserPurchases(Long userId, int pageNumber) {
+    public ReportDTO<UserStatisticDTO> getUserReport(Long userId, int pageNumber) {
         ReportDTO<UserStatisticDTO> result;
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
             result = ticketDao.getUserStatistic(userId, pageNumber);
@@ -18,7 +18,7 @@ public class ReportService {
         return result;
     }
 
-    public ReportDTO<AdminStatisticDTO> getAdminPurchases(int pageNumber) {
+    public ReportDTO<AdminStatisticDTO> getAdminReport(int pageNumber) {
         ReportDTO<AdminStatisticDTO> result;
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
             result = ticketDao.getAdminStatistic(pageNumber);

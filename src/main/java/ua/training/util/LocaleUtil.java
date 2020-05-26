@@ -21,7 +21,7 @@ public class LocaleUtil {
         return ResourceBundleManager.INSTANCE.getLocaleProperty(property);
     }
 
-    public static String getLocalNameRegexName() {
+    public static String getLocalNameRegex() {
         if (isEnglish()) {
             return getProperty(REGEX_NAME_PATTERN);
         }

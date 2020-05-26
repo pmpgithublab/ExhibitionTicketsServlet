@@ -3,9 +3,11 @@ package ua.training.util;
 import java.util.Random;
 
 import static ua.training.Constants.DOLLAR_SIGN;
-import static ua.training.Constants.EXCHANGE_RATE;
 
 public class FinancialUtil {
+    private static final int EXCHANGE_RATE = 30;
+
+
     public static long calcCost(long sum) {
         if (LocaleUtil.isEnglish()) {
             return sum;

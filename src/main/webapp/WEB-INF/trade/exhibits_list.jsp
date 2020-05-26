@@ -29,20 +29,20 @@
     <table class="table table-hover">
         <thead class="thead-light">
         <tr>
-            <th style="width: 10%"><fmt:message key="exhibit.title.exhibitDate"/></th>
-            <th style="width: 20%"><fmt:message key="exhibit.title.theme"/></th>
-            <th style="width: 15%"><fmt:message key="exhibit.title.hall"/></th>
-            <th style="width: 13%"><fmt:message key="exhibit.title.startDateTime"/></th>
-            <th style="width: 13%"><fmt:message key="exhibit.title.endDateTime"/></th>
-            <th style="width: 7%"><fmt:message key="exhibit.title.ticketCost"/></th>
-            <th style="width: 5%"><fmt:message key="exhibit.title.ticketQuantity"/></th>
+            <th style="width: 10%"><fmt:message key="exhibitDate"/></th>
+            <th style="width: 20%"><fmt:message key="theme"/></th>
+            <th style="width: 15%"><fmt:message key="hall"/></th>
+            <th style="width: 13%"><fmt:message key="startDateTime"/></th>
+            <th style="width: 13%"><fmt:message key="endDateTime"/></th>
+            <th style="width: 7%"><fmt:message key="cost"/></th>
+            <th style="width: 5%"><fmt:message key="quantity"/></th>
             <th style="width: 7%"><fmt:message key="exhibit.title.add.to.cart"/></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${exhibitDatesList}" var="exhibitItem">
-            <form action="${pageContext.request.contextPath}/trade/ticket_add" method="post">
-                <tr>
+            <tr>
+                <form action="${pageContext.request.contextPath}/trade/ticket_add" method="post">
                     <fmt:parseDate value="${exhibitItem.exhibitDate}" pattern="yyyy-MM-dd" var="exhibitDate"
                                    type="date"/>
                     <fmt:parseDate value="${exhibitItem.startDateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="startDateTime"
@@ -65,11 +65,11 @@
                             <td><fmt:formatDate pattern="MMM dd yyyy h:mm a" value="${endDateTime}"/></td>
                         </c:otherwise>
                     </c:choose>
-                    <td id="cost"><fmt:formatNumber value="${exhibitItem.ticketCost/100}" type="currency"
-                                                    currencySymbol="${currencySign}"
-                                                    maxFractionDigits="2"
-                                                    minFractionDigits="2"/></td>
-                    <td><input name="quantity" id="quantity" type="number" onchange="calc()"
+                    <td><fmt:formatNumber value="${exhibitItem.ticketCost/100}" type="currency"
+                                          currencySymbol="${currencySign}"
+                                          maxFractionDigits="2"
+                                          minFractionDigits="2"/></td>
+                    <td><input name="quantity" id="quantity" type="number"
                                min="1" max="100000" step="1" value="1" size="6" required/></td>
                     <td>
 
@@ -79,8 +79,8 @@
                                 key="exhibit.title.add.to.cart"/></button>
 
                     </td>
-                </tr>
-            </form>
+                </form>
+            </tr>
         </c:forEach>
         </tbody>
     </table>
@@ -98,18 +98,6 @@
             }
             window.location.href = location + "?id=" + selectedIndex;
         }
-    }
-
-    function calc() {
-        // const quantity = parseInt(document.getElementById("quantity").value);
-        // const cost = parseInt(document.getElementById("cost").value);
-        // if (!isNaN(quantity) && !isNaN(cost)) {
-        //     document.getElementById("cost").value
-        //
-        // }
-        //
-
-
     }
 </script>
 </body>

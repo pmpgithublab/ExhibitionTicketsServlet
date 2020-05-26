@@ -11,14 +11,14 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/errorPages/error404.jsp</location>
+        <location>/WEB-INF/error_pages/error404.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/errorPages/error500.jsp</location>
+        <location>/WEB-INF/error_pages/error500.jsp</location>
     </error-page>
     <error-page>
         <exception-type>java.lang.RuntimeException</exception-type>
-        <location>/WEB-INF/errorPages/runtime_error.jsp</location>
+        <location>/WEB-INF/error_pages/runtime_error.jsp</location>
     </error-page>
 </web-app>

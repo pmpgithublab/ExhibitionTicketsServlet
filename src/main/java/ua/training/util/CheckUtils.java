@@ -8,15 +8,15 @@ import java.time.LocalTime;
 import static ua.training.Constants.*;
 
 public class CheckUtils {
-    private static final String IS_NUMBER_REGEX = "[А-ЩЮЯІЇЄҐ][а-щьюяіїєґ']{2,20}";
-
+    private static final String IS_NUMBER_REGEX = "\\d+";
+    private static final int MAX_TICKET_QUANTITY = 99999;
 
     private static boolean isPositiveNumber(String positiveNumber) {
         return positiveNumber != null && !positiveNumber.equals(EMPTY_STRING) && positiveNumber.matches(IS_NUMBER_REGEX);
     }
 
     public static boolean isPositiveInteger(String positiveNumber) {
-        if (isPositiveNumber(positiveNumber)){
+        if (isPositiveNumber(positiveNumber)) {
             try {
                 Integer.parseInt(positiveNumber);
                 return true;
@@ -29,7 +29,7 @@ public class CheckUtils {
     }
 
     public static boolean isPositiveLong(String positiveNumber) {
-        if (isPositiveNumber(positiveNumber)){
+        if (isPositiveNumber(positiveNumber)) {
             try {
                 Long.parseLong(positiveNumber);
 
@@ -47,7 +47,7 @@ public class CheckUtils {
         return isPositiveInteger(id) && Integer.parseInt(id) < MAX_TICKET_QUANTITY;
     }
 
-    public static boolean isDateValid(String localDate) {
+    public static boolean isDate(String localDate) {
         try {
             LocalDate.parse(localDate);
 
@@ -56,6 +56,10 @@ public class CheckUtils {
 
             return false;
         }
+    }
+
+    public static boolean isStringNotEmpty(String string) {
+        return string != null && !string.equals(EMPTY_STRING);
     }
 
     public static LocalDate getMaxDate(LocalDate date1, LocalDate date2) {
@@ -71,7 +75,7 @@ public class CheckUtils {
     }
 
     public static boolean isExhibitDateTimeActual(LocalDate ticketExhibitDate, LocalDate startDate,
-                                                            LocalDate endDate, LocalTime timeExhibitEnd) {
+                                                  LocalDate endDate, LocalTime timeExhibitEnd) {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
 

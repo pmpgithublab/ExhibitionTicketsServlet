@@ -1,18 +1,14 @@
-CREATE TABLE `exhibits`
+CREATE TABLE `users`
 (
-    `id`                   bigint       NOT NULL AUTO_INCREMENT,
-    `ticket_cost`          bigint       NOT NULL,
-    `start_date_time`      datetime     NOT NULL,
-    `end_date_time`        datetime     NOT NULL,
-    `hall_id`              bigint       NOT NULL,
-    `max_visitors_per_day` int          NOT NULL,
-    `name_en`              varchar(200) NOT NULL,
-    `name_uk`              varchar(200) NOT NULL,
+    `id`       bigint       NOT NULL AUTO_INCREMENT,
+    `email`    varchar(255) NOT NULL,
+    `name_en`  varchar(45)  NOT NULL,
+    `name_uk`  varchar(45)  NOT NULL,
+    `password` varchar(64)  NOT NULL,
+    `role`     varchar(20)  NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `name_en_UNIQUE` (`name_en`),
-    UNIQUE KEY `name_uk_UNIQUE` (`name_uk`),
-    KEY `FKHall_idx` (`hall_id`),
-    CONSTRAINT `FKHall` FOREIGN KEY (`hall_id`) REFERENCES `halls` (`id`)
+    UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 96
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;

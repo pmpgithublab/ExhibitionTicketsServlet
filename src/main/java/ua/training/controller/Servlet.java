@@ -18,11 +18,14 @@ import static ua.training.Constants.*;
 @WebServlet(urlPatterns = WELCOME_PATH)
 public class Servlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(Servlet.class);
+    private static final String SERVLET_DESTROY_METHOD_EXECUTING = "Servlet destroy method executing";
+    private static final String SERVLET_INIT_METHOD_START = "Servlet init method start";
+    private static final String SERVLET_INIT_METHOD_FINISH = "Servlet init method finish";
 
     private final Map<String, Command> commands = new HashMap<>();
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         log.info(SERVLET_INIT_METHOD_START);
 
         UserService userService = new UserService();
@@ -39,11 +42,9 @@ public class Servlet extends HttpServlet {
         commands.put(ERROR_PATH, new ErrorCommand());
 
         commands.put(ADMIN_PATH + HALLS_LIST_PATH, new HallsListCommand(hallService));
-        commands.put(ADMIN_PATH + HALL_ADD_PATH, new HallAddCommand());
         commands.put(ADMIN_PATH + HALL_EDIT_PATH, new HallEditCommand(hallService));
 
         commands.put(ADMIN_PATH + EXHIBITS_LIST_PATH, new ExhibitListCommand(exhibitService));
-        commands.put(ADMIN_PATH + EXHIBIT_ADD_PATH, new ExhibitAddCommand(hallService));
         commands.put(ADMIN_PATH + EXHIBIT_EDIT_PATH, new ExhibitEditCommand(hallService, exhibitService));
         commands.put(ADMIN_PATH + REPORT_PATH, new AdminReportCommand(reportService));
 
@@ -72,7 +73,7 @@ public class Servlet extends HttpServlet {
             throws ServletException, IOException {
 
         String path = request.getServletPath();
-        Command command = commands.getOrDefault(path, (r) -> REDIRECT_STRING + ERROR_PATH);
+        Command command = commands.getOrDefault(path, (r) -> REDIRECT_STRING + WELCOME_PATH);
         String page = command.execute(request);
         if (page.startsWith(REDIRECT_STRING)) {
             response.sendRedirect(page.replace(REDIRECT_STRING, request.getContextPath()));

@@ -12,20 +12,24 @@
 <table class="table">
     <thead>
     <tr>
-        <th style="width: 80%"><fmt:message key="admin.statistic.user"/></th>
-        <th style="width: 10%"><fmt:message key="admin.statistic.ticket.sum"/></th>
-        <th style="width: 10%"><fmt:message key="admin.statistic.ticket.quantity"/></th>
+        <th style="width: 20%"></th>
+        <th style="width: 40%"><fmt:message key="admin.statistic.user"/></th>
+        <th class="text-center" style="width: 10%"><fmt:message key="admin.statistic.ticket.sum"/></th>
+        <th class="text-center" style="width: 10%"><fmt:message key="ticket.quantity"/></th>
+        <th style="width: 20%"></th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${ReportDTOS.getItems()}" var="purchase">
         <tr>
-            <td>${purchase.userName}</td>
+            <td></td>
+            <td>${purchase.getUserName()}</td>
             <td class="text-right pr-4"><fmt:formatNumber value="${purchase.paidSum/100}" type="currency"
                                                           currencySymbol="${currencySign}"
                                                           maxFractionDigits="2"
                                                           minFractionDigits="2"/></td>
             <td class="text-right pr-4">${purchase.ticketQuantity}</td>
+            <td></td>
         </tr>
     </c:forEach>
     </tbody>

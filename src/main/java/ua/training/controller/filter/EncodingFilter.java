@@ -12,7 +12,7 @@ public class EncodingFilter implements Filter {
     private static final String CONTENT_TYPE = "text/html";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

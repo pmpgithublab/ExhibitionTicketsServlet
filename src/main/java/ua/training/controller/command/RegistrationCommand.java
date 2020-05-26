@@ -15,6 +15,8 @@ import static ua.training.Constants.*;
 
 public class RegistrationCommand implements Command {
     private static final Logger log = Logger.getLogger(RegistrationCommand.class);
+    private static final String REGISTRATION_PAGE = "/WEB-INF/registration.jsp";
+    private static final String EMAIL_EXIST = "Unsuccessful attempt to save new user. Email: ";
 
     private final UserService userService;
 
@@ -73,7 +75,7 @@ public class RegistrationCommand implements Command {
         request.setAttribute(IS_FIELDS_FILLED, isFieldsCorrect);
         request.setAttribute(IS_USER_EMAIL_ERROR, isEmailRegistered);
         request.setAttribute(NAME_PATTERN_REGEX, LocaleUtil.getProperty(REGEX_NAME_PATTERN));
-        request.setAttribute(NAME_UK_PATTERN_REGEX, LocaleUtil.getLocalNameRegexName());
+        request.setAttribute(NAME_UK_PATTERN_REGEX, LocaleUtil.getLocalNameRegex());
         request.setAttribute(EMAIL_PATTERN_REGEX, LocaleUtil.getProperty(REGEX_EMAIL_PATTERN));
         request.setAttribute(PASSWORD_PATTERN_REGEX, LocaleUtil.getProperty(REGEX_PASSWORD_PATTERN));
     }

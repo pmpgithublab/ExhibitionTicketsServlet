@@ -16,8 +16,10 @@ import static ua.training.Constants.*;
 
 @WebFilter(EVERY_PATH)
 public class LocaleFilter implements Filter {
+    private static final String PARAM_LANG = "lang";
+
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -27,30 +29,30 @@ public class LocaleFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
+
         if (request.getSession().isNew()) {
-            LocaleUtil.setLocale(new Locale(ENGLISH_LOCALE_NAME));
-            Config.set(session, Config.FMT_LOCALE, LocaleUtil.getLocale());
-            session.setAttribute(LANGUAGE, ENGLISH_LOCALE_NAME);
-            session.setAttribute(CURRENCY_SIGN, DOLLAR_SIGN);
-            DBQueryBundleManager.INSTANCE.setLocale(LocaleUtil.getLocale());
-            DBPropertiesManager.INSTANCE.setLocale(LocaleUtil.getLocale());
+            setLocale(ENGLISH_LOCALE_NAME, session);
         }
 
         if (request.getParameter(PARAM_LANG) != null) {
-            Locale locale = new Locale(request.getParameter(PARAM_LANG));
-            Config.set(request.getSession(), Config.FMT_LOCALE, locale);
-            LocaleUtil.setLocale(locale);
-            DBQueryBundleManager.INSTANCE.setLocale(LocaleUtil.getLocale());
-            DBPropertiesManager.INSTANCE.setLocale(LocaleUtil.getLocale());
-            session.setAttribute(LANGUAGE, locale);
-            if (LocaleUtil.isEnglish()) {
-                session.setAttribute(CURRENCY_SIGN, DOLLAR_SIGN);
-            } else {
-                session.setAttribute(CURRENCY_SIGN, HRYVNA_SIGN);
-            }
+            setLocale(request.getParameter(PARAM_LANG), session);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    private void setLocale(String localeString, HttpSession session) {
+        Locale locale = new Locale(localeString);
+        LocaleUtil.setLocale(locale);
+        Config.set(session, Config.FMT_LOCALE, LocaleUtil.getLocale());
+        DBQueryBundleManager.INSTANCE.setLocale(LocaleUtil.getLocale());
+        DBPropertiesManager.INSTANCE.setLocale(LocaleUtil.getLocale());
+        session.setAttribute(LANGUAGE, locale);
+        if (LocaleUtil.isEnglish()) {
+            session.setAttribute(CURRENCY_SIGN, DOLLAR_SIGN);
+        } else {
+            session.setAttribute(CURRENCY_SIGN, HRYVNA_SIGN);
+        }
     }
 
     @Override
