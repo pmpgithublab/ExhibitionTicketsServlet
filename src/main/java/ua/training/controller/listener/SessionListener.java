@@ -20,7 +20,6 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
         httpSessionEvent.getSession().setAttribute(USER_ROLE, UserRole.ROLE_ANONYMOUS);
-        httpSessionEvent.getSession().setAttribute(USER_CART, new HashMap<String, TicketDTO>());
         log.info(SESSION_CREATED + httpSessionEvent.getSession().getId());
     }
 

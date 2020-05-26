@@ -28,7 +28,6 @@ public interface Constants {
     String USER_NAME_UK = "userNameUK";
     String USER_EMAIL = "userEmail";
     String USER_ROLE = "userRole";
-    String USER_CART = "userCart";
     String CURRENCY_SIGN = "currencySign";
 
     //page variables
