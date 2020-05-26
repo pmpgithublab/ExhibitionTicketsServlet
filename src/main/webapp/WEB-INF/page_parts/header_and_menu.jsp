@@ -1,5 +1,4 @@
 <header class="header">
-<%--    table-borderless--%>
     <table class="table table-sm m-0 table-borderless">
         <tr>
             <td rowspan="2" width="7%"></td>
@@ -23,7 +22,7 @@
         </tr>
         <tr>
             <td>
-                <c:if test="${sessionScope.userRole != 'ROLE_ANONYMOUS'}">
+                <c:if test="${userRole != 'ROLE_ANONYMOUS'}">
                     <a href="${pageContext.request.contextPath}/logout"><fmt:message key="logout"/></a>
                 </c:if>
             </td>

@@ -82,13 +82,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.2.4</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -103,7 +96,6 @@
                         <port>8090</port>
                         <path>/ExhibitionTickets</path>
 <!--                        <charset>UTF-8</charset>-->
-<!--                        <contextFile>${project.basedir}/src/main/webapp/META-INF/context.xml</contextFile>-->
                     </configuration>
                 </plugin>
                 <plugin>
