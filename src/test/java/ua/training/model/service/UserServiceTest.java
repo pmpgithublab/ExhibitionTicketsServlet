@@ -18,14 +18,11 @@ public class UserServiceTest {
     private final Random random = new Random(System.currentTimeMillis());
 
     @Test
-    public void successfulSaveCorrectUserAndFindUser() {
+    public void successfulSaveCorrectUserAndFindUser() throws Exception {
         UserDTO userDTO = buildDefaultTestUserDTO();
 
-        try {
-            userService.saveUser(userDTO);
-        } catch (Exception e) {
-            fail();
-        }
+        userService.saveUser(userDTO);
+
         Optional<UserDTO> userDTOFromDB =
                 userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (userDTOFromDB.isPresent()) {
@@ -48,12 +45,8 @@ public class UserServiceTest {
     @Test(expected = SuchEmailExistsException.class)
     public void failSaveUserDuplicate() throws Exception {
         UserDTO userDTO = buildDefaultTestUserDTO();
-        try {
-            userService.saveUser(userDTO);
-        } catch (Exception e) {
-            fail();
-        }
 
+        userService.saveUser(userDTO);
         userService.saveUser(userDTO);
     }
 
@@ -93,13 +86,10 @@ public class UserServiceTest {
         }
     }
 
-    @Test
-    public void failSaveEmptyUser() {
+    @Test(expected = Exception.class)
+    public void failSaveEmptyUser() throws SuchEmailExistsException {
         UserDTO userDTO = new UserDTO();
-        try {
-            userService.saveUser(userDTO);
-            fail();
-        } catch (Exception ignored) {
-        }
+
+        userService.saveUser(userDTO);
     }
 }

@@ -25,14 +25,10 @@ public class HallServiceTest {
 
 
     @Test
-    public void successfulSaveHall(){
+    public void successfulSaveHall() throws Exception {
         HallDTO hallDTO = buildDefaultTestHallDTO();
 
-        try {
-            hallService.saveHall(hallDTO);
-        } catch (Exception e) {
-            fail();
-        }
+        hallService.saveHall(hallDTO);
     }
 
     private HallDTO buildDefaultTestHallDTO() {
@@ -46,13 +42,8 @@ public class HallServiceTest {
     public void failSaveHallDuplicate() throws Exception {
         HallDTO hallDTO = buildDefaultTestHallDTO();
 
-        try {
-            hallService.saveHall(hallDTO);
-        } catch (Exception e) {
-            fail();
-        }
-
-            hallService.saveHall(hallDTO);
+        hallService.saveHall(hallDTO);
+        hallService.saveHall(hallDTO);
     }
 
     @Test
@@ -84,14 +75,10 @@ public class HallServiceTest {
     }
 
     @Test
-    public void successfulFindAllHall() {
+    public void successfulFindAllHall() throws Exception {
         List<HallDTO> hallDTOS = buildDefaultTestHallListDTO(3);
         for (HallDTO hallDTO : hallDTOS) {
-            try {
-                hallService.saveHall(hallDTO);
-            } catch (Exception e) {
-                fail();
-            }
+            hallService.saveHall(hallDTO);
         }
 
         List<HallDTO> hallDTOSFromDB = hallService.findAllHall();
@@ -113,21 +100,17 @@ public class HallServiceTest {
     }
 
     @Test
-    public void successfulSaveHallAndFindHallAndFindById() {
+    public void successfulSaveHallAndFindHallAndFindById() throws Exception {
         HallDTO hallDTO = buildDefaultTestHallDTO();
 
-        try {
-            hallService.saveHall(hallDTO);
-        } catch (Exception e) {
-            fail();
-        }
+        hallService.saveHall(hallDTO);
 
         List<HallDTO> hallDTOS = hallService.findAllHall();
         hallDTOS = hallDTOS.stream()
                 .filter(e -> e.getName().equals(hallDTO.getName()))
                 .collect(Collectors.toList());
 
-        if (hallDTOS.size() != ONE_ELEMENT){
+        if (hallDTOS.size() != ONE_ELEMENT) {
             fail();
             return;
         }
