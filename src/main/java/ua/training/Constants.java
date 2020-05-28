@@ -29,6 +29,7 @@ public interface Constants {
     String USER_EMAIL = "userEmail";
     String USER_ROLE = "userRole";
     String CURRENCY_SIGN = "currencySign";
+    String LANGUAGE = "language";
 
     //page variables
     String IS_ERROR = "isError";
@@ -44,7 +45,6 @@ public interface Constants {
     String EXHIBIT_THEMES_LIST = "exhibitThemesList";
     String EXHIBIT_DATES_LIST = "exhibitDatesList";
     String EXHIBIT_SELECTED_THEME = "selectedExhibitTheme";
-    String LANGUAGE = "language";
     String CART = "cart";
     String EXPIRED_TICKETS = "expiredTickets";
     String NOT_ENOUGH_TICKETS = "notEnoughTickets";

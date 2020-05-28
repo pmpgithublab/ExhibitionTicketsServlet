@@ -8,6 +8,7 @@
 <%@ include file="../page_parts/header_and_menu.jsp" %>
 
 <h3 class="d-flex justify-content-center"><fmt:message key="page.title.cart"/></h3><br>
+
 <c:if test="${!notEnoughTickets.isEmpty()}">
     <h5 class="d-flex justify-content-center" style="color: red"><fmt:message key="cart.not.enough.tickets"/></h5>
     <table class="table">
