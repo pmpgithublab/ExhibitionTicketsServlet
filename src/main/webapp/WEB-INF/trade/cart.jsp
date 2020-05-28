@@ -128,7 +128,7 @@
                 <td>
                     <input hidden name="id" value="${tickets.exhibitId}">
                     <input hidden name="date" value="${tickets.exhibitDate}">
-                    <button type="submit" class="btn btn-primary pt-0 pb-0"><fmt:message key="cart.delete"/></button>
+                    <button type="submit" class="btn btn-danger pt-0 pb-0"><fmt:message key="cart.delete"/></button>
                 </td>
                 <td></td>
             </tr>
@@ -144,7 +144,7 @@
             <c:if test="${cart.size() != 0}">
                 <form action="${pageContext.request.contextPath}/trade/clear_cart" method="post">
                     <input hidden name="clearCart" value="yes">
-                    <button type="submit" class="btn btn-primary pt-0 pb-0"><fmt:message
+                    <button type="submit" class="btn btn-danger pt-0 pb-0"><fmt:message
                             key="cart.delete.all"/></button>
                 </form>
             </c:if>
