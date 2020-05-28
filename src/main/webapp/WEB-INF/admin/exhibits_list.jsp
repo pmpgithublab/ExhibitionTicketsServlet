@@ -53,7 +53,7 @@
         </tr>
     </c:forEach>
     <tr>
-        <td align="center">
+        <td class="form-inline d-flex justify-content-center">
             <a href="${pageContext.request.contextPath}/admin/exhibit_edit" class="btn btn-primary"> <fmt:message
                     key="exhibit.add"/></a>
         </td>
