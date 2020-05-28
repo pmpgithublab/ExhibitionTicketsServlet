@@ -19,7 +19,7 @@
             <td><input type="text" name="id" value="${exhibitDTO.getId()}"/></td>
         </tr>
         <tr>
-            <td width="200"><fmt:message key="exhibit.theme"/></td>
+            <td style="width: 200px"><fmt:message key="exhibit.theme"/></td>
             <td><input type="text" name="name" value="${exhibitDTO.getName()}" id="name" size="100" required/></td>
         </tr>
 
@@ -31,7 +31,7 @@
         <tr hidden id="nameUKRow">
             </c:otherwise>
             </c:choose>
-            <td width="200"><fmt:message key="exhibit.theme.uk"/></td>
+            <td><fmt:message key="exhibit.theme.uk"/></td>
             <td><input type="text" name="nameUK" value="${exhibitDTO.getNameUK()}" id="nameUK" size="100" required/>
             </td>
         </tr>
@@ -55,7 +55,7 @@
         <tr>
             <td><fmt:message key="cost"/></td>
             <td>
-                <input type="text" name="ticketCost" id="ticketCost" class="ticketCost" placeholder="0.00"
+                <input type="text" name="ticketCost" id="ticketCost" placeholder="0.00"
                        value="${exhibitDTO.getTicketCost()/100}"
                        size="10" pattern="^\d{1,7}\.\d{2}$" title="####.##" required/>
             </td>

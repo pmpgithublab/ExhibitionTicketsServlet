@@ -1,6 +1,7 @@
 <html>
 <head>
     <%@ include file="page_parts/jstl_and_bootstrap.jsp" %>
+    <title><fmt:message key="page.title.error"/></title>
 </head>
 <body>
 <%@ include file="page_parts/header_and_menu.jsp" %>

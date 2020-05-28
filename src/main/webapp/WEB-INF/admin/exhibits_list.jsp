@@ -12,12 +12,14 @@
 <table class="table">
     <thead>
     <tr>
-        <th width="50%"><fmt:message key="theme"/></th>
-        <th width="15%"><fmt:message key="startDateTime"/></th>
-        <th width="15%"><fmt:message key="endDateTime"/></th>
-        <th width="8%"><fmt:message key="maxVisitorsPerDay"/></th>
-        <th width="6%"><fmt:message key="cost"/></th>
-        <th width="6%"><fmt:message key="edit"/></th>
+        <th style="width: 10%"></th>
+        <th style="width: 30%"><fmt:message key="theme"/></th>
+        <th style="width: 16%"><fmt:message key="startDateTime"/></th>
+        <th style="width: 16%"><fmt:message key="endDateTime"/></th>
+        <th class="text-right" style="width: 6%"><fmt:message key="maxVisitorsPerDay"/></th>
+        <th class="text-right" style="width: 6%"><fmt:message key="cost"/></th>
+        <th style="width: 6%"><fmt:message key="edit"/></th>
+        <th style="width: 10%"></th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +29,7 @@
         <fmt:parseDate value="${exhibitItem.endDateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="endDateTime"
                        type="both"/>
         <tr>
+            <td></td>
             <td>${exhibitItem.name}</td>
             <c:choose>
                 <c:when test="${language != 'en'}">
@@ -44,11 +47,13 @@
                                       currencySymbol="${currencySign}"
                                       maxFractionDigits="2"
                                       minFractionDigits="2"/>
-            <td><a href="${pageContext.request.contextPath}/admin/exhibit_edit?id=${exhibitItem.id}" class="btn btn-primary pt-0 pb-0"><fmt:message key="edit"/></a></td>
+            <td><a href="${pageContext.request.contextPath}/admin/exhibit_edit?id=${exhibitItem.id}"
+                   class="btn btn-primary pt-0 pb-0"><fmt:message key="edit"/></a></td>
+            <td></td>
         </tr>
     </c:forEach>
     <tr>
-        <td colspan="6" align="center">
+        <td align="center">
             <a href="${pageContext.request.contextPath}/admin/exhibit_edit" class="btn btn-primary"> <fmt:message
                     key="exhibit.add"/></a>
         </td>
