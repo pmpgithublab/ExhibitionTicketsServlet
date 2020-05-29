@@ -33,7 +33,6 @@ public interface Constants {
 
     //page variables
     String IS_ERROR = "isError";
-    String IS_SUCCESSFUL = "isSuccessful";
     String IS_FIELDS_FILLED = "isFieldsFilled";
     String IS_USER_EMAIL_ERROR = "isUserEmailError";
     String NAME_PATTERN_REGEX = "name_pattern_regex";

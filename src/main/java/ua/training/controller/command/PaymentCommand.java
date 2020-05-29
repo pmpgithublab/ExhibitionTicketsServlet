@@ -26,6 +26,7 @@ public class PaymentCommand implements Command {
     private static final String PAYMENT_DATA_NOT_ACTUAL_OR_CANNOT_BE_PAID = "isPaymentDataNotActualOrCannotBePaid";
     private static final String IS_NOT_ENOUGH_TICKETS = "isNotEnoughTickets";
     private static final String PAYMENT_DATA_NOT_ACTUAL = "Payment data not actual. User id: ";
+    private static final String IS_SUCCESSFUL = "isSuccessful";
 
     private final PaymentService paymentService;
 
@@ -48,7 +49,8 @@ public class PaymentCommand implements Command {
     }
 
     private String showPaymentData(HttpServletRequest request) {
-        Optional<TicketDTO> payment = paymentService.findByUserIdSumAndQuantityNotPaidTickets(ControllerUtil.getUserId(request));
+        Optional<TicketDTO> payment = paymentService
+                .findByUserIdSumAndQuantityNotPaidTickets(ControllerUtil.getUserId(request));
         payment.ifPresent(p -> request.setAttribute(TOTAL_SUM, p.getTicketSum()));
         payment.ifPresent(p -> request.setAttribute(TOTAL_QUANTITY, p.getTicketQuantity()));
 
