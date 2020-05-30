@@ -19,7 +19,7 @@ public class JDBCUserDao implements UserDao {
     private static final String SQL_QUERY_INSERT_NEW_USER = "insert.new.user";
     private static final String SQL_QUERY_FIND_USER_BY_EMAIL_AND_PASSWORD = "find.user.by.email.and.password";
 
-    private static final String DB_USER_CREATION_ERROR_SUCH_EMAIL_EXISTS = "DB user creation error: such email exists. Email:";
+    private static final String DB_USER_CREATION_ERROR_SUCH_EMAIL_EXISTS = "DB user creation error: such email exists.";
     private static final String DB_USER_CREATED = "DB user created: ";
 
     private final Connection connection;

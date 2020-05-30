@@ -9,16 +9,15 @@
 
 <h3 class="d-flex justify-content-center"><fmt:message key="page.title.registration"/></h3><br>
 
+<c:if test="${!isFieldsFilled}">
+    <label class="d-flex justify-content-center" style="color: red"><fmt:message
+            key="registration.user.fill.fields"/></label>
+</c:if>
+<c:if test="${isUserEmailError}">
+    <label class="d-flex justify-content-center" style="color: red"><fmt:message
+            key="registration.email.exists"/></label>
+</c:if>
 <form action="${pageContext.request.contextPath}/registration" method="post" name="exhibitForm">
-    <c:if test="${!isFieldsFilled}">
-        <label class="d-flex justify-content-center" style="color: red"><fmt:message
-                key="registration.user.fill.fields"/></label>
-    </c:if>
-    <c:if test="${isUserEmailError}">
-        <label class="d-flex justify-content-center" style="color: red"><fmt:message
-                key="registration.email.exists"/></label>
-    </c:if>
-
     <table class="table d-flex justify-content-center">
         <tbody>
         <tr>

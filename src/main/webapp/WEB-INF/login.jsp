@@ -10,10 +10,10 @@
 
 <h3 class="d-flex justify-content-center"><fmt:message key="page.title.login"/></h3><br>
 
+<c:if test="${isError}">
+    <p class="d-flex justify-content-center" style="color: #F44336"><fmt:message key="login.error"/></p>
+</c:if>
 <form action="${pageContext.request.contextPath}/login" method="post">
-    <c:if test="${isError}">
-        <p class="d-flex justify-content-center" style="color: #F44336"><fmt:message key="login.error"/></p>
-    </c:if>
     <table class="table d-flex justify-content-center">
         <tbody>
         <tr>

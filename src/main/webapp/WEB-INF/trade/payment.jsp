@@ -34,7 +34,7 @@
     </div>
 </c:if>
 <table class="table d-flex justify-content-center">
-    <tr align="center">
+    <tr class="form-inline d-flex justify-content-center">
         <th colspan="2"><h5><fmt:message key="payment.information"/></h5></th>
     </tr>
     <tr>

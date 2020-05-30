@@ -1,10 +1,12 @@
 package ua.training.model.service;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.training.model.dto.ExhibitDTO;
 import ua.training.model.dto.HallDTO;
 import ua.training.model.entity.Hall;
 import ua.training.model.exception.NoDuplicationAllowedException;
+import ua.training.util.LocaleUtil;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -21,24 +23,17 @@ public class ExhibitServiceTest {
     private final ExhibitService exhibitService = new ExhibitService();
     private final HallService hallService = new HallService();
 
+
     @Test
-    public void successfulSaveExhibit() {
+    public void successfulSaveExhibit() throws Exception {
         ExhibitDTO exhibitDTO = buildDefaultTestExhibitDTO();
 
-        try{
-            exhibitService.saveExhibit(exhibitDTO);
-        }catch (Exception e){
-            fail();
-        }
+        exhibitService.saveExhibit(exhibitDTO);
     }
 
-    private ExhibitDTO buildDefaultTestExhibitDTO() {
+    private ExhibitDTO buildDefaultTestExhibitDTO() throws Exception {
         HallDTO hallDTO = buildDefaultTestHallDTO();
-        try {
-            hallService.saveHall(hallDTO);
-        } catch (Exception exception) {
-            fail();
-        }
+        hallService.saveHall(hallDTO);
 
         ExhibitDTO exhibitDTO = new ExhibitDTO();
         exhibitDTO.setName(TEST_STRING + LocalDateTime.now() + random.nextInt(10_000));
@@ -62,17 +57,13 @@ public class ExhibitServiceTest {
     public void failSaveExhibitionDuplicate() throws Exception {
         ExhibitDTO exhibitDTO = buildDefaultTestExhibitDTO();
 
-        try{
-            exhibitService.saveExhibit(exhibitDTO);
-        }catch (Exception e){
-            fail();
-        }
+        exhibitService.saveExhibit(exhibitDTO);
 
         exhibitService.saveExhibit(exhibitDTO);
     }
 
     @Test
-    public void failSaveExhibitWithEmptyFields() {
+    public void failSaveExhibitWithEmptyFields() throws Exception {
         ExhibitDTO exhibitDTO = buildDefaultTestExhibitDTO();
 
         exhibitDTO.setName(null);
@@ -100,14 +91,10 @@ public class ExhibitServiceTest {
     }
 
     @Test
-    public void successfulFindAllExhibit() {
+    public void successfulFindAllExhibit() throws Exception {
         List<ExhibitDTO> exhibitDTOS = buildDefaultTestExhibitListDTO(3);
         for (ExhibitDTO exhibitDTO : exhibitDTOS) {
-            try {
-                exhibitService.saveExhibit(exhibitDTO);
-            } catch (Exception e) {
-                fail();
-            }
+            exhibitService.saveExhibit(exhibitDTO);
         }
 
         List<ExhibitDTO> exhibitDTOSFromDB = exhibitService.findAllExhibit();
@@ -120,7 +107,7 @@ public class ExhibitServiceTest {
         }
     }
 
-    private List<ExhibitDTO> buildDefaultTestExhibitListDTO(int quantity) {
+    private List<ExhibitDTO> buildDefaultTestExhibitListDTO(int quantity) throws Exception {
         List<ExhibitDTO> result = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {
             result.add(buildDefaultTestExhibitDTO());
@@ -141,58 +128,43 @@ public class ExhibitServiceTest {
     }
 
     @Test
-    public void successfulFindCurrentExhibits(){
+    public void successfulFindCurrentExhibits() throws Exception {
         ExhibitDTO exhibitDTOPast = buildDefaultTestExhibitDTO();
         exhibitDTOPast.setStartDateTime(LocalDateTime.now().minusDays(10));
         exhibitDTOPast.setEndDateTime(LocalDateTime.now().minusDays(1));
-        try {
-            exhibitService.saveExhibit(exhibitDTOPast);
-        } catch (Exception e) {
-            fail();
-        }
+        exhibitService.saveExhibit(exhibitDTOPast);
+
         ExhibitDTO exhibitDTOFuture = buildDefaultTestExhibitDTO();
         exhibitDTOFuture.setStartDateTime(LocalDateTime.now().minusDays(10));
         exhibitDTOFuture.setEndDateTime(LocalDateTime.now().plusDays(10));
-        try {
-            exhibitService.saveExhibit(exhibitDTOFuture);
-        } catch (Exception e) {
-            fail();
-        }
+        exhibitService.saveExhibit(exhibitDTOFuture);
 
         List<ExhibitDTO> exhibitDTOS = exhibitService.findCurrentExhibits();
 
-        if (exhibitDTOS.stream().filter(e->e.getName().equals(exhibitDTOPast.getName())).count() == ONE_ELEMENT){
+        if (exhibitDTOS.stream().filter(e -> e.getName().equals(exhibitDTOPast.getName())).count() == ONE_ELEMENT) {
             fail();
         }
 
-        if (exhibitDTOS.stream().filter(e->e.getName().equals(exhibitDTOFuture.getName())).count() != ONE_ELEMENT){
+        if (exhibitDTOS.stream().filter(e -> e.getName().equals(exhibitDTOFuture.getName())).count() != ONE_ELEMENT) {
             fail();
         }
     }
 
     @Test
-    public void successfulGetExhibitListByDates(){
+    public void successfulGetExhibitListByDates() throws Exception {
         int tenDays = 10;
         ExhibitDTO exhibitDTO = buildDefaultTestExhibitDTO();
         exhibitDTO.setStartDateTime(LocalDateTime.now().minusDays(tenDays).minusSeconds(5));
         exhibitDTO.setEndDateTime(LocalDateTime.now().plusDays(tenDays).plusMinutes(10));
-        try {
-            exhibitService.saveExhibit(exhibitDTO);
-        } catch (Exception e) {
-            fail();
-        }
+        exhibitService.saveExhibit(exhibitDTO);
 
         List<ExhibitDTO> exhibitDTOS = exhibitService.findCurrentExhibits();
-        try{
-            Long exhibitId = exhibitDTOS.stream()
-                    .filter(e->e.getName().equals(exhibitDTO.getName()))
-                    .collect(Collectors.toList()).get(0)
-                    .getId();
-            List<ExhibitDTO> result = exhibitService.getExhibitListByDates(exhibitId);
-            if (result.size() != tenDays + 1){
-                fail();
-            }
-        }catch (Exception e){
+        Long exhibitId = exhibitDTOS.stream()
+                .filter(e -> e.getName().equals(exhibitDTO.getName()))
+                .collect(Collectors.toList()).get(0)
+                .getId();
+        List<ExhibitDTO> result = exhibitService.getExhibitListByDates(exhibitId);
+        if (result.size() != tenDays + 1) {
             fail();
         }
     }

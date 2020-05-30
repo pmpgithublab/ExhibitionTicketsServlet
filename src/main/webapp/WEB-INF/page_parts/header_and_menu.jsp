@@ -1,9 +1,9 @@
 <header class="header">
     <table class="table table-sm m-0 table-borderless">
         <tr>
-            <td rowspan="2" width="7%"></td>
+            <td rowspan="2" style="width: 7%"></td>
             <td rowspan="2"><h1 style="color: darkblue"><i><fmt:message key="company.name"/></i></h1></td>
-            <td rowspan="2" width="15%">
+            <td rowspan="2" style="width: 15%">
                 <c:if test="${user != null}">
                     <c:choose>
                         <c:when test="${language != 'en'}">
@@ -15,7 +15,7 @@
                     </c:choose>
                 </c:if>
             </td>
-            <td width="7%">
+            <td style="width: 7%">
                 <a href="javascript: changeLang('en');"><fmt:message key="language.en"/></a>&nbsp;&nbsp;&nbsp;
                 <a href="javascript: changeLang('uk');"><fmt:message key="language.uk"/></a>
             </td>

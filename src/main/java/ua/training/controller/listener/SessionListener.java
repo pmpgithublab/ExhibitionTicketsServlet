@@ -1,15 +1,13 @@
 package ua.training.controller.listener;
 
 import org.apache.log4j.Logger;
-import ua.training.model.dto.TicketDTO;
 import ua.training.model.entity.UserRole;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.util.HashMap;
 
-import static ua.training.Constants.*;
+import static ua.training.Constants.USER_ROLE;
 
 @WebListener
 public class SessionListener implements HttpSessionListener {

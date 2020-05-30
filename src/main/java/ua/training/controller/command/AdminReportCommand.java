@@ -13,7 +13,7 @@ import static ua.training.Constants.*;
 
 public class AdminReportCommand implements Command {
     private static final Logger log = Logger.getLogger(AdminReportCommand.class);
-    private static final String ADMIN_STATISTIC_PAGE = "/WEB-INF/admin/admin_statistic.jsp";
+    private static final String ADMIN_STATISTIC_PAGE = "/WEB-INF/admin/report.jsp";
 
     private final ReportService reportService;
 

@@ -76,7 +76,7 @@ public class Ticket {
             return this;
         }
 
-        public Ticket builder(){
+        public Ticket build(){
             return ticket;
         }
     }

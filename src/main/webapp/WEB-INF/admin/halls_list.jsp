@@ -12,9 +12,10 @@
 <table class="table">
     <thead>
     <tr>
-        <th width="10%"></th>
+        <th style="width: 10%"></th>
         <th><fmt:message key="halls.title.name"/></th>
-        <th width="10%"><fmt:message key="edit"/></th>
+        <th style="width: 10%"><fmt:message key="edit"/></th>
+        <th style="width: 10%"></th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
             <td></td>
             <td>${hall.name}</td>
             <td><a href="${pageContext.request.contextPath}/admin/hall_edit?id=${hall.id}" class="btn btn-primary pt-0 pb-0"><fmt:message key="edit"/></a></td>
+            <td></td>
         </tr>
     </c:forEach>
     </tbody>

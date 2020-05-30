@@ -15,6 +15,7 @@
 <form method="post" action="${pageContext.request.contextPath}/admin/hall_edit<c:if test="${hallDTO.getId() != null}">?id=${hallDTO.getId()}</c:if>">
     <table class="table d-flex justify-content-center">
         <tr hidden>
+            <td></td>
             <td><input type="text" name="id" id="id" value="${hallDTO.getId()}"/></td>
         </tr>
         <tr>

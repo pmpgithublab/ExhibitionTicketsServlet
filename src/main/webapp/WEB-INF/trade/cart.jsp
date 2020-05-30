@@ -8,6 +8,7 @@
 <%@ include file="../page_parts/header_and_menu.jsp" %>
 
 <h3 class="d-flex justify-content-center"><fmt:message key="page.title.cart"/></h3><br>
+
 <c:if test="${!notEnoughTickets.isEmpty()}">
     <h5 class="d-flex justify-content-center" style="color: red"><fmt:message key="cart.not.enough.tickets"/></h5>
     <table class="table">
@@ -127,7 +128,7 @@
                 <td>
                     <input hidden name="id" value="${tickets.exhibitId}">
                     <input hidden name="date" value="${tickets.exhibitDate}">
-                    <button type="submit" class="btn btn-primary pt-0 pb-0"><fmt:message key="cart.delete"/></button>
+                    <button type="submit" class="btn btn-danger pt-0 pb-0"><fmt:message key="cart.delete"/></button>
                 </td>
                 <td></td>
             </tr>
@@ -143,7 +144,7 @@
             <c:if test="${cart.size() != 0}">
                 <form action="${pageContext.request.contextPath}/trade/clear_cart" method="post">
                     <input hidden name="clearCart" value="yes">
-                    <button type="submit" class="btn btn-primary pt-0 pb-0"><fmt:message
+                    <button type="submit" class="btn btn-danger pt-0 pb-0"><fmt:message
                             key="cart.delete.all"/></button>
                 </form>
             </c:if>
