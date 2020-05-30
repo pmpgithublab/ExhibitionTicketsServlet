@@ -5,13 +5,11 @@
 
 
         <li class="page-item<c:if test="${ReportDTOS.getCurrentPage() <= 1}"> d-none </c:if>"><a class="page-link" href="${pageContext.request.contextPath}${ReportDTOS.getPageNavigationString()}/report?page=${ReportDTOS.getCurrentPage() - 2}">${ReportDTOS.getCurrentPage() - 1}</a></li>
-
         <li class="page-item<c:if test="${ReportDTOS.getCurrentPage() <= 0}"> d-none </c:if>"><a class="page-link" href="${pageContext.request.contextPath}${ReportDTOS.getPageNavigationString()}/report?page=${ReportDTOS.getCurrentPage() - 1}">${ReportDTOS.getCurrentPage()}</a></li>
 
         <li class="page-item disabled"><a class="page-link">${ReportDTOS.getCurrentPage() + 1}</a></li>
 
         <li class="page-item<c:if test="${ReportDTOS.getCurrentPage() + 1 > ReportDTOS.getPageQuantity()}"> d-none </c:if>"><a class="page-link" href="${pageContext.request.contextPath}${ReportDTOS.getPageNavigationString()}/report?page=${ReportDTOS.getCurrentPage() + 1}">${ReportDTOS.getCurrentPage() + 2}</a></li>
-
         <li class="page-item<c:if test="${ReportDTOS.getCurrentPage() + 2 > ReportDTOS.getPageQuantity()}"> d-none </c:if>"><a class="page-link" href="${pageContext.request.contextPath}${ReportDTOS.getPageNavigationString()}/report?page=${ReportDTOS.getCurrentPage() + 2}">${ReportDTOS.getCurrentPage() + 3}</a></li>
 
 

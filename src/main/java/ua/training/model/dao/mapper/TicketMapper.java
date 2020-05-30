@@ -24,6 +24,6 @@ public class TicketMapper implements ObjectMapper<Ticket> {
                 .exhibitId(rs.getLong(FIELD_DB_EXHIBIT_ID))
                 .hallId(rs.getLong(FIELD_DB_HALL_ID))
                 .userId(rs.getLong(FIELD_DB_USER_ID))
-                .builder();
+                .build();
     }
 }

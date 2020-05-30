@@ -19,6 +19,7 @@ public class ExhibitDTOValidator implements Validator<ExhibitDTO> {
                 && exhibitDTO.getStartDateTime().isAfter(LocalDateTime.now())
                 && exhibitDTO.getEndDateTime() != null
                 && exhibitDTO.getEndDateTime().isAfter(LocalDateTime.now())
+                && exhibitDTO.getStartDateTime().isBefore(exhibitDTO.getEndDateTime())
                 && exhibitDTO.getMaxVisitorsPerDay() > 0
                 && exhibitDTO.getTicketCost() > 0L
                 && exhibitDTO.getHallId() != null;
