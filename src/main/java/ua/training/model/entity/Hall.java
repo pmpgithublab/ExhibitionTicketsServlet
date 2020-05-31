@@ -29,7 +29,6 @@ public class Hall {
     @Override
     public int hashCode() {
         return name.hashCode() + nameUK.hashCode();
-//        return Objects.hash(name, nameUK);
     }
 
     public Long getId() {
