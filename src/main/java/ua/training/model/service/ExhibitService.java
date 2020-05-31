@@ -18,10 +18,6 @@ import java.util.stream.Collectors;
 import static ua.training.Constants.*;
 
 public class ExhibitService {
-    private static final Logger log = Logger.getLogger(ExhibitService.class);
-
-    private static final String CREATING_EXHIBIT_LIST_BY_DATES_ERROR = "Creating exhibit list by dates error";
-
 
     public void saveExhibit(ExhibitDTO exhibitDTO) throws Exception {
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
@@ -49,7 +45,7 @@ public class ExhibitService {
         }
     }
 
-    public List<ExhibitDTO> getExhibitListByDates(Long exhibitId) {
+    public List<ExhibitDTO> getExhibitListByDates(Long exhibitId) throws CloneNotSupportedException {
         Optional<ExhibitDTO> exhibitDTOFromDB;
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
             exhibitDTOFromDB = exhibitDao.findByIdWithHall(exhibitId);
@@ -61,7 +57,7 @@ public class ExhibitService {
         throw new RuntimeException(MessageUtil.getObjectByIdNotFoundMessage(exhibitId, EXHIBIT_NAME));
     }
 
-    private List<ExhibitDTO> buildExhibitListByDates(ExhibitDTO exhibitDTO) {
+    private List<ExhibitDTO> buildExhibitListByDates(ExhibitDTO exhibitDTO) throws CloneNotSupportedException {
         List<ExhibitDTO> result = new ArrayList<>();
         LocalDate startDate =
                 CheckUtils.getMaxDate(LocalDate.now(), exhibitDTO.getStartDateTime().toLocalDate());
@@ -69,12 +65,7 @@ public class ExhibitService {
         ExhibitDTO newExhibitDTO;
         LocalDate exhibitDate;
         for (int i = 0; i <= restDays; i++) {
-            try {
-                newExhibitDTO = exhibitDTO.clone();
-            } catch (CloneNotSupportedException e) {
-                log.error(CREATING_EXHIBIT_LIST_BY_DATES_ERROR + SLASH_SYMBOL + e.getMessage());
-                throw new RuntimeException(e);
-            }
+            newExhibitDTO = exhibitDTO.clone();
             exhibitDate = startDate.plusDays(i);
             newExhibitDTO.setExhibitDate(exhibitDate);
             if (CheckUtils.isExhibitDateTimeActual(exhibitDate, newExhibitDTO)) {

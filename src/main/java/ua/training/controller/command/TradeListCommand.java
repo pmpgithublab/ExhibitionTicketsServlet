@@ -15,12 +15,15 @@ import static ua.training.Constants.*;
 public class TradeListCommand implements Command {
     private static final Logger log = Logger.getLogger(TradeListCommand.class);
     private static final String EXHIBITS_LIST_TRADE_PAGE = "/WEB-INF/trade/exhibits_list.jsp";
+    private static final String CREATING_EXHIBIT_LIST_BY_DATES_ERROR = "Creating exhibit list by dates error";
 
     private final ExhibitService exhibitService;
+
 
     public TradeListCommand(ExhibitService exhibitService) {
         this.exhibitService = exhibitService;
     }
+
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -34,7 +37,12 @@ public class TradeListCommand implements Command {
                 Long id = Long.parseLong(stringExhibitId);
 
                 setupSelectedTheme(request, exhibitDTOS, id);
-                createExhibitList(request, id);
+                try {
+                    createExhibitList(request, id);
+                } catch (CloneNotSupportedException e) {
+                    log.error(CREATING_EXHIBIT_LIST_BY_DATES_ERROR + SLASH_SYMBOL + e.getMessage());
+                    return REDIRECT_STRING + ERROR_PATH;
+                }
             }
 
             return EXHIBITS_LIST_TRADE_PAGE;
@@ -46,10 +54,10 @@ public class TradeListCommand implements Command {
 
     private void setupSelectedTheme(HttpServletRequest request, List<ExhibitDTO> exhibitDTOS, Long exhibitId) {
         request.setAttribute(EXHIBIT_SELECTED_THEME,
-                exhibitDTOS.stream().filter(e->e.getId().equals(exhibitId)).findFirst().get());
+                exhibitDTOS.stream().filter(e -> e.getId().equals(exhibitId)).findFirst().get());
     }
 
-    private void createExhibitList(HttpServletRequest request, Long exhibitId) {
+    private void createExhibitList(HttpServletRequest request, Long exhibitId) throws CloneNotSupportedException {
         List<ExhibitDTO> exhibitListByDates = exhibitService.getExhibitListByDates(exhibitId);
         exhibitListByDates.forEach(c -> c.setTicketCost(FinancialUtil.calcCost(c.getTicketCost())));
         request.setAttribute(EXHIBIT_DATES_LIST, exhibitListByDates);
