@@ -75,7 +75,7 @@ public class HallServiceTest {
     }
 
     @Test
-    public void successfulFindAllHall() throws Exception {
+    public void successfulSaveAndFindAllHalls() throws Exception {
         List<HallDTO> hallDTOS = buildDefaultTestHallListDTO(3);
         for (HallDTO hallDTO : hallDTOS) {
             hallService.saveHall(hallDTO);

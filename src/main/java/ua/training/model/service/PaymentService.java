@@ -1,7 +1,6 @@
 package ua.training.model.service;
 
 import org.apache.log4j.Logger;
-import ua.training.util.FinancialUtil;
 import ua.training.model.dao.PaymentDao;
 import ua.training.model.dao.TicketDao;
 import ua.training.model.dao.implementation.JDBCDaoFactory;
@@ -9,11 +8,13 @@ import ua.training.model.dto.TicketDTO;
 import ua.training.model.entity.Payment;
 import ua.training.model.entity.Ticket;
 import ua.training.model.exception.ExternalPaymentSystemRejectPaymentException;
+import ua.training.util.FinancialUtil;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static ua.training.Constants.*;
+import static ua.training.Constants.EXTERNAL_PAYMENT_SYSTEM_NOT_CONFIRM_TEMPORARY_BLOCK_USER_SUM;
+import static ua.training.Constants.SLASH_SYMBOL;
 
 public class PaymentService {
     private static final Logger log = Logger.getLogger(PaymentService.class);

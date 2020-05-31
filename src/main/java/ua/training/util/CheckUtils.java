@@ -62,8 +62,8 @@ public class CheckUtils {
         return string != null && !string.equals(EMPTY_STRING);
     }
 
-    public static LocalDate getMaxDate(LocalDate date1, LocalDate date2) {
-        return date1.isAfter(date2) ? date1 : date2;
+    public static LocalDate getMaxDate(LocalDate firstDate, LocalDate secondDate) {
+        return firstDate.isAfter(secondDate) ? firstDate : secondDate;
     }
 
     public static boolean isExhibitDateTimeActual(LocalDate ticketExhibitDate, ExhibitDTO exhibitDTO) {
