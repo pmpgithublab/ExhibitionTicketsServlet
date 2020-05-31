@@ -1,6 +1,5 @@
 package ua.training.model.service;
 
-import org.apache.log4j.Logger;
 import ua.training.model.dao.ExhibitDao;
 import ua.training.model.dao.implementation.JDBCDaoFactory;
 import ua.training.model.dto.ExhibitDTO;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static ua.training.Constants.*;
+import static ua.training.Constants.EXHIBIT_NAME;
 
 public class ExhibitService {
 
