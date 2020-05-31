@@ -91,7 +91,7 @@ public class ExhibitServiceTest {
     }
 
     @Test
-    public void successfulFindAllExhibit() throws Exception {
+    public void successfulSaveAndFindAllExhibits() throws Exception {
         List<ExhibitDTO> exhibitDTOS = buildDefaultTestExhibitListDTO(3);
         for (ExhibitDTO exhibitDTO : exhibitDTOS) {
             exhibitService.saveExhibit(exhibitDTO);
