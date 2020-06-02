@@ -1,6 +1,7 @@
 package ua.training.model.dao.implementation;
 
 import org.apache.log4j.Logger;
+import ua.training.util.LocaleUtil;
 import ua.training.util.MessageUtil;
 import ua.training.model.dao.ExhibitDao;
 import ua.training.model.dao.mapper.*;
@@ -90,7 +91,7 @@ public class JDBCExhibitDao implements ExhibitDao {
         List<Exhibit> result = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(
-                    DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_EXHIBITS));
+                    LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_EXHIBITS)));
 
             ObjectMapper<Exhibit> mapper = new ExhibitAdminListMapper();
             while (resultSet.next()) {
@@ -107,8 +108,8 @@ public class JDBCExhibitDao implements ExhibitDao {
     @Override
     public List<Exhibit> findCurrentExhibits() {
         List<Exhibit> result = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_CURRENT_EXHIBIT_NAMES))) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(LocaleUtil.localizeQuery(
+                DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_CURRENT_EXHIBIT_NAMES)))) {
 
             preparedStatement.setObject(1, LocalDateTime.now());
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -127,7 +128,8 @@ public class JDBCExhibitDao implements ExhibitDao {
 
     @Override
     public Optional<ExhibitDTO> findByIdWithHall(Long exhibitId) {
-        String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_CURRENT_EXHIBITS_WITH_HALL);
+        String sqlQuery = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
+                                                            SQL_QUERY_SELECT_CURRENT_EXHIBITS_WITH_HALL));
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setObject(1, LocalDateTime.now());
             preparedStatement.setLong(2, exhibitId);

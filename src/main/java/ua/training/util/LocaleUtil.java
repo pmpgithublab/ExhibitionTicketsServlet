@@ -5,6 +5,10 @@ import java.util.Locale;
 import static ua.training.Constants.*;
 
 public class LocaleUtil {
+    private static final String ENG_QUERY_PART = "_en";
+    private static final String UKR_QUERY_PART = "_uk";
+
+
     public static Locale getLocale() {
         return ResourceBundleManager.INSTANCE.getLocale();
     }
@@ -26,5 +30,13 @@ public class LocaleUtil {
             return getProperty(REGEX_NAME_PATTERN);
         }
         return getProperty(REGEX_NAME_UK_PATTERN);
+    }
+
+    public static String localizeQuery(String query){
+        if (LocaleUtil.isEnglish()){
+            return query;
+        }else {
+            return query.replaceAll(ENG_QUERY_PART, UKR_QUERY_PART);
+        }
     }
 }

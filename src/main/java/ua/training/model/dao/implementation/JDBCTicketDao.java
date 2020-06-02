@@ -7,6 +7,7 @@ import ua.training.model.util.DBQueryBundleManager;
 import ua.training.model.dao.TicketDao;
 import ua.training.model.dao.mapper.*;
 import ua.training.model.entity.Ticket;
+import ua.training.util.LocaleUtil;
 import ua.training.util.MessageUtil;
 
 import java.sql.*;
@@ -166,7 +167,8 @@ public class JDBCTicketDao implements TicketDao {
         }
 
         if (recordQuantity > 0) {
-            String sqlQuery2 = DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_FIND_USER_STATISTIC);
+            String sqlQuery2 = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
+                                                                            SQL_QUERY_FIND_USER_STATISTIC));
             try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery2)) {
                 preparedStatement.setLong(1, userId);
                 preparedStatement.setLong(2, RECORD_PER_PAGE);
@@ -206,7 +208,8 @@ public class JDBCTicketDao implements TicketDao {
         }
 
         if (recordQuantity > 0) {
-            String sqlQuery2 = DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_FIND_ADMIN_STATISTIC);
+            String sqlQuery2 = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
+                                                                                SQL_QUERY_FIND_ADMIN_STATISTIC));
             try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery2)) {
                 preparedStatement.setLong(1, RECORD_PER_PAGE);
                 preparedStatement.setLong(2, pageNumber * RECORD_PER_PAGE);
@@ -248,8 +251,8 @@ public class JDBCTicketDao implements TicketDao {
 
     @Override
     public List<UserCartDTO> getUserCart(Long userId) {
-        String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(
-                FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_EXHIBIT_AND_HALL_NAMES_AND_REST_OF_NOT_SOLD_TICKETS);
+        String sqlQuery = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
+                FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_EXHIBIT_AND_HALL_NAMES_AND_REST_OF_NOT_SOLD_TICKETS));
         List<UserCartDTO> result = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setLong(1, userId);

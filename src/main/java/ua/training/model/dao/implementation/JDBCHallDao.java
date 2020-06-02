@@ -2,6 +2,7 @@ package ua.training.model.dao.implementation;
 
 import org.apache.log4j.Logger;
 import ua.training.model.dao.mapper.ObjectMapper;
+import ua.training.util.LocaleUtil;
 import ua.training.util.MessageUtil;
 import ua.training.model.dao.HallDao;
 import ua.training.model.dao.mapper.HallAdminMapper;
@@ -85,8 +86,8 @@ public class JDBCHallDao implements HallDao {
     public List<Hall> findAll() {
         List<Hall> result = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet =
-                    statement.executeQuery(DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_HALLS));
+            ResultSet resultSet = statement.executeQuery(
+                    LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(SQL_QUERY_SELECT_HALLS)));
 
             ObjectMapper<Hall> mapper = new HallMapper();
             while (resultSet.next()) {

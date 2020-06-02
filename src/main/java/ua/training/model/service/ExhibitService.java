@@ -67,8 +67,8 @@ public class ExhibitService {
         ExhibitDTO newExhibitDTO;
         LocalDate exhibitDate;
         for (int i = 0; i <= restDays; i++) {
-            newExhibitDTO = exhibitDTO.clone();
             exhibitDate = startDate.plusDays(i);
+            newExhibitDTO = exhibitDTO.clone();
             newExhibitDTO.setExhibitDate(exhibitDate);
             if (CheckUtils.isExhibitDateTimeActual(exhibitDate, newExhibitDTO)) {
                 result.add(newExhibitDTO);

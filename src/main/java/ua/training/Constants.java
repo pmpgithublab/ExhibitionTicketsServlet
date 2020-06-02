@@ -13,6 +13,8 @@ public interface Constants {
     String SLASH_SYMBOL = "/";
     String REDIRECT_STRING = "redirect:";
 
+    int FIRST_PAGE = 0;
+
     String HALL_NAME = "Hall";
     String EXHIBIT_NAME = "Exhibit";
     String ReportDTOS = "ReportDTOS";
@@ -20,6 +22,7 @@ public interface Constants {
     //    parameter's names
     String PARAM_TICKET_QUANTITY = "quantity";
     String PARAM_PAGE_NUMBER = "page";
+    String PARAM_PAGE_NUMBER_REDIRECT = "?page=";
     String PARAM_DATE = "date";
 
     //    session variables

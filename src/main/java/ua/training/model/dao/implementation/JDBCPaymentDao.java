@@ -114,6 +114,7 @@ public class JDBCPaymentDao implements PaymentDao {
         int tickedRecordAffected = save(payment);
 
         if (tickedRecordAffected != resultRecordsQuantity) {
+            connection.rollback();
             throw new ExpiredPaymentDataException(PAYMENT_SAVE_FAILED_NOT_ALL_TICKETS_UPDATED + payment.getUserId()
                     + PAYMENT_SUM + payment.getPaidSum() + TICKET_QUANTITY + payment.getTicketQuantity());
         }
