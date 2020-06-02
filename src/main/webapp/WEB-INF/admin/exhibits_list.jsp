@@ -52,14 +52,10 @@
             <td></td>
         </tr>
     </c:forEach>
-    <tr>
-        <td class="form-inline d-flex justify-content-center">
-            <a href="${pageContext.request.contextPath}/admin/exhibit_edit" class="btn btn-primary"> <fmt:message
-                    key="exhibit.add"/></a>
-        </td>
-    </tr>
     </tbody>
 </table>
-
+<div class=" d-flex justify-content-center">
+    <a href="${pageContext.request.contextPath}/admin/exhibit_edit" class="btn btn-primary"> <fmt:message key="exhibit.add"/></a>
+</div>
 </body>
 </html>

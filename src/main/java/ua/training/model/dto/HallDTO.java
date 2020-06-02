@@ -29,6 +29,9 @@ public class HallDTO {
         this.nameUK = hall.getNameUK();
     }
 
+    public HallDTO() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

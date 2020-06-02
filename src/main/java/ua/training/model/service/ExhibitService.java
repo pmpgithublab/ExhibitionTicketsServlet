@@ -5,6 +5,7 @@ import ua.training.model.dao.implementation.JDBCDaoFactory;
 import ua.training.model.dto.ExhibitDTO;
 import ua.training.model.entity.Exhibit;
 import ua.training.util.CheckUtils;
+import ua.training.util.FinancialUtil;
 import ua.training.util.MessageUtil;
 
 import java.time.LocalDate;
@@ -26,15 +27,17 @@ public class ExhibitService {
 
     public Optional<ExhibitDTO> findById(Long id) {
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
-            return exhibitDao.findById(id).map(ExhibitDTO::new);
+            Optional<ExhibitDTO> result = exhibitDao.findById(id).map(ExhibitDTO::new);
+            result.ifPresent(exhibitDTO -> exhibitDTO.setTicketCost(FinancialUtil.calcCost(exhibitDTO.getTicketCost())));
+            return result;
         }
     }
 
     public List<ExhibitDTO> findAllExhibit() {
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
-            return exhibitDao.findAll().stream()
-                    .map(ExhibitDTO::new)
-                    .collect(Collectors.toList());
+            List<ExhibitDTO> result = exhibitDao.findAll().stream().map(ExhibitDTO::new).collect(Collectors.toList());
+            result.forEach(e -> e.setTicketCost(FinancialUtil.calcCost(e.getTicketCost())));
+            return result;
         }
     }
 

@@ -13,27 +13,37 @@ import java.util.Optional;
 
 import static ua.training.Constants.*;
 
-public class HallEditCommand implements Command {
-    private static final Logger log = Logger.getLogger(HallEditCommand.class);
+public class HallCommand implements Command {
+    private static final Logger log = Logger.getLogger(HallCommand.class);
     private static final String HALL_PAGE = "/WEB-INF/admin/hall.jsp";
+    private static final String HALLS_LIST_PAGE = "/WEB-INF/admin/halls_list.jsp";
     private static final String HALL_DTO = "hallDTO";
 
     private final HallService hallService;
 
 
-    public HallEditCommand(HallService hallService) {
+    public HallCommand(HallService hallService) {
         this.hallService = hallService;
     }
 
 
     @Override
     public String execute(HttpServletRequest request) {
+        String path = request.getServletPath().replaceAll(ADMIN_PATH, "");
+
         if (request.getMethod().equals(METHOD_GET)) {
-            return getHallForEdit(request);
+            if (path.equals(HALL_EDIT_PATH)) {
+                return getHallForEdit(request);
+            }
+            if (path.equals(HALLS_LIST_PATH)) {
+                return getHallsList(request);
+            }
         }
 
         if (request.getMethod().equals(METHOD_POST)) {
-            return saveHall(request);
+            if (path.equals(HALL_EDIT_PATH)) {
+                return saveHall(request);
+            }
         }
 
         log.warn(MessageUtil.getUnacceptedMethodMessage(request));
@@ -55,6 +65,12 @@ public class HallEditCommand implements Command {
             }
         }
         return HALL_PAGE;
+    }
+
+    private String getHallsList(HttpServletRequest request) {
+        request.setAttribute(HALLS_LIST, hallService.findAllHall());
+
+        return HALLS_LIST_PAGE;
     }
 
     private String saveHall(HttpServletRequest request) {
