@@ -25,7 +25,7 @@ public class PaymentService {
             "External payment system confirm temporary block user sum: ";
     private static final String SEND_CONFIRM_PAYMENT_TO_EXTERNAL_PAYMENT_SYSTEM =
             "Send confirm payment to external payment system";
-    private static final int TEN_SECONDS = 10;
+    private static final int ONE_MINUTE = 1;
 
 
     public Optional<TicketDTO> findByUserIdSumAndQuantityNotPaidTickets(Long userId) {
@@ -43,7 +43,7 @@ public class PaymentService {
 
     public void paymentProcess(int totalQuantity, Long totalSum, Long userId) throws Exception {
         log.info(ASK_EXTERNAL_PAYMENT_SYSTEM_TEMPORARY_BLOCK_USER_SUM + totalSum + SLASH_SYMBOL + userId);
-        if (FinancialUtil.askExternalPaymentSystemTemporaryBlockUserSum(userId, totalSum, TEN_SECONDS)) {
+        if (FinancialUtil.askExternalPaymentSystemTemporaryBlockUserSum(userId, totalSum, ONE_MINUTE)) {
             log.info(EXTERNAL_PAYMENT_SYSTEM_CONFIRM_TEMPORARY_BLOCK_USER_SUM + totalSum + SLASH_SYMBOL + userId);
 
             Payment payment = createPayment(totalQuantity, totalSum, userId);
