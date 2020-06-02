@@ -20,4 +20,5 @@ public enum DBQueryBundleManager {
     public String getProperty(String key) {
         return resourceBundle.getString(key);
     }
+
 }

@@ -90,7 +90,9 @@
     </table>
     <br><br>
 </c:if>
+<c:if test="${notEnoughTickets.isEmpty() && expiredTicket.isEmpty()}">
 <h5 class="d-flex justify-content-center" style="color: blue"><fmt:message key="page.title.cart"/></h5>
+</c:if>
 <table class="table">
     <thead>
     <tr>

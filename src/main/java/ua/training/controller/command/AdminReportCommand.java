@@ -31,9 +31,18 @@ public class AdminReportCommand implements Command {
 
             if (CheckUtils.isPositiveInteger(stringPageNumber)) {
                 pageNumber = Integer.parseInt(stringPageNumber);
+            } else {
+                return REDIRECT_STRING + ADMIN_PATH + REPORT_PATH
+                        + PARAM_PAGE_NUMBER_REDIRECT + FIRST_PAGE;
             }
 
             ReportDTO<AdminStatisticDTO> adminStatisticDTOS = reportService.getAdminReport(pageNumber);
+
+            if (adminStatisticDTOS.getPageQuantity() < pageNumber) {
+                return REDIRECT_STRING + ADMIN_PATH + REPORT_PATH
+                        + PARAM_PAGE_NUMBER_REDIRECT + adminStatisticDTOS.getPageQuantity();
+            }
+
             adminStatisticDTOS.setPageNavigationString(ADMIN_PATH);
             request.setAttribute(ReportDTOS, adminStatisticDTOS);
 

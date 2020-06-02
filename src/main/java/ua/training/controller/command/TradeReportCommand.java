@@ -32,10 +32,19 @@ public class TradeReportCommand implements Command {
 
             if (CheckUtils.isPositiveInteger(stringPageNumber)) {
                 pageNumber = Integer.parseInt(stringPageNumber);
+            } else {
+                return REDIRECT_STRING + TRADE_PATH + REPORT_PATH
+                        + PARAM_PAGE_NUMBER_REDIRECT + FIRST_PAGE;
             }
 
             ReportDTO<UserStatisticDTO> userStatisticDTOS =
                     reportService.getUserReport(ControllerUtil.getUserId(request), pageNumber);
+
+            if (userStatisticDTOS.getPageQuantity() < pageNumber) {
+                return REDIRECT_STRING + TRADE_PATH + REPORT_PATH
+                        + PARAM_PAGE_NUMBER_REDIRECT + userStatisticDTOS.getPageQuantity();
+            }
+
             userStatisticDTOS.setPageNavigationString(TRADE_PATH);
             request.setAttribute(ReportDTOS, userStatisticDTOS);
 
