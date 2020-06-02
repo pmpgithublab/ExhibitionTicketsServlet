@@ -41,18 +41,21 @@ public class Servlet extends HttpServlet {
         commands.put(LOGOUT_PATH, new LogOutCommand());
         commands.put(ERROR_PATH, new ErrorCommand());
 
-        commands.put(ADMIN_PATH + HALLS_LIST_PATH, new HallsListCommand(hallService));
-        commands.put(ADMIN_PATH + HALL_EDIT_PATH, new HallEditCommand(hallService));
+        HallCommand hallCommand = new HallCommand(hallService);
+        commands.put(ADMIN_PATH + HALLS_LIST_PATH, hallCommand);
+        commands.put(ADMIN_PATH + HALL_EDIT_PATH, hallCommand);
 
-        commands.put(ADMIN_PATH + EXHIBITS_LIST_PATH, new ExhibitListCommand(exhibitService));
-        commands.put(ADMIN_PATH + EXHIBIT_EDIT_PATH, new ExhibitEditCommand(hallService, exhibitService));
+        ExhibitCommand exhibitCommand = new ExhibitCommand(hallService, exhibitService);
+        commands.put(ADMIN_PATH + EXHIBITS_LIST_PATH, exhibitCommand);
+        commands.put(ADMIN_PATH + EXHIBIT_EDIT_PATH, exhibitCommand);
         commands.put(ADMIN_PATH + REPORT_PATH, new AdminReportCommand(reportService));
 
+        CartCommand cartCommand = new CartCommand(cartService);
         commands.put(TRADE_PATH + EXHIBITS_LIST_PATH, new TradeListCommand(exhibitService));
-        commands.put(TRADE_PATH + TICKET_ADD_TO_CART_PATH, new AddTicketToCartCommand(cartService));
-        commands.put(TRADE_PATH + CART_PATH, new ShowCartCommand(cartService));
-        commands.put(TRADE_PATH + TICKET_DELETE_FROM_CART_PATH, new DeleteTicketFromCartCommand(cartService));
-        commands.put(TRADE_PATH + CLEAR_CART_PATH, new ClearCartCommand(cartService));
+        commands.put(TRADE_PATH + TICKET_ADD_TO_CART_PATH, cartCommand);
+        commands.put(TRADE_PATH + CART_PATH, cartCommand);
+        commands.put(TRADE_PATH + TICKET_DELETE_FROM_CART_PATH, cartCommand);
+        commands.put(TRADE_PATH + CLEAR_CART_PATH, cartCommand);
         commands.put(TRADE_PATH + PAYMENT_PATH, new PaymentCommand(paymentService));
         commands.put(TRADE_PATH + REPORT_PATH, new TradeReportCommand(reportService));
 

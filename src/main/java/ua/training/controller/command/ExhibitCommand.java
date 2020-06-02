@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.training.model.dto.validator.ExhibitDTOValidator;
 import ua.training.model.exception.NoDuplicationAllowedException;
 import ua.training.util.CheckUtils;
+import ua.training.util.FinancialUtil;
 import ua.training.util.MessageUtil;
 import ua.training.model.dto.ExhibitDTO;
 import ua.training.model.dto.HallDTO;
@@ -16,9 +17,10 @@ import java.util.Optional;
 
 import static ua.training.Constants.*;
 
-public class ExhibitEditCommand implements Command {
-    private static final Logger log = Logger.getLogger(ExhibitEditCommand.class);
+public class ExhibitCommand implements Command {
+    private static final Logger log = Logger.getLogger(ExhibitCommand.class);
     private static final String EXHIBIT_PAGE = "/WEB-INF/admin/exhibit.jsp";
+    private static final String EXHIBITS_LIST_ADMIN_PAGE = "/WEB-INF/admin/exhibits_list.jsp";
     private static final String EXHIBIT_DTO = "exhibitDTO";
     private static final String FIELD_SELECTED_HALL = "selectedHall";
     private static final String FIELD_HALLS = "halls";
@@ -26,19 +28,27 @@ public class ExhibitEditCommand implements Command {
     private final HallService hallService;
     private final ExhibitService exhibitService;
 
-    public ExhibitEditCommand(HallService hallService, ExhibitService exhibitService) {
+    public ExhibitCommand(HallService hallService, ExhibitService exhibitService) {
         this.hallService = hallService;
         this.exhibitService = exhibitService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
+        String path = request.getServletPath().replaceAll(ADMIN_PATH, "");
         if (request.getMethod().equals(METHOD_GET)) {
-            return getExhibitForEdit(request);
+            if (path.equals(EXHIBIT_EDIT_PATH)) {
+                return getExhibitForEdit(request);
+            }
+            if (path.equals(EXHIBITS_LIST_PATH)) {
+                return showExhibitList(request);
+            }
         }
 
         if (request.getMethod().equals(METHOD_POST)) {
-            return saveExhibit(request);
+            if (path.equals(EXHIBIT_EDIT_PATH)) {
+                return saveExhibit(request);
+            }
         }
 
         log.warn(MessageUtil.getUnacceptedMethodMessage(request));
@@ -64,9 +74,17 @@ public class ExhibitEditCommand implements Command {
         return EXHIBIT_PAGE;
     }
 
+    private String showExhibitList(HttpServletRequest request) {
+        request.setAttribute(EXHIBITS_LIST, exhibitService.findAllExhibit());
+
+        return EXHIBITS_LIST_ADMIN_PAGE;
+    }
+
     private String saveExhibit(HttpServletRequest request) {
         ExhibitDTO exhibitDTO = new ExhibitDTO(request);
         if (isExhibitDTOValid(exhibitDTO)) {
+            exhibitDTO.setTicketCost(FinancialUtil.getAccountingSum(exhibitDTO.getTicketCost(),
+                                                            (String) request.getSession().getAttribute(CURRENCY_SIGN)));
             try {
                 exhibitService.saveExhibit(exhibitDTO);
                 log.info(MessageUtil.getObjectSaveMessage(request, EXHIBIT_NAME,
@@ -100,6 +118,9 @@ public class ExhibitEditCommand implements Command {
         List<HallDTO> hallDTOS = hallService.findAllHall();
         request.setAttribute(FIELD_HALLS, hallDTOS);
         request.setAttribute(FIELD_SELECTED_HALL,
-                hallDTOS.stream().filter(e -> e.getId().equals(exhibitDTO.getHallId())).findFirst().get());
+                hallDTOS.stream()
+                        .filter(e -> e.getId().equals(exhibitDTO.getHallId()))
+                        .findFirst()
+                        .orElse(new HallDTO()));
     }
 }

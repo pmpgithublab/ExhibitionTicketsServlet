@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * A service for work with user cart.
  * Can create, store, change and delete a ticket.
- * @author Maxym Pidvysotskyi
+ * Also can show a list of user tickets in the user cart.
  */
 public class CartService {
     private static final Logger log = Logger.getLogger(CartService.class);
@@ -68,6 +68,8 @@ public class CartService {
      * @param exhibitDate A ticket date of the exhibit
      * @param ticketQuantity Quantity tickets to the exhibit
      * @param userId The identifier of the user who creates the ticket
+     *
+     * @return An Optional with the TicketDTO value present or an empty Optional
      * */
     public Optional<TicketDTO> createTicketByExhibitIdAndExhibitDate(Long exhibitId, LocalDate exhibitDate,
                                                                      int ticketQuantity, Long userId) {
@@ -144,6 +146,8 @@ public class CartService {
      * Reads unpaid user tickets from the database.
      *
      * @param userId The identifier of the user whose cart is read
+     *
+     * @return A List of UserCartDTO with user-selected and not paid tickets (otherwise an empty)
      * */
     public List<UserCartDTO> getUserCart(Long userId) {
         List<UserCartDTO> result;
