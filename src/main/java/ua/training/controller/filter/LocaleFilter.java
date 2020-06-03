@@ -45,7 +45,6 @@ public class LocaleFilter implements Filter {
         Locale locale = new Locale(localeString);
         LocaleUtil.setLocale(locale);
         Config.set(session, Config.FMT_LOCALE, LocaleUtil.getLocale());
-        DBQueryBundleManager.INSTANCE.setLocale(LocaleUtil.getLocale());
         DBPropertiesManager.INSTANCE.setLocale(LocaleUtil.getLocale());
         session.setAttribute(LANGUAGE, locale);
         if (LocaleUtil.isEnglish()) {

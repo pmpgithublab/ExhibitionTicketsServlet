@@ -21,7 +21,9 @@ import java.util.Optional;
  */
 public class CartService {
     private static final Logger log = Logger.getLogger(CartService.class);
-    /** use for error logging during to current exhibit list building */
+    /**
+     * use for error logging during to current exhibit list building
+     */
     private static final String TICKET_CREATION_OR_SAVING_ERROR = "Ticket creation or saving error. User id: ";
 
 
@@ -30,13 +32,12 @@ public class CartService {
      * If exists adds tickets quantity and sum to exists ticket and save it to the database.
      * If not exists, then creates a new one and saves it to the database.
      *
-     * @param exhibitId An identifier of the required exhibit
-     * @param exhibitDate A ticket date of the exhibit
+     * @param exhibitId      An identifier of the required exhibit
+     * @param exhibitDate    A ticket date of the exhibit
      * @param ticketQuantity Quantity tickets to the exhibit
-     * @param userId The identifier of the user to whose cart the ticket is added
-     *
+     * @param userId         The identifier of the user to whose cart the ticket is added
      * @throws Exception If adding is failed
-     * */
+     */
     public void addTicketToCart(Long exhibitId, LocalDate exhibitDate, int ticketQuantity, Long userId)
             throws Exception {
 
@@ -64,13 +65,12 @@ public class CartService {
     /**
      * Create a new ticketDTO object. Reads actual an exhibit and a hall data from DB.
      *
-     * @param exhibitId An identifier of the required exhibit
-     * @param exhibitDate A ticket date of the exhibit
+     * @param exhibitId      An identifier of the required exhibit
+     * @param exhibitDate    A ticket date of the exhibit
      * @param ticketQuantity Quantity tickets to the exhibit
-     * @param userId The identifier of the user who creates the ticket
-     *
+     * @param userId         The identifier of the user who creates the ticket
      * @return An Optional with the TicketDTO value present or an empty Optional
-     * */
+     */
     public Optional<TicketDTO> createTicketByExhibitIdAndExhibitDate(Long exhibitId, LocalDate exhibitDate,
                                                                      int ticketQuantity, Long userId) {
         try (ExhibitDao exhibitDao = JDBCDaoFactory.getInstance().createExhibitDao()) {
@@ -94,13 +94,12 @@ public class CartService {
      * If exists and quantity and sum are equals or more than exists, then deletes ticket from the database.
      * If not exists does nothing.
      *
-     * @param exhibitId An identifier of the required exhibit
-     * @param exhibitDate A ticket date of the exhibit
+     * @param exhibitId      An identifier of the required exhibit
+     * @param exhibitDate    A ticket date of the exhibit
      * @param ticketQuantity Quantity tickets to the exhibit
-     * @param userId The identifier of the user to whose cart the ticket is added
-     *
+     * @param userId         The identifier of the user to whose cart the ticket is added
      * @throws Exception If deleting is failed
-     * */
+     */
     public void deleteTicketFromCart(Long exhibitId, LocalDate exhibitDate, int ticketQuantity, Long userId)
             throws Exception {
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
@@ -120,9 +119,8 @@ public class CartService {
      * Save a ticket to the database.
      *
      * @param ticketDTO The ticket which is saved to the database
-     *
      * @throws Exception If saving is failed
-     * */
+     */
     public void saveTicket(TicketDTO ticketDTO) throws Exception {
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
             ticketDao.save(new Ticket(ticketDTO));
@@ -133,9 +131,8 @@ public class CartService {
      * Deletes all unpaid user tickets from the database.
      *
      * @param userId The identifier of the user whose tickets are deleted from the cart
-     *
      * @throws Exception If deletion is failed
-     * */
+     */
     public void clearCart(Long userId) throws Exception {
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
             ticketDao.deleteAllByUserIdAndNotPaid(userId);
@@ -146,9 +143,8 @@ public class CartService {
      * Reads unpaid user tickets from the database.
      *
      * @param userId The identifier of the user whose cart is read
-     *
      * @return A List of UserCartDTO with user-selected and not paid tickets (otherwise an empty)
-     * */
+     */
     public List<UserCartDTO> getUserCart(Long userId) {
         List<UserCartDTO> result;
         try (TicketDao ticketDao = JDBCDaoFactory.getInstance().createTicketDao()) {
