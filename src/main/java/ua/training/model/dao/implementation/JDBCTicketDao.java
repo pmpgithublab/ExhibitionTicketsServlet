@@ -31,7 +31,7 @@ public class JDBCTicketDao implements TicketDao {
     private static final String SQL_QUERY_FIND_TICKETS_SUM_AND_QUANTITY_BY_USER_ID_AND_NOT_PAID = "find.tickets.sum.and.quantity.by.user.id.and.not.paid";
     private static final String SQL_QUERY_DELETE_ALL_NOT_PAID_TICKETS_FROM_CART = "delete.all.not.paid.tickets.from.cart";
     private static final String SQL_QUERY_DELETE_BY_ID_NOT_PAID_TICKET_FROM_CART = "delete.by.id.not.paid.tickets.from.cart";
-    private static final String FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_EXHIBIT_AND_HALL_NAMES_AND_REST_OF_NOT_SOLD_TICKETS = "find.user.cart.tickets.with.exhibit.dates.and.exhibit.and.hall.names.and.rest.of.not.sold.tickets";
+    private static final String SQL_QUERY_FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_EXHIBIT_AND_HALL_NAMES_AND_REST_OF_NOT_SOLD_TICKETS = "find.user.cart.tickets.with.exhibit.dates.and.exhibit.and.hall.names.and.rest.of.not.sold.tickets";
 
     private static final String DB_TICKET_SAVED_ID = "DB ticket saved. Id: ";
     private static final String DB_TICKET_SAVING_ERROR = "DB ticked saving error. Name: ";
@@ -252,7 +252,7 @@ public class JDBCTicketDao implements TicketDao {
     @Override
     public List<UserCartDTO> getUserCart(Long userId) {
         String sqlQuery = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
-                FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_EXHIBIT_AND_HALL_NAMES_AND_REST_OF_NOT_SOLD_TICKETS));
+                SQL_QUERY_FIND_USER_CART_TICKETS_WITH_EXHIBIT_DATES_AND_EXHIBIT_AND_HALL_NAMES_AND_REST_OF_NOT_SOLD_TICKETS));
         List<UserCartDTO> result = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setLong(1, userId);
