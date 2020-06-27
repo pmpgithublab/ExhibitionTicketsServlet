@@ -2,6 +2,8 @@ package ua.training.model.entity;
 
 import ua.training.model.dto.HallDTO;
 
+import java.util.Objects;
+
 public class Hall {
     private Long id;
     private String name;
@@ -28,7 +30,7 @@ public class Hall {
 
     @Override
     public int hashCode() {
-        return name.hashCode() + nameUK.hashCode();
+        return Objects.hash(id) + name.hashCode() + nameUK.hashCode();
     }
 
     public Long getId() {
