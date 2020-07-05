@@ -18,8 +18,6 @@ public interface TicketDao extends GenericDao<Ticket> {
 
     ReportDTO<UserStatisticDTO> getUserStatistic(Long userId, int pageNumber);
 
-    ReportDTO<AdminStatisticDTO> getAdminStatistic(int pageNumber);
-
     Optional<Ticket> findByUserIdSumAndQuantityNotPaidTickets(Long userId);
 
     List<UserCartDTO> getUserCart(Long userId);

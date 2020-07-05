@@ -23,8 +23,6 @@ public class JDBCTicketDao implements TicketDao {
 
     private static final String SQL_QUERY_FIND_USER_STATISTIC_RECORD_QUANTITY = "sql.query.find.user.statistic.record.quantity";
     private static final String SQL_QUERY_FIND_USER_STATISTIC = "sql.query.find.user.statistic";
-    private static final String SQL_QUERY_FIND_ADMIN_STATISTIC_RECORD_QUANTITY = "sql.query.find.admin.statistic.record.quantity";
-    private static final String SQL_QUERY_FIND_ADMIN_STATISTIC = "sql.query.find.admin.statistic";
     private static final String SQL_QUERY_INSERT_NEW_TICKET = "insert.new.ticket";
     private static final String SQL_QUERY_UPDATE_TICKET = "update.ticket";
     private static final String SQL_QUERY_FIND_TICKET_BY_EXHIBIT_ID_AND_EXHIBIT_DATE_AND_USER_ID_AND_NOT_PAID = "find.ticket.by.exhibit.id.and.exhibit.date.and.user.id.and.not.paid";
@@ -39,9 +37,7 @@ public class JDBCTicketDao implements TicketDao {
     private static final String DB_TICKET_DELETED_FROM_CART_BY_ID = "Ticket deleted from cart by id";
     private static final String DB_ALL_TICKETS_DELETING_FROM_CART_ERROR = "All tickets deleting from cart error";
     private static final String DB_TICKET_DELETING_BY_ID_FROM_CART_ERROR = "Deleting ticket by id from cart error";
-    private static final String FIELD_DB_RECORD_QUANTITY = "record_quantity";
     private static final int ONE_ELEMENT = 1;
-    private static final int RECORD_PER_PAGE = 5;
 
     private final Connection connection;
 
@@ -180,45 +176,6 @@ public class JDBCTicketDao implements TicketDao {
                     result.getItems().add(mapper.extractFromResultSet(resultSet));
                 }
                 result.setPageQuantity((recordQuantity - ONE_ELEMENT) / RECORD_PER_PAGE);
-                result.setCurrentPage(pageNumber);
-            } catch (Exception e) {
-                log.error(MessageUtil.getRuntimeExceptionMessage(e));
-                throw new RuntimeException(e);
-            }
-        }
-
-        return result;
-    }
-
-    @Override
-    public ReportDTO<AdminStatisticDTO> getAdminStatistic(int pageNumber) {
-        ReportDTO<AdminStatisticDTO> result = new ReportDTO<>();
-        String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(
-                SQL_QUERY_FIND_ADMIN_STATISTIC_RECORD_QUANTITY);
-        int recordQuantity = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                recordQuantity = resultSet.getInt(FIELD_DB_RECORD_QUANTITY);
-            }
-        } catch (Exception e) {
-            log.error(MessageUtil.getRuntimeExceptionMessage(e));
-            throw new RuntimeException(e);
-        }
-
-        if (recordQuantity > 0) {
-            String sqlQuery2 = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
-                                                                                SQL_QUERY_FIND_ADMIN_STATISTIC));
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery2)) {
-                preparedStatement.setLong(1, RECORD_PER_PAGE);
-                preparedStatement.setLong(2, pageNumber * RECORD_PER_PAGE);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                ObjectMapper<AdminStatisticDTO> mapper = new AdminStatisticDTOMapper();
-                while (resultSet.next()) {
-                    result.getItems().add(mapper.extractFromResultSet(resultSet));
-                }
-                result.setPageQuantity(recordQuantity / RECORD_PER_PAGE);
                 result.setCurrentPage(pageNumber);
             } catch (Exception e) {
                 log.error(MessageUtil.getRuntimeExceptionMessage(e));

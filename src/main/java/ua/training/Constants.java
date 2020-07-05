@@ -14,6 +14,7 @@ public interface Constants {
     String REDIRECT_STRING = "redirect:";
 
     int FIRST_PAGE = 0;
+    int RECORD_PER_PAGE = 5;
 
     String HALL_NAME = "Hall";
     String EXHIBIT_NAME = "Exhibit";
@@ -93,6 +94,7 @@ public interface Constants {
     String FIELD_DB_TICKET_COST = "ticket_cost";
     String FIELD_DB_TICKET_SUM = "tickets_sum";
     String FIELD_DB_REMAIN_TICKETS = "remain_tickets";
+    String FIELD_DB_RECORD_QUANTITY = "record_quantity";
 
     //    regex patterns
     String REGEX_NAME_PATTERN = "name.pattern.regexp";

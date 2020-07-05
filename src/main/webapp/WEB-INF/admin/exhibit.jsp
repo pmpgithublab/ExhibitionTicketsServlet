@@ -13,7 +13,7 @@
     <h5 class="text-center" style="color: red"><fmt:message key="exhibit.error"/></h5>
 </c:if>
 <form method="post" action="${pageContext.request.contextPath}/admin/exhibit_edit<c:if test="${exhibitDTO.getId() != null}">?id=${exhibitDTO.getId()}</c:if>">
-    <table class="table d-flex justify-content-center">
+    <table class="table table-borderless d-flex justify-content-center">
         <tr hidden>
             <td></td>
             <td><input type="text" name="id" value="${exhibitDTO.getId()}"/></td>

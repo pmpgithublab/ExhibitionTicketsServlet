@@ -2,11 +2,16 @@ package ua.training.model.dao.implementation;
 
 import org.apache.log4j.Logger;
 import ua.training.model.dao.PaymentDao;
+import ua.training.model.dao.mapper.AdminStatisticDTOMapper;
+import ua.training.model.dao.mapper.ObjectMapper;
+import ua.training.model.dto.AdminStatisticDTO;
+import ua.training.model.dto.ReportDTO;
 import ua.training.model.entity.Payment;
 import ua.training.model.exception.ExpiredPaymentDataException;
 import ua.training.model.exception.NotEnoughTicketsException;
 import ua.training.model.util.DBQueryBundleManager;
 import ua.training.util.CheckUtils;
+import ua.training.util.LocaleUtil;
 import ua.training.util.MessageUtil;
 
 import java.sql.*;
@@ -22,6 +27,8 @@ public class JDBCPaymentDao implements PaymentDao {
     private static final String SQL_QUERY_SAVE_PAYMENT = "sql.query.save.payment";
     private static final String SQL_QUERY_SAVE_PAYMENT_UPDATE_TICKETS = "sql.query.save.payment.update.tickets";
     private static final String SQL_QUERY_FIND_USER_CART_TICKETS_WITH_REST_OF_NOT_SOLD_TICKETS = "find.user.cart.tickets.with.rest.of.not.sold.tickets";
+    private static final String SQL_QUERY_FIND_ADMIN_STATISTIC_RECORD_QUANTITY = "sql.query.find.admin.statistic.record.quantity";
+    private static final String SQL_QUERY_FIND_ADMIN_STATISTIC = "sql.query.find.admin.statistic";
 
     private static final String PAYMENT_SAVE_FAILED_NO_ROWS_AFFECTED = "Saving payment failed, no rows affected. User id: ";
     private static final String PAYMENT_SAVE_FAILED_NO_ID_OBTAINED = "Saving payment failed, no ID obtained. User id: ";
@@ -132,6 +139,45 @@ public class JDBCPaymentDao implements PaymentDao {
             throw new ExpiredPaymentDataException(PAYMENT_DATA_NOT_ACTUAL + resultSet.getLong(FIELD_DB_EXHIBIT_ID)
                     + TICKET_ID + resultSet.getLong(FIELD_DB_ID));
         }
+    }
+
+    @Override
+    public ReportDTO<AdminStatisticDTO> getAdminStatistic(int pageNumber) {
+        ReportDTO<AdminStatisticDTO> result = new ReportDTO<>();
+        String sqlQuery = DBQueryBundleManager.INSTANCE.getProperty(
+                SQL_QUERY_FIND_ADMIN_STATISTIC_RECORD_QUANTITY);
+        int recordQuantity = 0;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                recordQuantity = resultSet.getInt(FIELD_DB_RECORD_QUANTITY);
+            }
+        } catch (Exception e) {
+            log.error(MessageUtil.getRuntimeExceptionMessage(e));
+            throw new RuntimeException(e);
+        }
+
+        if (recordQuantity > 0) {
+            String sqlQuery2 = LocaleUtil.localizeQuery(DBQueryBundleManager.INSTANCE.getProperty(
+                    SQL_QUERY_FIND_ADMIN_STATISTIC));
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery2)) {
+                preparedStatement.setLong(1, RECORD_PER_PAGE);
+                preparedStatement.setLong(2, pageNumber * RECORD_PER_PAGE);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                ObjectMapper<AdminStatisticDTO> mapper = new AdminStatisticDTOMapper();
+                while (resultSet.next()) {
+                    result.getItems().add(mapper.extractFromResultSet(resultSet));
+                }
+                result.setPageQuantity(recordQuantity / RECORD_PER_PAGE);
+                result.setCurrentPage(pageNumber);
+            } catch (Exception e) {
+                log.error(MessageUtil.getRuntimeExceptionMessage(e));
+                throw new RuntimeException(e);
+            }
+        }
+
+        return result;
     }
 
     @Override
