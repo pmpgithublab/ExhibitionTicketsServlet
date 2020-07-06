@@ -16,8 +16,8 @@ import java.util.Map;
 import static ua.training.Constants.*;
 
 @WebServlet(urlPatterns = WELCOME_PATH)
-public class Servlet extends HttpServlet {
-    private static final Logger log = Logger.getLogger(Servlet.class);
+public class ETServlet extends HttpServlet {
+    private static final Logger log = Logger.getLogger(ETServlet.class);
     private static final String SERVLET_DESTROY_METHOD_EXECUTING = "Servlet destroy method executing";
     private static final String SERVLET_INIT_METHOD_START = "Servlet init method start";
     private static final String SERVLET_INIT_METHOD_FINISH = "Servlet init method finish";
