@@ -38,6 +38,7 @@ public class JDBCPaymentDao implements PaymentDao {
     private static final String TICKET_ID = ". Ticket id: ";
     private static final String WRONG_TICKET_SUM_OR_QUANTITY = "Payment. Wrong ticket sum or quantity. User id: ";
     private static final int ZERO_TICKET_QUANTITY = 0;
+    private static final String FIELD_DB_TICKET_ID = "ticket_id";
 
     private final Connection connection;
 
@@ -137,7 +138,7 @@ public class JDBCPaymentDao implements PaymentDao {
         if (!CheckUtils.isExhibitDateTimeActual(ticketExhibitDate, exhibitStartDate, exhibitEndDate, timeExhibitEnd)) {
             connection.rollback();
             throw new ExpiredPaymentDataException(PAYMENT_DATA_NOT_ACTUAL + resultSet.getLong(FIELD_DB_EXHIBIT_ID)
-                    + TICKET_ID + resultSet.getLong(FIELD_DB_ID));
+                    + TICKET_ID + resultSet.getLong(FIELD_DB_TICKET_ID));
         }
     }
 
