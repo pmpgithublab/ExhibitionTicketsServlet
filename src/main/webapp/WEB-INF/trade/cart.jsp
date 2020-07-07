@@ -39,7 +39,7 @@
                 </c:choose>
                 <td>${notEnoughTicket.exhibitName}</td>
                 <td>${notEnoughTicket.hallName}</td>
-                <td><fmt:formatNumber value="${notEnoughTicket.ticketSum/100}" type="currency"
+                <td><fmt:formatNumber value="${notEnoughTicket.ticketSum/100 / notEnoughTicket.ticketQuantity * (notEnoughTicket.ticketQuantity - notEnoughTicket.unsoldTicketsQuantity)}" type="currency"
                                       currencySymbol="${currencySign}" maxFractionDigits="2"
                                       minFractionDigits="2"/></td>
                 <td class="text-right">${notEnoughTicket.ticketQuantity - notEnoughTicket.unsoldTicketsQuantity}</td>
@@ -48,6 +48,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <br>
 </c:if>
 <c:if test="${!expiredTickets.isEmpty()}">
     <br>
