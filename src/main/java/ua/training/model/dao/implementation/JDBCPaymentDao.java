@@ -106,7 +106,8 @@ public class JDBCPaymentDao implements PaymentDao {
                 ticketSum += resultSet.getLong(FIELD_DB_TICKET_SUM);
                 isTicketExhibitDateCorrect(resultSet);
 
-                if (resultSet.getInt(FIELD_DB_REMAIN_TICKETS) < ZERO_TICKET_QUANTITY) {
+                if (resultSet.getInt(FIELD_DB_REMAIN_TICKETS) < ZERO_TICKET_QUANTITY
+                || resultSet.getInt(FIELD_DB_REMAIN_TICKETS) < payment.getTicketQuantity()) {
                     connection.rollback();
                     throw new NotEnoughTicketsException(PAYMENT_NOT_ENOUGH_TICKETS + payment.getUserId()
                             + SLASH_SYMBOL + resultSet.getInt(FIELD_DB_REMAIN_TICKETS));
